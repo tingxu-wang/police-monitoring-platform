@@ -4,7 +4,7 @@ mongoose.connect('mongodb://localhost/control')//使用control集合
 
 var personSchema=new mongoose.Schema({
   name:String,//人名
-  locatoinStr:String,//经纬度字符串
+  locatoinStr:String,//经纬度字符串 格式为:"12,11" x和y值中间用英文逗号隔开
   type:String//人员类别 0为市民 1为民警
 },{
   collection:'person'

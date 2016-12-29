@@ -26,12 +26,12 @@ module.exports = function (app){
     var newPerson=new Person(person)
 
     newPerson.get(req.body.name,(err,person)=>{
-      if(person){
+/*      if(person){
         res.json({
-          status:0,
-          info:'该用户已经存在'
+          status:0, //状态码 0为失败 1为成功
+          info:'该用户已经存在' //文字描述
         })
-      }else{
+      }else{*/
         newPerson.save((err,person)=>{
           if(err){
             console.error(err)
@@ -41,7 +41,22 @@ module.exports = function (app){
             info:'用户信息保存成功'
           })
         })
+      //}
+    })
+  })
+
+  app.post('/get',(req,res,next)=>{
+    var newPerson=new person()
+
+    newPerson.get(req.body.name,(err,person)=>{
+      if(err){
+        console.log(err)
       }
+
+      res.json({
+        status:1,
+        person:person
+      })
     })
   })
 }
