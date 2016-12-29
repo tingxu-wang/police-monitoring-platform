@@ -25,7 +25,7 @@ module.exports = function (app){
 
     var newPerson=new Person(person)
 
-    newPerson.get(req.body.name,(err,person)=>{
+    //newPerson.get(req.body.name,(err,person)=>{
 /*      if(person){
         res.json({
           status:0, //状态码 0为失败 1为成功
@@ -42,7 +42,7 @@ module.exports = function (app){
           })
         })
       //}
-    })
+    //})
   })
 
   app.post('/get',(req,res,next)=>{
