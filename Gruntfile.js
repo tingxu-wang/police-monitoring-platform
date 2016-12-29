@@ -13,7 +13,7 @@ module.exports=function(grunt){
       express:{
         //files:['**/*.js','!src/**/*.js','!dist/**/*.js'],
         //files:['**/*.js'],
-        files:['*.js','models/**/*.js','routes/**/*.js','views/**/*.js'],
+        files:['*.js','**/*.js'],
         tasks:['express:dev'],
         options: {
           spawn: false // Without this option specified express won't be reloaded
