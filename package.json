@@ -7,13 +7,19 @@
   },
   "dependencies": {
     "body-parser": "~1.15.2",
+    "connect-redis": "^3.2.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "ejs": "~2.5.2",
     "express": "~4.14.0",
+    "express-session": "^1.14.2",
+    "mongoose": "*",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
-    "mongoose": "*",
-    "morgan": "~1.7.0"
-  }
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-express-server": "~0.4.11",
+    "load-grunt-tasks": "~0.3.0"
+  },
+  "devDependencies": {}
 }

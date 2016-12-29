@@ -5,13 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 var app = express();
 
 var router=require('./routes/index')
 
 // view engine setup
-//app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
@@ -20,8 +22,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname,'src')));
-app.use('/static',express.static(path.join(__dirname,'static')));
+app.use(express.static(path.join(__dirname,'src')));//工程目录
+app.use('/static',express.static(path.join(__dirname,'static')));//静态资源
+app.use('/lib',express.static(path.join(__dirname,'lib')))//第三方静态资源
 
 router(app)
 
