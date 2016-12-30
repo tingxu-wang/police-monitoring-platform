@@ -12,11 +12,17 @@ module.exports=function(grunt){
       },
       express:{
         //files:['**/*.js','!src/**/*.js','!dist/**/*.js'],
-        //files:['**/*.js'],
-        files:['*.js','**/*.js'],
+        files:['routes/**/*.js','models/**/*.js','bin/**/*.js','path_index/**/*.js'],
+        //files:['*.js','**/*.js'],
         tasks:['express:dev'],
         options: {
           spawn: false // Without this option specified express won't be reloaded
+        }
+      },
+      configFiles: {
+        files: [ 'Gruntfile.js' ],
+        options: {
+          reload: true
         }
       }
     },
@@ -24,7 +30,8 @@ module.exports=function(grunt){
       options:{},
       dev:{
         options:{
-          script:'bin/www'
+          script:'bin/www',
+          reload:true
         }
       }
     }

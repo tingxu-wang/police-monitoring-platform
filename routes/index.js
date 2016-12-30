@@ -3,6 +3,8 @@ var router = express.Router();
 
 var Person=require('../models/person.js')
 
+var getpath=require('../path_index')
+
 /* GET home page. */
 
 
@@ -12,9 +14,17 @@ module.exports = function (app){
     next()
   })
 
-  app.get('/', (req, res, next)=>{
-    res.render('/views/index');
+  app.get('/', (req, res, next)=>{//根目录加载ejs模板
+    res.render('index',{title:'test'})
   });
+/*
+  app.get('/tool',(req,res,next)=>{//开发时用到的工具页面
+    res.render(getpath.src+'tool.html')
+  })*/
+
+  app.get('/test',(req,res,next)=>{
+    res.render(getpath.src+'test.html')
+  })
 
   app.post('/save',(req,res,next)=>{
     var person={

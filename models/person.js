@@ -1,6 +1,6 @@
 var mongoose=require('mongoose')
 
-mongoose.connect('mongodb://localhost/control')//使用control集合
+var db=mongoose.connect('mongodb://localhost/control')//使用control集合
 
 var personSchema=new mongoose.Schema({
   name:String,//人名

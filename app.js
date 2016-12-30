@@ -14,6 +14,7 @@ var router=require('./routes/index')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.engine('.html',require('ejs').__express)//加载html渲染模块
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -25,7 +26,9 @@ app.use(bodyParser.urlencoded({            //此项必须在 bodyParser.json 下
   extended: true
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname,'src')));//工程目录
+app.use('/',express.static(path.join(__dirname,'views')))
+app.use('/dev',express.static(path.join(__dirname,'dev')))//开发用工具目录
+app.use('/src',express.static(path.join(__dirname,'src')));//工程目录
 app.use('/static',express.static(path.join(__dirname,'static')));//静态资源
 app.use('/lib',express.static(path.join(__dirname,'lib')))//第三方静态资源
 
