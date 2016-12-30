@@ -49,6 +49,6 @@ Person.prototype={
   },
   update (callback){
     var _this=this
-    PersonModel.update({name:_this.name},{$set:_this.updateObj},callback)
+    PersonModel.update({name:_this.name},{$set:_this.updateObj},{},callback)
   }
 }

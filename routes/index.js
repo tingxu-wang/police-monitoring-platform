@@ -61,11 +61,24 @@ module.exports = function (app){
       updateObj:req.body.updateObj//获取请求方传过来的修改参数修改对应的文档对象
     }
     var newPerson=new Person(person)
-    newPerson.update(()=>{
-      res.json({
-        success:1,
-        info:'update成功'
-      })
+    newPerson.update((err, result)=>{
+      if(err){
+        console.error(err)
+      }
+
+      console.log(result)//n是否匹配字段 nModified:是否覆盖字段 ok:是否匹配人名
+
+      if(result.nModified){
+        res.json({
+          success:1,
+          info:'成功覆盖字段'
+        })
+      }else{
+        res.json({
+          success:0,
+          info:'未成功覆盖字段'
+        })
+      }
     })
   })
 
