@@ -29,20 +29,29 @@ module.exports = function (app){
   app.post('/save',(req,res,next)=>{
     var person={
       type:req.body.type,
-      locationStr:req.body.locationStr,
+      location:req.body.location,
       name:req.body.name
     }
 
     var newPerson=new Person(person)
 
-    newPerson.save((err,person)=>{
-      if(err){
-        console.error(err)
+    newPerson.getOne((err,person)=>{
+      if(person){
+        res.json({
+          success:0,
+          info:'用户已存在'
+        })
+      }else{
+        newPerson.save((err,person)=>{
+          if(err){
+            console.error(err)
+          }
+          res.json({
+            success:1,
+            info:'用户信息保存成功'
+          })
+        })
       }
-      res.json({
-        success:1,
-        info:'用户信息保存成功'
-      })
     })
   })
 

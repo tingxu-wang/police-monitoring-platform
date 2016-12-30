@@ -24,52 +24,44 @@
   <div id="container" tabindex="0"></div>
   <script src="//cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
   <script>
-  //$.post('http://115.28.243.24:3000/save',(data)=>{
-  var obj={
-    name:'testa',
-    updateObj:{
-      type:0
-    }
-  }
-  $.post('http://localhost:3000/update',obj,(data)=>{
-    console.log(data)
-  },'json')
+
+
   </script>
   <!-- <script src="http://webapi.amap.com/js/marker.js"></script> -->
   <script src="http://webapi.amap.com/maps?v=1.3&key=6b5a8d3e24a8e0d618bffe49f353147e"></script>
-<!--   <script type="text/javascript">
-        //var map = new AMap.Map('container',{resizeEnable: true,zoom:4});
-        var map = new AMap.Map('container',{resizeEnable: true,zoom:4});
+   <script type="text/javascript">
+      //var map = new AMap.Map('container',{resizeEnable: true,zoom:4});
+      var map = new AMap.Map('container',{resizeEnable: true,zoom:4});
 
-        //setPosition(lnglat:LngLat)
-        //offset: new AMap.Pixel(-30, 5),
+      //setPosition(lnglat:LngLat)
+      //offset: new AMap.Pixel(-30, 5),
 
 
-        var markers = []; //province见Demo引用的JS文件
+      var markers = []; //province见Demo引用的JS文件
 
-        var pointa={
-          position:['12','12'],
-          title:'a',
-          map:map
-        }
+      var pointa={
+        position:['12','12'],
+        title:'a',
+        map:map
+      }
 
-        var pointb={
-          position:['14','15'],
-          title:'b',
-          map:map
-        }
+      var pointb={
+        position:['14','15'],
+        title:'b',
+        map:map
+      }
 
-        var arr=[new AMap.Marker(pointa),new AMap.Marker(pointb)]
+      var arr=[new AMap.Marker(pointa),new AMap.Marker(pointb)]
 
-        var data=12
-        setInterval(function(){
-          data+=0.1
+      var data=12
+      setInterval(function(){
+        data+=0.1
 
-          arr[0].setPosition(new AMap.LngLat(data,data))//位置实时更新
-        },500)
+        arr[0].setPosition(new AMap.LngLat(data,data))//位置实时更新
+      },500)
 
-			  map.setFitView();
-    </script>-->
+		  map.setFitView();
+    </script>
     <script type="text/javascript" src="http://webapi.amap.com/demos/js/liteToolbar.js"></script>
   </body>
 </html>

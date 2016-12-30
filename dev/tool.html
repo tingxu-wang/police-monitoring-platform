@@ -7,6 +7,50 @@
   <title>tool</title>
 </head>
 <body>
+<!--  <div>
+    <label>本地<input type="radio" value="http://localhost:3000" name="send"></label>
+    <label>远程<input type="radio" value="http://115.28.243.24:3000" name="send"></label>
+  </div>
+  <div class="js-ajax">
+    <h3>提交民警信息</h3>
+    <div class="js-save">
+      <label>name: <input type="text" class="name"></label> <br>
+      <label>name: <input type="text" class="name"></label> <br>
+    </div>
+  </div>-->
+  <script src="//cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
+  <script>
+    var local='http://localhost:3000/',
+        online='http://115.28.243.24:3000/'
 
+/*    var obj={
+      name:'qunzhong1',
+      type:0,
+      location:'5,5'
+    }*/
+
+    var obj={
+      name:'qunzhong1',
+      updateObj:{
+        location:'4,4'
+      }
+    }
+
+    function toLocal(type,obj){//type为请求的api类型 obj为请求体对象
+      $.post(local+type,obj,(data)=>{
+        console.log(data)
+      },'json')
+    }
+
+    function toOnline(type,obj){
+      $.post(online+type,obj,(data)=>{
+        console.log(data)
+      },'json')
+    }
+
+    toLocal('update',obj)
+
+
+  </script>
 </body>
 </html>

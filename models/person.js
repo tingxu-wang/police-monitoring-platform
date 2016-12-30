@@ -4,7 +4,7 @@ var db=mongoose.connect('mongodb://localhost/control')//使用control集合
 
 var personSchema=new mongoose.Schema({
   name:String,//人名
-  locationStr:String,//经纬度字符串 格式为:"12,11" x和y值中间用英文逗号隔开
+  location:String,//经纬度字符串 格式为:"12,11" x和y值中间用英文逗号隔开
   type:Number//人员类别 0为市民 1为民警
 },{
   collection:'person'
@@ -13,7 +13,7 @@ var personSchema=new mongoose.Schema({
 var PersonModel=mongoose.model('person',personSchema)
 
 function Person(person){
-  this.locationStr=person.locationStr
+  this.location=person.location
   this.name=person.name
   this.type=person.type
   this.updateObj=person.updateObj//用于update文档对象
@@ -25,7 +25,7 @@ Person.prototype={
   save (callback){
     var person={
       name:this.name,
-      locationStr:this.locationStr,
+      location:this.location,
       type:this.type
     }
     var personModel=new PersonModel(person)
