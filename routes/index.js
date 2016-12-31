@@ -56,15 +56,19 @@ module.exports = function (app){
   })
 
   app.post('/update',(req,res,next)=>{
-
-
-    var person={
+    /*var person={
       name:req.body.name
     }
-    var updateObj=req.body.updateObj
+    var updateObj=req.body.updateObj*/
+    var update=Person.prototype.update
+    var filter=req.body,
+        name=filter.name
 
-    var newPerson=new Person(person)
-    newPerson.update(person,updateObj,(err, result)=>{
+    var updateObj=Object.assign({},filter)
+    delete updateObj.name
+
+    //var newPerson=new Person(person)
+    update({name},updateObj,(err, result)=>{
       if(err){
         console.error(err)
       }
