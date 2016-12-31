@@ -157,12 +157,12 @@ module.exports = function (app){
     var success='成功覆盖字段',
         error='未成功覆盖字段'
 
-if(    tools.isUpdate(Person,searchObj,updateObj)){
+    if(tools.isUpdate(Person,searchObj,updateObj)){
 
-  tools.resSuc(res,success)
-}else{
-  tools.resErr(res,error)
-}
+      tools.resSuc(res,success)
+    }else{
+      tools.resErr(res,error)
+    }
   })
 
   /*
@@ -254,7 +254,8 @@ if(    tools.isUpdate(Person,searchObj,updateObj)){
 
 
   app.post('/listTest',(req,res,next)=>{
-    var newList=new List({test:req.body.test})
+    var newList=new List({test:req.body})
+    console.log(req.body)
 
     newList.save((err,list)=>{
       res.json({
