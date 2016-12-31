@@ -17,10 +17,6 @@ module.exports = function (app){
   app.get('/', (req, res, next)=>{//根目录加载ejs模板
     res.render('index',{title:'test'})
   });
-/*
-  app.get('/tool',(req,res,next)=>{//开发时用到的工具页面
-    res.render(getpath.src+'tool.html')
-  })*/
 
   app.get('/test',(req,res,next)=>{
     res.render(getpath.src+'test.html')
@@ -51,45 +47,6 @@ module.exports = function (app){
             msg:'用户信息保存成功'
           })
         })
-      }
-    })
-  })
-
-  app.post('/update',(req,res,next)=>{
-    /*var person={
-      name:req.body.name
-    }
-    var updateObj=req.body.updateObj*/
-    var update=Person.prototype.update
-    var filter=req.body,
-        name=filter.name
-
-    var updateObj=Object.assign({},filter)
-    delete updateObj.name
-
-    //var newPerson=new Person(person)
-    update({name},updateObj,(err, result)=>{
-      if(err){
-        console.error(err)
-      }
-
-      if(result.upserted){
-        res.json({
-          success:1,
-          msg:'成功创建成员'
-        })
-      }else{
-        if(result.nModified){
-          res.json({
-            success:1,
-            msg:'成功覆盖字段'
-          })
-        }else{
-          res.json({
-            success:0,
-            msg:'未成功覆盖字段'
-          })
-        }
       }
     })
   })
@@ -133,10 +90,77 @@ module.exports = function (app){
         console.error(err)
       }
 
-      if(persons){
+      if(persons.length){
         res.json({
           success:1,
           persons:persons
+        })
+      }else{
+        res.json({
+          success:0,
+          msg:'未找到匹配项'
+        })
+      }
+    })
+  })
+
+  app.post('/upsertUpdate',(req,res,next)=>{
+    var upsertUpdate=Person.prototype.upsertUpdate
+    var filter=req.body,
+        name=filter.name
+
+    var updateObj=Object.assign({},filter)
+    delete updateObj.name
+
+    upsertUpdate({name},updateObj,(err, result)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(result.upserted){
+        res.json({
+          success:1,
+          msg:'成功创建成员'
+        })
+      }else{
+        if(result.nModified){
+          res.json({
+            success:1,
+            msg:'成功覆盖字段'
+          })
+        }else{
+          res.json({
+            success:0,
+            msg:'未成功覆盖字段'
+          })
+        }
+      }
+    })
+  })
+
+  /*
+   * 更改民警状态(status)
+  */
+  app.post('/changeStatus',(req,res,next)=>{
+    var update=Person.prototype.update
+    var filter=req.body,
+        searchObj={name:filter.name},
+        updateObj={status:filter.status}
+
+    update(searchObj,updateObj,(err,result)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(result.nModified){
+        res.json({
+          success:1,
+          msg:'修改民警状态成功'
+        })
+      }else{
+        res.json({
+          success:0,
+          msg:'修改民警状态失败'
         })
       }
     })

@@ -23,9 +23,10 @@ Common.prototype={
       callback(null,docs)
     })
   },
-  update (searchObj,updateObj,callback){
-    // var _this=this
-    // this.model.update({name:_this.name},{$set:_this.updateObj},{},callback)
+  upsertUpdate (searchObj,updateObj,callback){
     this.model.update(searchObj,{$set:updateObj},{upsert:true},callback)
+  },
+  update (searchObj,updateObj,callback){
+    this.model.update(searchObj,{$set:updateObj},{upsert:false},callback)
   }
 }

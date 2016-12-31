@@ -7,7 +7,8 @@ var Common=require('./common')
 var personSchema=new mongoose.Schema({
   name:String,//人名
   location:String,//经纬度字符串 格式为:"12,11" x和y值中间用英文逗号隔开
-  type:Number//人员类别 0为市民 1为民警
+  type:Number,//人员类别 0为市民 1为民警
+  status:Number//民警的当前状态
 },{
   collection:'person'
 })
@@ -20,6 +21,7 @@ function Person(person){
   this.location=person.location
   this.name=person.name
   this.type=person.type
+  this.status=person.status
   this.updateObj=person.updateObj//用于update文档对象
 }
 
@@ -45,5 +47,6 @@ Person.prototype={
   //...common
   findOne:common.findOne.bind(common),
   find:common.find.bind(common),
+  upsertUpdate:common.upsertUpdate.bind(common),
   update:common.update.bind(common)
 }

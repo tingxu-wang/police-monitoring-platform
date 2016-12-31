@@ -21,28 +21,24 @@
   <script src="//cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
   <script src="/static/javascript/tool.js"></script>
   <script>
-    /*    var obj={
-      name:'qunzhong1',
-      type:0,
-      location:'5,5'
-    }*/
-
     var update={
-      name:'qunzhong4',
-      location:'30,34',
-      type:0
+      name:'minjing1',
+      location:'5,5',
+      type:1,
+      status:0
     }
 
     var get={
-      name:'qunzhong4'
+      name:'minjing1'
     }
 
-/*    var obj={
-      type:1
-    }*/
+    var changeStatus={
+      name:'minjing1',
+      status:2
+    }
 
-    toLocal('update',update)
-    toLocal('findOne',get)
+    toLocal('upsertUpdate',update)
+    toLocal('find',get)
   </script>
 </body>
 </html>
