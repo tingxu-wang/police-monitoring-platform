@@ -22,7 +22,7 @@ module.exports = function (app){
     res.render(getpath.src+'test.html')
   })
 
-  app.post('/save',(req,res,next)=>{
+  app.get('/save',(req,res,next)=>{
     var person={
       type:req.body.type,
       location:req.body.location,
@@ -51,7 +51,7 @@ module.exports = function (app){
     })
   })
 
-  app.post('/findOne',(req,res,next)=>{
+  app.get('/findOne',(req,res,next)=>{
     var filter=req.body
     var findOne=Person.prototype.findOne
 
@@ -81,7 +81,7 @@ module.exports = function (app){
     }
   })
 
-  app.post('/find',(req,res,next)=>{
+  app.get('/find',(req,res,next)=>{
     var filter=req.body
     var find=Person.prototype.find
 
@@ -104,7 +104,7 @@ module.exports = function (app){
     })
   })
 
-  app.post('/upsertUpdate',(req,res,next)=>{
+  app.get('/upsertUpdate',(req,res,next)=>{
     var upsertUpdate=Person.prototype.upsertUpdate
     var filter=req.body,
         name=filter.name
@@ -141,7 +141,7 @@ module.exports = function (app){
   /*
    * 更改民警状态(status)
   */
-  app.post('/changeStatus',(req,res,next)=>{
+  app.get('/changeStatus',(req,res,next)=>{
     var update=Person.prototype.update
     var filter=req.body,
         searchObj={name:filter.name},
