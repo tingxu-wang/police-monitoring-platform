@@ -22,11 +22,14 @@ module.exports = function (app){
     res.render(getpath.src+'test.html')
   })
 
+
+//--------
+
   app.get('/save',(req,res,next)=>{
     var person={
-      type:req.body.type,
-      location:req.body.location,
-      name:req.body.name
+      type:req.query.type,
+      location:req.query.location,
+      name:req.query.name
     }
 
     var newPerson=new Person(person)
@@ -52,7 +55,7 @@ module.exports = function (app){
   })
 
   app.get('/findOne',(req,res,next)=>{
-    var filter=req.body
+    var filter=req.query
     var findOne=Person.prototype.findOne
 
     if(Object.getOwnPropertyNames(filter).length!==1){
@@ -82,7 +85,7 @@ module.exports = function (app){
   })
 
   app.get('/find',(req,res,next)=>{
-    var filter=req.body
+    var filter=req.query
     var find=Person.prototype.find
 
     find(filter,(err,persons)=>{
@@ -106,7 +109,7 @@ module.exports = function (app){
 
   app.get('/upsertUpdate',(req,res,next)=>{
     var upsertUpdate=Person.prototype.upsertUpdate
-    var filter=req.body,
+    var filter=req.query,
         name=filter.name
 
     var updateObj=Object.assign({},filter)
@@ -143,7 +146,7 @@ module.exports = function (app){
   */
   app.get('/changeStatus',(req,res,next)=>{
     var update=Person.prototype.update
-    var filter=req.body,
+    var filter=req.query,
         searchObj={name:filter.name},
         updateObj={status:filter.status}
 
