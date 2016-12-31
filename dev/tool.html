@@ -27,13 +27,24 @@
       location:'5,5'
     }*/
 
-    var obj={
-      name:'qunzhong1',
+    var update={
+      name:'qunzhong4',
       updateObj:{
-        location:'30,2000'
+        location:'30,35',
+        type:0
       }
     }
-    toOnline('update',obj)
+
+    var get={
+      name:'qunzhong4'
+    }
+
+/*    var obj={
+      type:1
+    }*/
+    //toOnline('getOne',obj)
+    toOnline('update',update)
+    toOnline('findOne',get)
   </script>
 </body>
 </html>
