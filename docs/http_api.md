@@ -12,11 +12,14 @@
 ``` javascript
   {name:"minjing1"}
 ```
-- 民警出警
-  `/callout`
+- 待机
+  `/free`
 
 - 委派
-  `/send`  
+  `/send`
+
+- 民警出警
+  `/callout`
 
 - 民警到达
   `/arrive`

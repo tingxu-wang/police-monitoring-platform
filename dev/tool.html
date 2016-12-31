@@ -22,24 +22,32 @@
   <script src="/static/javascript/tool.js"></script>
   <script>
     var update={
-      name:'minjing1',
+      name:'minjing10',
       location:'5,5',
       type:1,
       status:0
     }
 
     var get={
-      name:'minjing1'
+      name:'minjing30'
       //type:0
     }
 
     var changeStatus={
-      name:'minjing1',
-      status:2
+      name:'minjing7',
+      status:0
     }
 
-    //toOnline('upsertUpdate',update)
-    //toLocal('find',get)
+    var callout={
+      name:'minjing1'
+    }
+
+    //toLocal('arrive',callout)
+    //toLocal('callout',callout)
+    //toLocal('findOne',get)
+
+    toLocal('listTest',{test:'aaaaaaabbb'})
+    toLocal('findOneList',{})
   </script>
 </body>
 </html>

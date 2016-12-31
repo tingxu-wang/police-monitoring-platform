@@ -1,6 +1,7 @@
 var mongoose=require('mongoose')
 
-var db=mongoose.connect('mongodb://localhost/control')//使用control集合
+var db=mongoose.connect('mongodb://127.0.0.1/control')//使用control集合
+//var db=mongoose.createConnection('mongodb://localhost/control')
 
 var Common=require('./common')
 
@@ -32,7 +33,8 @@ Person.prototype={
     var person={
       name:this.name,
       location:this.location,
-      type:this.type
+      type:this.type,
+      status:this.status
     }
     var personModel=new PersonModel(person)
 
@@ -42,6 +44,7 @@ Person.prototype={
         return callback(err)
       }
       callback(null,person)
+      //db.disconnect()
     })
   },
   //...common

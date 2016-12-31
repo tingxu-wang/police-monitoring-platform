@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-var Person=require('../models/person.js')
+//数据集合
+var Person=require('../models/person'),
+    List=require('../models/list')
 
 var getpath=require('../path_index')
+
+var tools=require('../models/tools')//向客户端返回json的工具模块
 
 /* GET home page. */
 
@@ -34,7 +38,7 @@ module.exports = function (app){
 
     var newPerson=new Person(person)
 
-    newPerson.findOne((err,person)=>{
+    newPerson.findOne({name:person.name},(err,person)=>{
       if(person){
         res.json({
           success:0,
@@ -141,29 +145,138 @@ module.exports = function (app){
     })
   })
 
+  app.get('/update',(req,res,next)=>{
+    var filter=req.query,
+        name=filter.name
+
+    var updateObj=Object.assign({},filter)
+    delete updateObj.name
+
+    var searchObj={name}
+
+    var success='成功覆盖字段',
+        error='未成功覆盖字段'
+
+if(    tools.isUpdate(Person,searchObj,updateObj)){
+
+  tools.resSuc(res,success)
+}else{
+  tools.resErr(res,error)
+}
+  })
+
   /*
-   * 更改民警状态(status)
+   * 更改民警状态(status) 同时修改person中的status以及history中的对应时间
   */
-  app.get('/changeStatus',(req,res,next)=>{
-    var update=Person.prototype.update
+
+  app.get('/changeStatus',(req,res,next)=>{//通用方法,不提交时间
     var filter=req.query,
         searchObj={name:filter.name},
         updateObj={status:filter.status}
 
-    update(searchObj,updateObj,(err,result)=>{
-      if(err){
-        console.error(err)
-      }
+    var success='修改民警状态 成功',
+        error='修改民警状态 失败'
 
-      if(result.nModified){
+    if(tools.isUpdate(Person,searchObj,updateObj)){
+      tools.resSuc(res,success)
+    }else{
+      tools.resErr(res,error)
+    }
+  })
+
+  app.get('/callout',(req,res,next)=>{//出警
+    var filter=req.query,
+        searchObj={name:filter.name},
+        updateObj={status:1}
+
+    var success='修改民警状态：出警 成功',
+        error='修改民警状态：出警 失败'
+
+    if(tools.isUpdate(Person,searchObj,updateObj)){
+
+      tools.resSuc(res,success)
+    }else{
+      tools.resErr(res,error)
+    }
+  })
+
+  app.get('/send',(req,res,next)=>{//委派
+    var filter=req.query,
+        searchObj={name:filter.name},
+        updateObj={status:2}
+
+    var success='修改民警状态：委派 成功',
+        error='修改民警状态：委派 失败'
+
+    if(tools.isUpdate(Person,searchObj,updateObj)){
+
+      tools.resSuc(res,success)
+    }else{
+      tools.resErr(res,error)
+    }
+  })
+
+  app.get('/arrive',(req,res,next)=>{//民警到达
+    var filter=req.query,
+        searchObj={name:filter.name},
+        updateObj={status:3}
+
+    var success='修改民警状态：到达 成功',
+        error='修改民警状态：到达 失败'
+
+    if(tools.isUpdate(Person,searchObj,updateObj)){
+
+      tools.resSuc(res,success)
+    }else{
+      tools.resErr(res,error)
+    }
+  })
+
+  app.get('/solve',(req,res,next)=>{
+    var filter=req.query,
+        searchObj={name:filter.name},
+        updateObj={status:4}
+
+    var success='修改民警状态：已解决 成功',
+        error='修改民警状态：已解决 失败'
+
+    if(tools.isUpdate(Person,searchObj,updateObj)){
+
+      tools.resSuc(res,success)
+    }else{
+      tools.resErr(res,error)
+    }
+  })
+
+  app.get('/saveList',(req,res,next)=>{
+    var newList=new List(req.query)
+  })
+
+
+  app.post('/listTest',(req,res,next)=>{
+    var newList=new List({test:req.body.test})
+
+    newList.save((err,list)=>{
+      res.json({
+        success:1,
+        msg:'成功'
+      })
+    })
+  })
+
+  app.post('/findOneList',(req,res,next)=>{
+    var filter=req.body
+    var findOne=List.prototype.findOne
+
+    findOne(filter,(err,list)=>{
+      if(list){
         res.json({
           success:1,
-          msg:'修改民警状态成功'
+          list
         })
       }else{
         res.json({
-          success:0,
-          msg:'修改民警状态失败'
+          msg:'订单不存在'
         })
       }
     })
