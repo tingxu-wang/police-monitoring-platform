@@ -1,0 +1,22 @@
+@media(min-width:768px){
+  .quit{
+    width:50px !important;
+    height:30px !important;
+    padding:0px !important;
+    background: #332e57 !important;
+    color:#77739a !important;
+    border-radius: 20px;
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    margin: 15px 0px 0px 200px;
+    cursor: pointer;
+  }
+
+  @media(max-width:1200px){
+    .quit{
+      margin-left: 120px;
+    }
+  }
+}

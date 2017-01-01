@@ -22,12 +22,13 @@
   <script src="/static/javascript/tool.js"></script>
   <script>
     var update={
-      name:'minjing1',
-      location:'10,1'
+      name:'minjing100',
+      location:'1,1',
+      type:1
     }
 
     var get={
-      name:'minjing1'
+      name:'minjing100'
       //type:0
     }
 
@@ -40,7 +41,7 @@
       name:'minjing1'
     }
 
-    toLocal('update',update)
+    toLocal('upsertUpdate',update)
     toLocal('findOne',get)
 /*    toOnline('save',{
       name:'minjing1',

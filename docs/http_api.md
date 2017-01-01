@@ -1,6 +1,10 @@
 # ajax api
 ---
 
+问卷推送数据说明文档：
+
+https://tower.im/projects/4026d76c72fd465483e69b81f3747f9a/docs/c2ee768471994e948428716abd948dda/
+
 问卷数据示例：
 ```javascript
 
@@ -103,6 +107,16 @@ var schema={
   (设置`person`集合中该`policeName`的民警`status`为3)
 
 - 民警解决案件`/policeSolved`：安卓端将`policeName`以及`listStatus=1`发送到后台，后台将`solveTime`设置为当前时间，将`listStatus`设置为2
+
+  **将该list对象中的  `openid` `id` `caseInfo` `listStatus`字段以json格式发送到晓晨服务器上，对象示例：**
+  ```javascript
+  {
+    openid:String,//市民微信openid
+    listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略
+    id:Number,//订单id（案件编号）
+    caseInfo:String//案件描述
+  }
+  ```
 
   (设置`person`集合中该`policeName`的民警`status`为0)
 

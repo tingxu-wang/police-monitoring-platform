@@ -1,6 +1,6 @@
-var express = require('express');
+/*var express = require('express');
 var router = express.Router();
-
+*/
 //数据集合
 var Person=require('../models/person'),
     List=require('../models/list')
@@ -18,13 +18,11 @@ module.exports = function (app){
     next()
   })
 
-  app.get('/', (req, res, next)=>{//根目录加载ejs模板
-    res.render('index',{title:'test'})
+  //视图渲染：
+  app.get('/views/:fileName', (req, res, next)=>{//根目录加载ejs模板
+    //res.render('index',{title:'test'})
+    res.render('')
   });
-
-  app.get('/test',(req,res,next)=>{
-    res.render(getpath.src+'test.html')
-  })
 
 
 //--------

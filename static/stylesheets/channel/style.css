@@ -1,0 +1,23 @@
+/* 重置bootstrap默认样式 */
+@import url("../public/reset/common.css");
+@import url("../public/reset/pc.css");
+@import url("../public/reset/mobile.css");
+
+/* 自定义样式 */
+@import url("../public/mod/pc.css");
+
+body{
+  background-color: #efefef;
+}
+
+.main-container{
+  background: #fff;
+  min-height: 680px;
+}
+
+.copy-right{
+  color:#666;
+  margin-top: 20px;
+  height:60px;
+  text-align: center;
+}

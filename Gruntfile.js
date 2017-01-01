@@ -12,7 +12,7 @@ module.exports=function(grunt){
       },
       express:{
         //files:['**/*.js','!src/**/*.js','!dist/**/*.js'],
-        files:['routes/**/*.js','models/**/*.js','bin/**/*.js','path_index/**/*.js'],
+        files:['*.js','routes/**/*.js','models/**/*.js','bin/**/*.js','path_index/**/*.js'],
         //files:['*.js','**/*.js'],
         tasks:['express:dev'],
         options: {

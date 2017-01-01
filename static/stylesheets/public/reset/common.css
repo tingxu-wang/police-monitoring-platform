@@ -1,0 +1,31 @@
+.navbar{
+  margin-bottom: 0px;
+}
+
+.navbar-toggle{
+  margin-top:13px;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus{
+  background-color: rgba(255,255,255,0);
+}
+
+.navbar-default{
+  /*background: url('/static/images/navbar_bg.jpg');*/
+  background: linear-gradient(90deg,#3a4e9f,#524689);
+  background-size: cover;
+}
+
+.navbar-default .navbar-brand{
+  box-sizing: content-box;
+  color:#fff;
+}
+
+.navbar-default .navbar-brand:hover{
+  color: #ccc;
+}
+
+.navbar-brand img{
+  display: inline;
+}
