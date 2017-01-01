@@ -70,7 +70,7 @@ var schema={
 - 获取单个人物信息`/findOne`:
 
 | url | 发送值 | 返回值 | 说明 |
-| :------------- | :------------- |
+| :------------- | :------------- | :------------- | :------------- |
 | /findOne | 筛选条件对象 | {success,person,msg} | 用客户端发送的json对象遍历person集合返回匹配的第一个对象到 `person` 字段 |
 | /find | 筛选条件对象 | {success,persons,msg} | 用客户端端发送的json对象遍历person集合返回匹配的所有符合条件的对象到 `persons` 字段 |
 | /upsertUpdate | 由人员name字段以及想要覆盖的字段组成的对象 | {success,msg} | 利用客户端传来的json对象中的name字段遍历数据库，其余字段更新数据库信息，如果name未匹配任何集合，则利用客户端的json对象创建相应的person对象到数据库 |
