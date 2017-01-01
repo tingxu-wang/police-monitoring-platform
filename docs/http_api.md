@@ -65,7 +65,19 @@ var schema={
 ```
 
 ---
-## 订单交互逻辑梳理(括号中的操作为person集合的操作而非对list)
+## 人物数据交互api说明
+
+- 获取单个人物信息`/findOne`:
+
+| url | 发送值 | 返回值 | 说明 |
+| :------------- | :------------- |
+| /findOne | 筛选条件对象 | {success,person,msg} | 用客户端发送的json对象遍历person集合返回匹配的第一个对象到 `person` 字段 |
+| /find | 筛选条件对象 | {success,persons,msg} | 用客户端端发送的json对象遍历person集合返回匹配的所有符合条件的对象到 `persons` 字段 |
+| /upsertUpdate | 由人员name字段以及想要覆盖的字段组成的对象 | {success,msg} | 利用客户端传来的json对象中的name字段遍历数据库，其余字段更新数据库信息，如果name未匹配任何集合，则利用客户端的json对象创建相应的person对象到数据库 |
+| /update | 同上 | {success,msg} |效果同上，只是name不匹配任何对象时不创建对象 |
+| /save(工具api) | 人员信息对象 | {success,msg} | 先用客户端传来的name字段遍历数据库，如果有匹配则返回失败信息，如果不匹配则向数据库创建该person对象信息并返回成功信息对象 |
+
+## 订单交互逻辑梳理及api设计(括号中的操作为person集合的操作而非对list)
 
 发起订单：
 - 创建list对象(post)`/paperOne`：用户发出paperOne问卷对象，后台新创建一个list对象保存此表单信息到paperOne字段，并将`listStatus`字段值设置为0，设置`id`字段值自增1，并将当前时间保存到`startTime`字段内,**将问卷内的关键信息转存一份到该list相应字段内**
