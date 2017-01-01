@@ -3,11 +3,10 @@
 */
 
 var tools={
+  resUpdate (req,res,model,searchObj,updateObj,successMsg,errorMsg){
   //在执行完update操作后返回操作是否成功的boolean
-  //isUpdate (req,res,model,searchObj,updateObj,successMsg,errorMsg){
-  isUpdate (model,searchObj,updateObj){
-    var update=model.prototype.update,
-        bool=null
+  //isUpdate (model,searchObj,updateObj){
+    var update=model.prototype.update
 
     update(searchObj,updateObj,(err,result)=>{
       if(err){
@@ -15,27 +14,20 @@ var tools={
       }
 
       if(result.nModified){//异步因此最后return的是null
-        bool=true
-        console.log(bool)
+        res.json({
+          success:1,
+          msg:successMsg
+        })
       }else{
-        bool=false
-        console.log(bool)
+        res.json({
+          success:0,
+          msg:errorMsg
+        })
       }
     })
+  },
+  policeChangeStatus (res,Person,List,searchObj,updateObj,successMsg,errorMsg){
 
-    return bool
-  },
-  resSuc (res,msg){
-    res.json({
-      success:1,
-      msg
-    })
-  },
-  resErr (res,msg){
-    res.json({
-      success:0,
-      msg
-    })
   }
 }
 

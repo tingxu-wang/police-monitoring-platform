@@ -18,7 +18,8 @@ var schema={
   arriveTime:Number,//到达时间
   solveTime:Number,//解决时间
 
-  test:String//问卷星整个存的test字段
+  paperOne:Object,//问卷1
+  paperTwo:Object//问卷2
 }
 
 var listSchema=new mongoose.Schema(schema,{
@@ -39,7 +40,8 @@ function List(list){
   this.arriveTime=list.arriveTime
   this.solveTime=list.solveTime
 
-  this.test=list.test
+  this.paperOne=paperOne
+  this.paperTwo=paperTwo
 }
 
 module.exports=List
@@ -54,9 +56,10 @@ List.prototype={
       sendTime:this.sendTime,
       calloutTime:this.calloutTime,
       arriveTime:this.arriveTime,
-      solveTime:this.solveTime
+      solveTime:this.solveTime,
 
-      ,test:this.test
+      paperOne:this.paperOne,
+      paperTwo:this.paperTwo
     }
     var listModel=new ListModel(list)
 
