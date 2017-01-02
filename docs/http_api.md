@@ -61,6 +61,7 @@ var schema={
   confirmTime:Number,//民警确认的时间
   arriveTime:Number,//民警到达案发地的时间
   solveTime:Number,//民警解决该案件的时间
+  endTime:Number,//订单结束时间（用户评价后或者指挥端忽略后更新此字段）
 
   paperOne:Object,//问卷1
   paperTwo:Object//问卷2
@@ -89,24 +90,24 @@ var schema={
 - 抓取未出警的民警`/getfreePolice`：web端设置心跳抓取`status=0`的person对象数组
 
 分配订单：
-- 忽略未处理的订单`/ignoreList`：web端将该list的`id`字段发送到后台，后台设置该`id`的list对象`listStatus`为4
+- 忽略未处理的订单`/ignoreList`：web端将该list的`id`字段发送到后台，后台设置该`id`的list对象`listStatus`为4，将当前时间保存到`endTime`字段内
 
 - 委派未处理的订单`/delegate`：web端将该list的`id`以及`policeName`字段发送到后台，后台设置该`id`的list对象`listStatus`为1，`policeName`设置为获取的民警姓名，`sendTime`字段保存当前时间
 
   (设置`person`集合中该`policeName`的民警`status`为1)
 
 更改民警状态：
-- 获取分配给自己（该民警）的任务`/getMission`：安卓端将`policeName`以及`listStatus=1`发送到后台，后台检索req.query对象将匹配的list对象去除`paperOne`以及`paperTwo`两个字段后发送给请求方
+- 获取分配给自己（该民警）的任务`/getMission`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`req.query.policeName`将匹配的list对象去除`paperOne`以及`paperTwo`两个字段后发送给请求方
 
-- 民警确认出警`/confirmMission`：安卓端将`policeName`以及`listStatus=1`发送给后端，后端将匹配的list对象`confirmTime`设置为当前时间
+- 民警确认出警`/confirmMission`：安卓端将`policeName`发送给后端，后端联合`listStatus=1`以及`policeName`将匹配的list对象`confirmTime`设置为当前时间
 
   (设置`person`集合中该`policeName`的民警`status`为2)
 
-- 民警到达市民地点`/policeArrive`：安卓端将`policeName`以及`listStatus=1`发送到后台，后台将`arriveTime`设置为当前时间
+- 民警到达市民地点`/policeArrive`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`policeName`将匹配的list对象`arriveTime`设置为当前时间
 
   (设置`person`集合中该`policeName`的民警`status`为3)
 
-- 民警解决案件`/policeSolved`：安卓端将`policeName`以及`listStatus=1`发送到后台，后台将`solveTime`设置为当前时间，将`listStatus`设置为2
+- 民警解决案件`/policeSolved`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`policeName`将匹配的list对象`listStatus`设置为2，`solveTime`设置为当前时间
 
   **将该list对象中的  `openid` `id` `caseInfo` `listStatus`字段以json格式发送到晓晨服务器上，对象示例：**
   ```javascript

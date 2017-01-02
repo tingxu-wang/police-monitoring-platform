@@ -25,7 +25,6 @@ function Person(person){
   this.name=person.name
   this.type=person.type
   this.status=person.status
-  this.updateObj=person.updateObj//用于update文档对象
 }
 
 module.exports=Person

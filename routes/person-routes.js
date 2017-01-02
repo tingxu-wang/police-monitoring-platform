@@ -2,11 +2,11 @@ var Person=require('../models/person'),
     List=require('../models/list')
 
 module.exports=function(app){
-  app.get('/save',(req,res,next)=>{
+  app.post('/save',(req,res,next)=>{
     var person={
-      type:req.query.type,
-      location:req.query.location,
-      name:req.query.name
+      type:req.body.type,
+      location:req.body.location,
+      name:req.body.name
     }
 
     var newPerson=new Person(person)
@@ -31,8 +31,8 @@ module.exports=function(app){
     })
   })
 
-  app.get('/findOne',(req,res,next)=>{
-    var filter=req.query
+  app.post('/findOne',(req,res,next)=>{
+    var filter=req.body
     var findOne=Person.prototype.findOne
 
     if(Object.getOwnPropertyNames(filter).length!==1){
@@ -61,8 +61,8 @@ module.exports=function(app){
     }
   })
 
-  app.get('/find',(req,res,next)=>{
-    var filter=req.query
+  app.post('/find',(req,res,next)=>{
+    var filter=req.body
     var find=Person.prototype.find
 
     find(filter,(err,persons)=>{
@@ -84,9 +84,9 @@ module.exports=function(app){
     })
   })
 
-  app.get('/upsertUpdate',(req,res,next)=>{
+  app.post('/upsertUpdate',(req,res,next)=>{
     var upsertUpdate=Person.prototype.upsertUpdate
-    var filter=req.query,
+    var filter=req.body,
         name=filter.name
 
     var updateObj=Object.assign({},filter)
@@ -118,8 +118,8 @@ module.exports=function(app){
     })
   })
 
-  app.get('/update',(req,res,next)=>{
-    var filter=req.query,
+  app.post('/update',(req,res,next)=>{
+    var filter=req.body,
         name=filter.name
 
     var updateObj=Object.assign({},filter)
@@ -138,7 +138,7 @@ module.exports=function(app){
         console.error(err)
       }
 
-      if(result.nModified){//异步因此最后return的是null
+      if(result.nModified){
         res.json({
           success:1,
           msg:success

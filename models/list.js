@@ -1,15 +1,20 @@
 var mongoose=require('mongoose')
 
+var autoIncrement=require('mongoose-auto-increment')//_id自增模块
+
 //var db=mongoose.connect('mongodb://localhost/control')//使用control集合
 /* 第一个链接的db用connect 第二个用createConnection */
 var db=mongoose.createConnection('mongodb://127.0.0.1/control')
+
+autoIncrement.initialize(db)
 
 var Common=require('./common')
 
 var schema={
   policeName:String,//民警姓名
   listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略
-  id:Number,//订单id（案件编号）
+  //id:Number,//订单id（案件编号）
+  //id:{type:Number,index:{dafault:00001}},
 
   /* 从问卷中抽出的转存信息 */
   caseInfo:String,//案件描述
@@ -17,16 +22,16 @@ var schema={
   openid:String,//市民微信openid
   phoneNum:String,//市民电话号码
   idCard:String,//市民身份证号
-  area:String,//市民所在区域
+  //area:String,//市民所在区域
 
 
   /* 时间单位为毫秒，记录操作的当前时间 */
   startTime:Number,//订单发起时间（用户提交paperOne的时间）
   sendTime:Number,//委派给民警的时间
-  //calloutTime:Number,//民警接单的时间
   confirmTime:Number,//民警确认的时间
   arriveTime:Number,//民警到达案发地的时间
   solveTime:Number,//民警解决该案件的时间
+  endTime:Number,//订单结束时间（用户评价后或者指挥端忽略后更新此字段）
 
   paperOne:Object,//问卷1
   paperTwo:Object//问卷2
@@ -38,55 +43,41 @@ var listSchema=new mongoose.Schema(schema,{
 
 var ListModel=mongoose.model('list',listSchema)
 
+listSchema.plugin(autoIncrement.plugin,'list')
+
 var common=new Common(ListModel)
 
 function List(list){
-  this.policeName=list.policeName
-  this.listStatus=list.listStatus
-  this.id=list.id
+  this.list={
+    /*创建文档的时候并不是所有字段都给出，注释掉的是之后update的*/
+    //policeName:list.policeName,
 
-  this.caseInfo=list.caseInfo
-  this.userName=list.userName
-  this.openid=list.openid
-  this.phoneNum=list.phoneNum
-  this.idCard=list.idCard
-  this.area=list.area
+    //listStatus:list.listStatus,
+    listStatus:0,
 
-  this.startTime=list.startTime
-  this.sendTime=list.sendTime
-  this.confirmTime=list.confirmTime
-  this.arriveTime=list.arriveTime
-  this.solveTime=list.solveTime
+    caseInfo:list.paperOne.q5,
+    userName:list.paperOne.q1,
+    openid:list.paperOne.sojumpparm,
+    phoneNum:list.paperOne.q3,
+    idCard:list.paperOne.q2,
 
-  this.paperOne=list.paperOne
-  this.paperTwo=list.paperTwo
+    startTime:list.startTime,
+    // endTime:list.endTime,
+    // sendTime:list.sendTime,
+    // confirmTime:list.confirmTime,
+    // arriveTime:list.arriveTime,
+    // solveTime:list.solveTime,
+
+    paperOne:list.paperOne
+    //paperTwo:list.paperTwo
+  }
 }
 
 module.exports=List
 
 List.prototype={
   save (callback){
-    var list={
-      policeName:this.policeName,
-      listStatus:this.listStatus,
-      id:this.id,
-
-      caseInfo:this.caseInfo,
-      userName:this.userName,
-      openid:this.openid,
-      phoneNum:this.phoneNum,
-      idCard:this.idCard,
-      area:this.area,
-
-      startTime:this.startTime,
-      sendTime:this.sendTime,
-      confirmTime:this.confirmTime,
-      arriveTime:this.arriveTime,
-      solveTime:this.solveTime,
-
-      paperOne:this.paperOne,
-      paperTwo:this.paperTwo
-    }
+    var list=this.list
     var listModel=new ListModel(list)
 
     var promise=listModel.save()
