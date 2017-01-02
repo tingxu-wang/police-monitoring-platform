@@ -29,7 +29,11 @@ var tools={
       }
     })
   },
-  changePoliceStatus (res,policeName,policeStatusNumber,listTimeType,isTransmit=false){
+  changePoliceStatus (res,policeName,policeStatusNumber,listTimeType,isTransmit){
+    if(!arguments[4]){
+      var isTransmit=false
+    }
+
     var listUpdate=List.prototype.update,
         personUpdate=Person.prototype.update
 
