@@ -10,8 +10,8 @@ var RedisStore = require('connect-redis')(session);
 
 var app = express();
 
+//routes
 var router=require('./routes/index')
-var devRouter=require('./routes/dev')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,7 +36,6 @@ app.use('/lib',express.static(path.join(__dirname,'lib')))//第三方静态资�
 //app.use('/demo',express.static(path.join(__dirname,'views','demo')))//demo页位置
 
 router(app)
-devRouter(app)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

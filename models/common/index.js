@@ -28,5 +28,13 @@ Common.prototype={
   },
   update (searchObj,updateObj,callback){
     this.model.update(searchObj,{$set:updateObj},{upsert:false},callback)
+  },
+  findOneAndUpdate (searchObj,updateObj,callback){
+    this.model.findOneAndUpdate(searchObj,{$set:updateObj},{upsert:false},function(err,doc){
+      if(err){
+        return callback(err)
+      }
+      callback(null,doc)
+    })
   }
 }
