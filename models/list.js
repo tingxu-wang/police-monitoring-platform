@@ -60,7 +60,7 @@ function List(list){
     openid:list.paperOne.sojumpparm,
     phoneNum:list.paperOne.q3,
     idCard:list.paperOne.q2,
-    caseType:list.paperOne.q4
+    caseType:list.paperOne.q4,
 
     startTime:list.startTime,
     // endTime:list.endTime,
