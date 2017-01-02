@@ -43,7 +43,6 @@ list字段示例：
 var schema={
   policeName:String,//民警姓名
   listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略
-  id:Number,//订单id（案件编号）
 
   /* 从问卷中抽出的转存信息 */
   caseInfo:String,//案件描述
@@ -51,16 +50,14 @@ var schema={
   openid:String,//市民微信openid
   phoneNum:String,//市民电话号码
   idCard:String,//市民身份证号
-  area:String,//市民所在区域
 
 
   /* 时间单位为毫秒，记录操作的当前时间 */
   startTime:Number,//订单发起时间（用户提交paperOne的时间）
   sendTime:Number,//委派给民警的时间
-  //calloutTime:Number,//民警接单的时间
   confirmTime:Number,//民警确认的时间
   arriveTime:Number,//民警到达案发地的时间
-  solveTime:Number,//民警解决该案件的时间
+  solvedTime:Number,//民警解决该案件的时间
   endTime:Number,//订单结束时间（用户评价后或者指挥端忽略后更新此字段）
 
   paperOne:Object,//问卷1
