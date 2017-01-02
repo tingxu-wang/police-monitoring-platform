@@ -21,10 +21,10 @@ var PersonModel=mongoose.model('person',personSchema)
 var common=new Common(PersonModel)
 
 function Person(person){
-  this.location=person.location
-  this.name=person.name
-  this.type=person.type
-  this.status=person.status
+  this.location=person.location || '0,0'
+  this.name=person.name || 'admin'
+  this.type=person.type || 0
+  this.status=person.status || 0
 }
 
 module.exports=Person
