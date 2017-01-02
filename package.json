@@ -23,6 +23,7 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "mongoose-auto-increment": "^5.0.1"
+    "mongoose-auto-increment": "^5.0.1",
+    "requestify": "^0.2.5"
   }
 }

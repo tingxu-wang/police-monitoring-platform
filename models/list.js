@@ -30,7 +30,7 @@ var schema={
   sendTime:Number,//委派给民警的时间
   confirmTime:Number,//民警确认的时间
   arriveTime:Number,//民警到达案发地的时间
-  solveTime:Number,//民警解决该案件的时间
+  solvedTime:Number,//民警解决该案件的时间
   endTime:Number,//订单结束时间（用户评价后或者指挥端忽略后更新此字段）
 
   paperOne:Object,//问卷1
@@ -66,7 +66,7 @@ function List(list){
     // sendTime:list.sendTime,
     // confirmTime:list.confirmTime,
     // arriveTime:list.arriveTime,
-    // solveTime:list.solveTime,
+    // solvedTime:list.solvedTime,
 
     paperOne:list.paperOne
     //paperTwo:list.paperTwo

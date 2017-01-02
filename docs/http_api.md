@@ -70,6 +70,7 @@ var schema={
 ```
 
 ---
+
 ## 人物数据交互api
 
 | url | 发送值 | 返回值 | 说明 |
@@ -78,7 +79,23 @@ var schema={
 | /find | 筛选条件对象 | {success,persons,msg} | 用客户端端发送的json对象遍历person集合返回匹配的所有符合条件的对象到 `persons` 字段 |
 | /upsertUpdate | 由人员name字段以及想要覆盖的字段组成的对象 | {success,msg} | 利用客户端传来的json对象中的name字段遍历数据库，其余字段更新数据库信息，如果name未匹配任何集合，则利用客户端的json对象创建相应的person对象到数据库 |
 | /update | 同上 | {success,msg} |效果同上，只是name不匹配任何对象时不创建对象 |
-| /save(工具api) | 人员信息对象 | {success,msg} | 先用客户端传来的name字段遍历数据库，如果有匹配则返回失败信息，如果不匹配则向数据库创建该person对象信息并返回成功信息对象 |
+| /save(工具接口) | 人员信息对象 | {success,msg} | 先用客户端传来的name字段遍历数据库，如果有匹配则返回失败信息，如果不匹配则向数据库创建该person对象信息并返回成功信息对象 |
+
+## 订单数据交互api
+| url | 发送值 | 返回值 | 说明 |
+| :------------- | :------------- | :------------- | :------------- |
+| /paperOne | 问卷一数据对象 | {success,msg} | 利用所给到的对象数据创建list对象，并对问卷中的关键信息进行转存 |
+| /getWantedList | 无 | `listStatus=0`的list对象数组 | 抓取未处理的订单 |
+| /getfreePolice | 无 | `status=0`的person对象数组 | 抓取未出警的民警 |
+| /ignoreList | {_id:订单编号} | {success,msg} | 忽略未处理的订单,提交成功后后台会自动更新`endTime`字段并将该`_id`的订单`listStatus`设置为4 |
+| /delegate | {_id,policeName} | {success,msg} | web端委派未处理的订单，提交成功后后台会自动更新`sendTime`字段并将该`policeName`的民警`status`设置为1 |
+| /getMission | {policeName} | {success,msg,list} | 获取分配给自己（该民警）的任务 |
+| /confirmMission | {policeName} | {success,msg} | 提交成功后后台会自动更新`confirmTime`字段并将该`policeName`的民警`status`设置为2 |
+| /policeArrive | {policeName} | {success,msg} | 提交成功后后台会自动更新`arriveTime`字段并将该`policeName`的民警`status`设置为3 |
+| /policeSolved | {policeName} | {success,msg} | 提交成功后后台会自动更新`solveTime`字段并将该`policeName`的民警`status`设置为0 |
+| /paperTwo | 问卷二数据对象 | {success,msg} | 提交表单json对象后后端自动检索json中的`id`字段的list对象，将问卷信息并入匹配文档中并更新该list对象的`listStatus`为3 |
+
+---
 
 ## 订单交互逻辑梳理及api设计(括号中的操作为person集合的操作而非对list)
 
@@ -122,8 +139,8 @@ var schema={
   (设置`person`集合中该`policeName`的民警`status`为0)
 
 案件终止：
-- 市民评价(post)`/rated`：微信端将反馈对象提供给后端，后端将`req.body`中的订单号`id`解析出来联合上`listStatus=2`取出来list对象，匹配的话就将`paperTwo`字段设置为`req.body`
+- 市民评价(post)`/paperTwo`：微信端将反馈对象提供给后端，后端将`req.body`中的订单号`id`解析出来联合上`listStatus=2`取出来list对象，匹配的话就将`paperTwo`字段设置为`req.body`，并将该list对象的`endTime`字段设置为当前时间
 ，将`listStatus`设置为3
 
 工具接口:
-- 获得单个用户的订单列表`/getUserLists`：微信端向后台发送用户的`openid`，后台遍历list集合中的`openid`，将符合该id值的所有list对象返回请求方
+- <s>获得单个用户的订单列表`/getUserLists`：微信端向后台发送用户的`openid`，后台遍历list集合中的`openid`，将符合该id值的所有list对象返回请求方</s>

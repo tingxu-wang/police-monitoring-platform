@@ -1,6 +1,8 @@
 var Person=require('../models/person'),
     List=require('../models/list')
 
+var tools=require('../models/tools')
+
 module.exports=function(app){
   //创建文档保存paperOne数据并记录startTime
   app.post('/paperOne',(req,res,next)=>{
@@ -114,6 +116,10 @@ module.exports=function(app){
 
       if(result.nModified){//订单状态修改成功
         personUpdate({name:filter.policeName,type:1},{status:1},(err,result)=>{
+          if(err){
+            console.error(err)
+          }
+
           if(result.nModified){
             res.json({
               success:1,
@@ -129,7 +135,7 @@ module.exports=function(app){
       }else{
         res.json({
           success:0,
-          msg:'该list对象listStatus已经为1'
+          msg:'未匹配到符合该_id值的list对象或该list对象listStatus已经为1'
         })
       }
     })
@@ -139,5 +145,74 @@ module.exports=function(app){
    * 更改民警状态
   */
 
-  
+  //获取分配给自己（该民警）的任务
+  app.post('/getMission',(req,res,next)=>{
+    var findOne=List.prototype.findOne
+    var searchObj={
+      policeName:req.body.policeName,
+      listStatus:1
+    }
+
+    findOne(searchObj,(err,list)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(list){
+        delete list.paperOne
+        delete list.paperTwo
+        res.json({
+          success:1,
+          list
+        })
+      }else{
+        res.json({
+          success:0,
+          msg:'当前民警未分配任务'
+        })
+      }
+    })
+  })
+
+  app.post('/confirmMission',(req,res,next)=>{
+    tools.changePoliceStatus(res,req.body.policeName,2,'confirmTime')
+  })
+
+  app.post('/policeArrive',(req,res,next)=>{
+    tools.changePoliceStatus(res,req.body.policeName,3,'arriveTime')
+  })
+
+  app.post('/policeSolved',(req,res,next)=>{
+    tools.changePoliceStatus(res,req.body.policeName,0,'solvedTime',true)
+  })
+
+  app.post('/paperTwo',(req,res,next)=>{
+    var update=List.prototype.update
+    var paper=req.body,
+        schema={
+          paperTwo:paper,
+          endTime:Date.now()
+        }
+    var listId=paper.id//从反馈表单对象中取出的list对象id
+
+    update({_id:listId,listStatus:2},{listStatus:3},(err,result){
+      if(err){
+        console.error(err)
+      }
+
+      if(result.nModified){
+        res.json({
+          success:1,
+          msg:'订单评价成功'
+        })
+      }else{
+        res.json({
+          success:0,
+          msg:'该订单已评价'
+        })
+      }
+
+    })
+  })
+
 }

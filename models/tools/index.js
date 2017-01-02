@@ -2,6 +2,9 @@
  * 用于操作数据库以及向客户端返回结果的共用操作模块
 */
 
+var Person=require('../person'),
+    List=require('../list')
+
 var tools={
   resUpdate (req,res,model,searchObj,updateObj,successMsg,errorMsg){
   //在执行完update操作后返回操作是否成功的boolean
@@ -26,8 +29,74 @@ var tools={
       }
     })
   },
-  policeChangeStatus (res,Person,List,searchObj,updateObj,successMsg,errorMsg){
+  changePoliceStatus (res,policeName,policeStatusNumber,listTimeType,isTransmit=false){
+    var listUpdate=List.prototype.update,
+        personUpdate=Person.prototype.update
 
+    var filter={listStatus:1,policeName}
+
+    listUpdate(filter,{[listTimeType]:Date.now()},(err,result)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(result.nModified){
+        personUpdate({name:policeName},{status:policeStatusNumber},(err,result)=>{
+          if(err){
+            console.error(err)
+          }
+
+          if(result.nModified){
+            if(isTransmit){
+              tools.transmit(filter)
+            }
+            res.json({
+              success:1,
+              msg:`订单时间字段 ${listTimeType} 设置成功,民警当前status值为：${policeStatusNumber}`
+            })
+          }else{
+            res.json({
+              success:0,
+              msg:`订单时间字段 ${listTimeType} 设置成功,民警状态修改失败，当前传参status值与当前民警状态值相同`
+            })
+          }
+        })
+      }else{//未匹配订单
+        res.json({
+          success:0,
+          msg:'未匹配到符合条件的订单'
+        })
+      }
+    })
+  },
+  sendPost (infoObj){
+    var requestify=require('requestify')
+
+    requestify.post('http://115.159.202.104:8989/feedback', infoObj)
+    .then(function(response) {
+        response.getBody();
+    });
+  },
+  /*调用该方法后根据参数对象在list集合中搜索list对象，抽出所需字段推到微信服务器*/
+  transmit (filter){
+    var findOne=List.prototype.findOne
+    var listStatus=filter.listStatus,
+        policeName=filter.policeName
+
+    findOne({listStatus,policeName},(err,list)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(list){
+        tools.sendPost({
+          openid:list.openid,
+          listStatus:list.listStatus,
+          id:list._id,
+          caseInfo:list.caseInfo
+        })
+      }
+    })
   }
 }
 
