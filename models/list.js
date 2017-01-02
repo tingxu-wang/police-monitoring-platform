@@ -22,7 +22,7 @@ var schema={
   openid:String,//市民微信openid
   phoneNum:String,//市民电话号码
   idCard:String,//市民身份证号
-  //area:String,//市民所在区域
+  caseType:Number,//报案类型
 
 
   /* 时间单位为毫秒，记录操作的当前时间 */
@@ -60,6 +60,7 @@ function List(list){
     openid:list.paperOne.sojumpparm,
     phoneNum:list.paperOne.q3,
     idCard:list.paperOne.q2,
+    caseType:list.paperOne.q4
 
     startTime:list.startTime,
     // endTime:list.endTime,
