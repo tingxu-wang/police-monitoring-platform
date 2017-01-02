@@ -195,7 +195,7 @@ module.exports=function(app){
         }
     var listId=paper.id//从反馈表单对象中取出的list对象id
 
-    update({_id:listId,listStatus:2},{listStatus:3},(err,result){
+    update({_id:listId,listStatus:2},{listStatus:3},(err,result)=>{
       if(err){
         console.error(err)
       }
