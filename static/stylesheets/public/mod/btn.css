@@ -1,0 +1,37 @@
+/* 按钮相关样式 */
+
+.list-btn{
+  width:100px;
+  height:40px;
+  color:#fff;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 20px;
+  line-height: 43px;
+  cursor: pointer;
+  float: right;
+}
+
+.list-btn-primary{
+  background: #364fa2;
+}
+
+.list-btn-danger{
+  background: #b10f29;
+  margin-top: 20px;
+}
+
+.list-btn-short{
+  width:100px;
+  height: 30px;
+  color:#fff;
+  border-radius: 20px;
+  line-height: 30px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.list-btn-short-default{
+  background: #4e478d;
+}

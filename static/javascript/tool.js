@@ -1,3 +1,5 @@
+/* 开发环境用的工具脚本 */
+
 var local='http://localhost:3000/',
     online='http://115.28.243.24:3000/'
 

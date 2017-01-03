@@ -1,0 +1,104 @@
+/* 订单样式 */
+
+.list-container{
+  padding:20px 0px;
+  border-bottom: 1px #ccc solid;
+}
+
+.list-title{
+  font-size: 18px;
+  width:70px;
+  height:30px;
+  float:left;
+  color:#364fa2;
+}
+
+.list-number{
+  height:20px;
+  font-size: 12px;
+  float:left;
+  margin-left: 10px;
+  padding-top: 5px;
+}
+
+.list-info-row{
+  margin-top: 10px;
+}
+
+.list-info-row:after{
+  content: ".";
+  clear: both;
+  display: block;
+  height:0;
+  visibility: hidden;
+}
+
+.list-first-info{
+  width:170px;
+  float:left;
+}
+
+.list-second-info{
+
+}
+
+.list-info-item{
+  color:#999;
+}
+
+.list-info-value{
+  color:#1a1a1a;
+}
+
+.list-case-info{
+  height:40px;
+  margin-top: 10px;
+  overflow: auto;
+}
+
+.list-case-detail-info{
+  margin-top: 10px;
+}
+
+.list-brn-container{
+
+}
+
+.list-case-map{
+  margin-top: 15px;
+  height:220px;
+  background: #ccc;
+}
+
+.list-case-police-choice{
+  margin-top: 20px;
+}
+
+.list-police-info-container > .clearfix > div{
+  float:right;
+}
+
+.list-status{
+  margin-top: 10px;
+  font-size:16px;
+}
+
+.list-police-info-first,.list-police-info{
+  font-size: 12px;
+}
+
+.list-police-info-first{
+  margin-top: 10px;
+}
+
+.list-police-info{
+  margin-top:5px;
+}
+
+.list-police-detail{
+  margin-top: 10px;
+}
+
+.list-police-kpi{
+  margin-top: 10px;
+}

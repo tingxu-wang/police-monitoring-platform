@@ -39,7 +39,13 @@ var tools={
 
     var filter={listStatus:1,policeName}
 
-    listUpdate(filter,{[listTimeType]:Date.now()},(err,result)=>{
+    var updateObj={[listTimeType]:Date.now()}
+
+    if(listTimeType==='solvedTime'){//已解决接口调用时将listStatus设置为2
+      updateObj.listStatus=2
+    }
+
+    listUpdate(filter,updateObj,(err,result)=>{
       if(err){
         console.error(err)
       }
