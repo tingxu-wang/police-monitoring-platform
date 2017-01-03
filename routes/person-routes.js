@@ -1,6 +1,9 @@
 var Person=require('../models/person'),
     List=require('../models/list')
 
+var tools=require('../tools'),
+    renderInfo=tools.renderInfo
+
 module.exports=function(app){
   app.post('/save',(req,res,next)=>{
     var person={
@@ -32,16 +35,12 @@ module.exports=function(app){
   })
 
   app.post('/findOne',(req,res,next)=>{
-    var infoObj=req.body
+    //var infoObj=req.body
+    var filter=renderInfo(req.body)
     var findOne=Person.prototype.findOne
 
-    var filter={}
 
-    switch (infoObj){
-      
-    }
-
-    findOne(filter.name,(err,person)=>{
+    findOne(filter,(err,person)=>{
       if(err){
         console.error(err)
       }
@@ -61,7 +60,8 @@ module.exports=function(app){
   })
 
   app.post('/find',(req,res,next)=>{
-    var filter=req.body
+    //var filter=req.body
+    var filter=renderInfo(req.body)
     var find=Person.prototype.find
 
     find(filter,(err,persons)=>{
