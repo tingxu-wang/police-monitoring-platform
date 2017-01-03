@@ -18,6 +18,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('.html',require('ejs').__express)//加载html渲染模块
 
+/*app.use(session({
+  secret:'control',
+  key:'control',
+  cookie:{maxAge:1000*60*30},//cookie有效期30分钟
+  store:
+}))*/
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

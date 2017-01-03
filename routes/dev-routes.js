@@ -9,6 +9,11 @@ module.exports=function (app){
   })
 
   app.post('/postTest',(req,res,next)=>{
-    console.log(req.body)
+    var filter=req.body
+
+    var keys=Object.getOwnPropertyNames(filter)
+
+    console.log(keys)
+    res.json({})
   })
 }

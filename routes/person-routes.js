@@ -32,33 +32,32 @@ module.exports=function(app){
   })
 
   app.post('/findOne',(req,res,next)=>{
-    var filter=req.body
+    var infoObj=req.body
     var findOne=Person.prototype.findOne
 
-    if(Object.getOwnPropertyNames(filter).length!==1){
-      res.json({
-        success:0,
-        msg:'单个查找仅支持单个字段'
-      })
-    }else{
-      findOne(filter,(err,person)=>{
-        if(err){
-          console.error(err)
-        }
+    var filter={}
 
-        if(person){
-          res.json({
-            success:1,
-            person:person
-          })
-        }else{
-          res.json({
-            success:0,
-            msg:'该用户不存在'
-          })
-        }
-      })
+    switch (infoObj){
+      
     }
+
+    findOne(filter.name,(err,person)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(person){
+        res.json({
+          success:1,
+          person:person
+        })
+      }else{
+        res.json({
+          success:0,
+          msg:'该用户不存在'
+        })
+      }
+    })
   })
 
   app.post('/find',(req,res,next)=>{
