@@ -9,11 +9,19 @@ module.exports=function (app){
   })
 
   app.post('/postTest',(req,res,next)=>{
-    var filter=req.body
+    var infoObj=req.body
 
-    var keys=Object.getOwnPropertyNames(filter)
+    var keys=Object.getOwnPropertyNames(infoObj)
+    var filter={}
 
-    console.log(keys)
-    res.json({})
+    for(var i=0;i<keys.length;i++){
+      var property=keys[i]
+
+      filter[property]=infoObj[property]
+    }
+
+    res.json({
+      info:filter
+    })
   })
 }
