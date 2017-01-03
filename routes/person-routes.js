@@ -53,7 +53,7 @@ module.exports=function(app){
       }else{
         res.json({
           success:0,
-          msg:'该用户不存在'
+          msg:'未找到匹配项'
         })
       }
     })

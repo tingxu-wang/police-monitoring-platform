@@ -25,12 +25,14 @@ body{
 
 .list-container{
   padding:20px 0px;
+  border-bottom: 1px #ccc solid;
 }
 
 .list-title{
   font-size: 18px;
   width:70px;
   height:30px;
+  float:left;
   color:#364fa2;
 }
 
@@ -38,5 +40,88 @@ body{
   height:20px;
   font-size: 12px;
   float:left;
-  margin-left: 30px;
+  margin-left: 10px;
+  padding-top: 5px;
 }
+
+.list-info-row{
+  margin-top: 10px;
+}
+
+.list-info-row:after{
+  content: ".";
+  clear: both;
+  display: block;
+  height:0;
+  visibility: hidden;
+}
+
+.list-first-info{
+  width:170px;
+  float:left;
+}
+
+.list-second-info{
+
+}
+
+.list-info-item{
+  color:#999;
+}
+
+.list-info-value{
+  color:#1a1a1a;
+}
+
+.list-case-info{
+  height:40px;
+  margin-top: 10px;
+  overflow: auto;
+}
+
+.list-case-detail-info{
+  margin-top: 10px;
+}
+
+.list-brn-container{
+
+}
+
+.list-btn{
+  width:100px;
+  height:40px;
+  color:#fff;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 20px;
+  line-height: 43px;
+  cursor: pointer;
+  float: right;
+}
+
+.list-btn-primary{
+  background: #364fa2;
+}
+
+.list-btn-danger{
+  background: #b10f29;
+  margin-top: 20px;
+}
+
+.list-case-map{
+  margin-top: 15px;
+  height:220px;
+  background: #ccc;
+}
+
+.list-case-police-choice{
+  margin-top: 20px;
+}
+
+/*.modal-backdrop{
+  display: none;
+}*/
+
+/*.modal{
+  display: block;
+}*/
