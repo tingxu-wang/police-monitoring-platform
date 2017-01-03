@@ -13,7 +13,7 @@ module.exports = function (app){
   //CORS头设置
   app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*')
-    res.header("Content-Type", "application/json; charset=utf-8")
+    // res.header("Content-Type", "application/json; charset=utf-8")
     next()
   })
 
