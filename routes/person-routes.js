@@ -150,4 +150,36 @@ module.exports=function(app){
       }
     })
   })
+
+  app.post('/updateUserLocation',(req,res,next)=>{
+    var filter=req.body,
+        openid=filter.openid,
+        location=filter.location
+
+    var searchObj={openid},
+        updateObj={location}
+
+    var success='成功覆盖字段',
+        error='未成功覆盖字段'
+
+    var update=Person.prototype.update
+
+    update(searchObj,updateObj,(err,result)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(result.nModified){
+        res.json({
+          success:1,
+          msg:success
+        })
+      }else{
+        res.json({
+          success:0,
+          msg:error
+        })
+      }
+    })
+  })
 }

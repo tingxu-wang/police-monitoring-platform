@@ -77,6 +77,7 @@ var schema={
 | /find | 筛选条件对象 | {success,persons,msg} | 用客户端端发送的json对象遍历person集合返回匹配的所有符合条件的对象到 `persons` 字段 |
 | /upsertUpdate | 由人员name字段以及想要覆盖的字段组成的对象 | {success,msg} | 利用客户端传来的json对象中的name字段遍历数据库，其余字段更新数据库信息，如果name未匹配任何集合，则利用客户端的json对象创建相应的person对象到数据库 |
 | /update | 同上 | {success,msg} |效果同上，只是name不匹配任何对象时不创建对象 |
+| /updateUserLocation | 由人员openid字段以及想要覆盖的字段组成的对象 | {success,msg} | 用openid字段更新用户对象信息，用于微信端修改用户位置所用 |
 | /save(工具接口) | 人员信息对象 | {success,msg} | 先用客户端传来的name字段遍历数据库，如果有匹配则返回失败信息，如果不匹配则向数据库创建该person对象信息并返回成功信息对象 |
 
 ## 订单数据交互api
