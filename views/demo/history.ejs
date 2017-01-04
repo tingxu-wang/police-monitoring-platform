@@ -43,98 +43,112 @@
         <div class="clearfix">
           <div class="list-police-info-first">
             <span class="list-info-item">出警民警：</span>
-            <span class="list-info-value">王小二</span>
+            <span class="list-info-value js-policeName">王小二</span>
           </div>
         </div>
         <div class="clearfix">
           <div class="list-police-info">
             <span class="list-info-item">编号：</span>
-            <span class="list-info-value">12138</span>
+            <span class="list-info-value js-policeId">12138</span>
           </div>
         </div>
         <div class="clearfix">
           <div class="list-police-info">
             <span class="list-info-item">总用时：</span>
-            <span class="list-info-value">00:13:46</span>
+            <span class="list-info-value js-useTime">00:13:46</span>
           </div>
         </div>
         <div class="clearfix">
-          <div class="list-btn-short list-btn-short-default">
+          <div class="list-btn-short list-btn-short-default js-total-count js-show-modal">
             4.5分
           </div>
         </div>
       </div>
+      <div class="hidden-info-container">
+        <div class="js-police-speed">2</div>
+        <div class="js-police-attitude">3</div>
+        <div class="js-case-result">1</div>
+        <div class="js-user-comment">警察叔叔请我喝了三罐可乐~</div>
+      </div>
     </div>
-    <div class="js-modal-container modal-container">
-      <div class="modal fade" id="js-listModal" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title" id="myModalLabel">出警确认</h4>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="list-info-row">
-                    <div class="list-title js-m-caseType">
 
-                    </div>
-                    <div class="list-number js-id">
-
-                    </div>
-                  </div>
-                  <div class="list-info-row row">
-                    <div class="list-first-info col-xs-12 col-sm-6">
-                      <span class="list-info-item">报警人：</span><span class="list-info-value js-m-userName"></span>
-                    </div>
-                    <div class="list-second-info col-xs-12 col-sm-6">
-                      <span class="list-info-item">身份证：</span><span class="list-info-value js-m-idCard"></span>
-                    </div>
-                  </div>
-                  <div class="list-info-row">
-                    <div class="list-first-info">
-                      <span class="list-info-item">联系电话：</span><span class="list-info-value js-m-phoneNumber"></span>
-                    </div>
-                  </div>
-                  <div class="list-case-detail-info js-m-caseInfo">
-
-                  </div>
-                  <div class="list-case-map">
-                    <!-- 地图 -->
-                  </div>
-                  <div class="list-case-police-choice row">
-                    <div class="col-xs-6">
-                      <select class="form-control js-officeName">
-                        <option>派出所1</option>
-                        <option>派出所2</option>
-                      </select>
-                    </div>
-                    <div class="col-xs-6">
-                      <select class="form-control js-policeName">
-                        <option>minjing1</option>
-                        <option>minjing2</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary js-delegate">确认指派</button>
-            </div>
+  </div>
+  <div class="list-container js-list-container">
+    <div class="row">
+      <div class="col-sm-9 col-xs-8">
+        <div class="list-info-row">
+          <div class="list-title js-caseType">
+            强奸案
+          </div>
+          <div class="list-number js-id">
+            00004
+          </div>
+        </div>
+        <div class="list-info-row row">
+          <div class="list-first-info col-xs-12 col-sm-6">
+            <span class="list-info-item">报警人：</span><span class="list-info-value js-userName">陈泽</span>
+          </div>
+          <div class="list-second-info col-xs-12 col-sm-6">
+            <span class="list-info-item">身份证：</span><span class="list-info-value js-idCard">110107199412120066</span>
+          </div>
+        </div>
+        <div class="list-info-row">
+          <div class="list-first-info">
+            <span class="list-info-item">联系电话：</span><span class="list-info-value js-phoneNumber">15801183488</span>
+          </div>
+        </div>
+        <div class="list-case-info js-caseInfo">
+          点击出警按钮弹出该弹窗，点击确认指派，状态变更；点击取消关闭弹窗 案件描述及整
+          个弹窗高度给的都是最大高度，这里最好不要写成固定的高度，不然文字少的时候可能太
+          丑 地图居中显示报案人位置 派出所选择默认文案：“请选择出警派出所”  ，颜色#999999
+          ，点击上拉菜单选择派出所， ，选择后显示派出所名称，颜色变为#1a1a1a 未选择派出所时，
+          民警选择不可选择，文案“请选择民警”，颜色#CCCCCC，派出所选择后，“请选择民警”颜色变为#999999
+          ，点击上拉菜单选择民警
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-4 list-police-info-container">
+        <div class="clearfix">
+          <div class="list-status">
+            已完成
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="list-police-info-first">
+            <span class="list-info-item">出警民警：</span>
+            <span class="list-info-value js-policeName">王小二</span>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="list-police-info">
+            <span class="list-info-item">编号：</span>
+            <span class="list-info-value js-policeId">12138</span>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="list-police-info">
+            <span class="list-info-item">总用时：</span>
+            <span class="list-info-value js-useTime">00:13:46</span>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="list-btn-short list-btn-short-muted">
+            未评价
           </div>
         </div>
       </div>
+      <div class="hidden-info-container">
+        <div class="js-police-speed"></div>
+        <div class="js-police-attitude"></div>
+        <div class="js-case-result"></div>
+        <div class="js-user-comment"></div>
+      </div>
     </div>
+
   </div>
 
 </div>
 
-<script type="text/javascript">
-  var schema=['policeName','policeId','time']
-</script>
 
+<%- include ../private/history-modal %>
 <%- include ../public/components/rights %>
 <%- include ../public/footer %>

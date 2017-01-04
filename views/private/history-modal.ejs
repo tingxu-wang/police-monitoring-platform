@@ -1,0 +1,100 @@
+<div class="js-modal-container modal-container">
+  <div class="modal fade" id="js-list-modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">评价详情</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="clearfix">
+                <div class="case-number js-m-id">
+
+                </div>
+                <div class="total-count js-m-total-count">
+
+                </div>
+              </div>
+              <div class="list-info-row row">
+                <div class="list-first-info col-xs-12 col-sm-6">
+                  <span class="list-info-item">办案民警：</span><span class="list-info-value js-m-policeName"></span>
+                </div>
+                <div class="list-second-info col-xs-12 col-sm-6">
+                  <span class="list-info-item">编号：</span><span class="list-info-value js-m-policeId"></span>
+                </div>
+              </div>
+              <div class="case-star-container">
+                <div class="case-star-row row js-case-star-row">
+                  <div class="js-m-police-speed hidden-info-container js-hidden-info-container"></div>
+                  <div class="col-xs-12 col-sm-6 star-left">
+                    <span class="list-info-value">出警速度</span><span class="list-info-item">(<span class="js-m-useTime"></span>)</span>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="js-star-main-container star-main-container">
+                      <span class="star-container-first">
+                        <img src="/static/images/star-solid.jpg" alt="">
+                      </span>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="case-star-row row js-case-star-row">
+                  <div class="js-m-police-attitude hidden-info-container js-hidden-info-container"></div>
+                  <div class="col-xs-12 col-sm-6 star-left">
+                    <span class="list-info-value">服务态度</span>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="js-star-main-container star-main-container">
+                      <span class="star-container-first">
+                        <img src="/static/images/star-solid.jpg" alt="">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="case-star-row row js-case-star-row">
+                  <div class="js-m-case-result hidden-info-container js-hidden-info-container"></div>
+                  <div class="col-xs-12 col-sm-6 star-left">
+                    <span class="list-info-value">处理结果</span>
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <div class="js-star-main-container star-main-container">
+                      <span class="star-container-first">
+                        <img src="/static/images/star-solid.jpg" alt="">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="case-info-container">
+                <textarea placeholder="无反馈意见" class="form-control js-m-user-comment"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    var schema=['policeName','policeId','useTime','total-count','police-attitude','case-result','police-speed','id','user-comment']
+
+    var bind=new BindingModal()
+    $('.js-show-modal').on('click',function(){
+      bind.getPosition($(this))
+
+      $('#js-list-modal').modal('show')
+    })
+
+    $('#js-list-modal').on('show.bs.modal',function(){
+      bind.bindingInfo(schema)
+      new StarCompile()
+    })
+  })
+</script>

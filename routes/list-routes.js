@@ -13,6 +13,8 @@ module.exports=function(app){
         }
 
     var newList=new List(schema)
+    var newPerson=new Person({name:paper.q1})
+    newPerson.save(()=>{})//新建用户
 
     newList.save((err)=>{
       if(err){

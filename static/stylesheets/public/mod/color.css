@@ -1,0 +1,36 @@
+.list-info-item{
+  color:#999;
+}
+
+.list-info-value{
+  color:#1a1a1a;
+}
+
+.list-btn-primary{
+  background: #364fa2;
+}
+
+.list-btn-short-default{
+  background: #4e478d;
+}
+
+.list-btn-short-muted{
+  background: #ccc;
+  cursor: auto;
+}
+
+.list-status-onway{
+  color: #eab616;
+}
+
+.list-status-arrive{
+  color: #16eaa7;
+}
+
+.list-status-ignore{
+  color: #cccccc;
+}
+
+.list-status-finished{
+  color: #1a1a1a;
+}

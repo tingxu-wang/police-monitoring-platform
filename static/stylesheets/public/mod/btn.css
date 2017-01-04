@@ -12,10 +12,6 @@
   float: right;
 }
 
-.list-btn-primary{
-  background: #364fa2;
-}
-
 .list-btn-danger{
   background: #b10f29;
   margin-top: 20px;
@@ -30,8 +26,4 @@
   margin-top: 20px;
   text-align: center;
   cursor: pointer;
-}
-
-.list-btn-short-default{
-  background: #4e478d;
 }

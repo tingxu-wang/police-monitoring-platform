@@ -42,14 +42,6 @@
 
 }
 
-.list-info-item{
-  color:#999;
-}
-
-.list-info-value{
-  color:#1a1a1a;
-}
-
 .list-case-info{
   height:40px;
   margin-top: 10px;
@@ -101,4 +93,55 @@
 
 .list-police-kpi{
   margin-top: 10px;
+}
+
+.case-number{
+  font-size: 24px;
+  font-weight: bold;
+  color:#1a1a1a;
+  height: 30px;
+  float: left;
+  line-height: 28px;
+}
+
+.total-count{
+  font-size: 16px;
+  color:#e93e10;
+  line-height: 31px;
+  margin-left: 17px;
+  float: left;
+}
+
+.star-left{
+  line-height: 30px;
+}
+
+.case-star-container{
+  margin-top: 10px;
+}
+
+.case-star-row{
+  height:30px;
+}
+
+.star-container{
+  margin-left: 5px;
+}
+
+.hidden-info-container{/* 信息隐藏域 */
+  display: none;
+}
+
+.case-info-container{
+  margin-top: 15px;
+}
+
+.star-main-container{
+  float: right;
+}
+
+@media(max-width:767px){
+  .star-main-container{
+    float: left;
+  }
 }
