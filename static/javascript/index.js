@@ -1,4 +1,6 @@
 /* views中用的脚本文件 */
+var online='http://115.28.243.24:3000/'
+
 function BindingModal(schema,isInsertStar){
   this.listIndex=0
 }
@@ -73,7 +75,7 @@ StarCompile.prototype={
       <img src="/static/images/star-solid.jpg" alt="">
     </span>`
 
-    $('#js-listModal').on('hidden.bs.modal',function(){
+    $('#js-list-modal').on('hidden.bs.modal',function(){
       $('.js-star-main-container').html('').append(solidStar)
     })
   }

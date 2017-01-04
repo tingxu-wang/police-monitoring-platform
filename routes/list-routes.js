@@ -13,8 +13,13 @@ module.exports=function(app){
         }
 
     var newList=new List(schema)
-    var newPerson=new Person({name:paper.q1})
-    newPerson.save(()=>{})//新建用户
+    var newPerson=new Person({name:paper.q1,openid:paper.sojumpparm})
+
+    newPerson.findOne({openid:paper.sojumpparm},(err,person)=>{
+      if(!person){
+        newPerson.save(()=>{})//新建用户对象
+      }
+    })
 
     newList.save((err)=>{
       if(err){

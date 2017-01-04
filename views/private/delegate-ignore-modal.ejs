@@ -22,7 +22,7 @@
   $(function(){
     var schema=['id']
     var bind=new BindingModal()
-    $('.js-show-ignore-modal').on('click',function(){
+    $('.main-container').on('click','.js-show-ignore-modal',function(){
       bind.getPosition($(this))
 
       $('#js-ignore-modal').modal('show')

@@ -66,14 +66,25 @@
   $(function(){
     var schema=['userName','phoneNumber','idCard','caseType','caseInfo','id']//list绑定到modal时用的字段，定位两者的class名
     var bind=new BindingModal()
-    $('.js-show-modal').on('click',function(){
+
+    function getUserPosition(name,fn){
+      $.post(online+'findOne',{name},fn)
+    }
+
+    $('.main-container').on('click','.js-show-modal',function(){
       bind.getPosition($(this))
 
       $('#js-list-modal').modal('show')
     })
 
     $('#js-list-modal').on('show.bs.modal',function(){
+      var name=$('.js-m-userName').html()
+
       bind.bindingInfo(schema)
+
+      getUserPosition(name,(data){
+        
+      })
     })
   })
 </script>

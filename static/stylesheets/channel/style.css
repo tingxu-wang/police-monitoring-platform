@@ -18,6 +18,9 @@
 /* 颜色相关样式 */
 @import url("../public/mod/color.css");
 
+/* 案件详情页样式 */
+@import url("../private/mod/detail.css");
+
 body{
   background-color: #efefef;
 }
@@ -25,7 +28,7 @@ body{
 .main-container{
   background: #fff;
   min-height: 680px;
-  padding:0px 30px;
+  padding:0px 30px 20px;
 }
 
 .copy-right{

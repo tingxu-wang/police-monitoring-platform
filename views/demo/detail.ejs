@@ -1,0 +1,66 @@
+<%- include ../public/header %>
+
+<div class="container main-container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="list-info-row">
+        <div class="list-title">
+          盗窃案
+        </div>
+        <div class="list-number">
+          0001
+        </div>
+      </div>
+      <div class="list-info-row">
+        <div class="list-first-info">
+          <span class="list-info-item">报警人：</span><span class="list-info-value">张二狗</span>
+        </div>
+      </div>
+      <div class="list-info-row">
+        <div class="list-second-info">
+          <span class="list-info-item">身份证：</span><span class="list-info-value">110107199412120014</span>
+        </div>
+      </div>
+      <div class="list-info-row">
+        <div class="list-first-info">
+          <span class="list-info-item">联系电话：</span><span class="list-info-value">15801183454</span>
+        </div>
+      </div>
+      <div class="case-detail-info">
+        点击出警按钮弹出该弹窗，点击确认指派，状态变更；点击取消关闭弹窗 案件描述及整
+        个弹窗高度给的都是最大高度，这里最好不要写成固定的高度，不然文字少的时候可能太
+        丑 地图居中显示报案人位置 派出所选择默认文案：“请选择出警派出所”  ，颜色#999999
+        ，点击上拉菜单选择派出所， ，选择后显示派出所名称，颜色变为#1a1a1a 未选择派出所时，
+        民警选择不可选择，文案“请选择民警”，颜色#CCCCCC，派出所选择后，“请选择民警”颜色变为#999999
+        ，点击上拉菜单选择民警
+      </div>
+      <div class="detail-police-info-container row">
+        <div class="col-sm-6 list-status-onway">
+          在路上
+        </div>
+        <div class="col-sm-6 detail-info-right">
+          <span class="list-info-item">出警民警：</span><span class="list-info-value">王小二</span>
+        </div>
+      </div>
+      <div class="detail-police-info-container row">
+        <div class="col-sm-6">
+          00:13:56
+        </div>
+        <div class="col-sm-6 detail-info-right">
+          <span class="list-info-item">编号：</span><span class="list-info-value">12354</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8 live-container">
+    </div>
+  </div>
+  <div class="row">
+    <div class="detail-map-container">
+
+    </div>
+  </div>
+
+</div>
+
+<%- include ../public/components/rights %>
+<%- include ../public/footer %>

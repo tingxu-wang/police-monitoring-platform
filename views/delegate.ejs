@@ -1,0 +1,74 @@
+<%- include ./public/header %>
+
+<div class="container main-container" id="app">
+  <div class="list-container js-list-container" v-for="list in lists">
+    <div class="row">
+      <div class="col-sm-9 col-xs-8">
+        <div class="list-info-row">
+          <div class="list-title js-caseType">
+            <case-type v-bind:type="list.caseType"></case-type>
+          </div>
+          <div class="list-number js-id">
+            {{ list._id }}
+          </div>
+        </div>
+        <div class="list-info-row row">
+          <div class="list-first-info col-xs-12 col-sm-6">
+            <span class="list-info-item">报警人：</span><span class="list-info-value js-userName">{{ list.userName }}</span>
+          </div>
+          <div class="list-second-info col-xs-12 col-sm-6">
+            <span class="list-info-item">身份证：</span><span class="list-info-value js-idCard">{{ list.idCard }}</span>
+          </div>
+        </div>
+        <div class="list-info-row">
+          <div class="list-first-info">
+            <span class="list-info-item">联系电话：</span><span class="list-info-value js-phoneNumber">{{ list.phoneNum }}</span>
+          </div>
+        </div>
+        <div class="list-case-info js-caseInfo">
+          {{ list.caseInfo }}
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-4 list-brn-container">
+        <div class="clearfix">
+          <div class="list-btn list-btn-primary js-show-modal">
+            出警
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="list-btn list-btn-danger js-show-ignore-modal">
+            忽略
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    var vm=new Vue({
+      el:'#app',
+      data:{
+        //lists:[{ "_id" : 0, "listStatus" : 1, "caseInfo" : "这是描述", "userName" : "群众甲", " openid" : "od04Tv4xiR6kozeIHCkZMbI9bcYg", "phoneNum" : "46645848", "idCard" : "476848948", "caseType" : 4, "startTime" : 1483414592508}]
+        lists:[]
+      }
+    })
+
+    function request(){
+      $.post(online+'getWantedList',(data)=>{
+        vm.lists=data.lists
+      })
+    }
+
+    request()
+    setInterval(function(){
+      request()
+    },15000)
+  })
+</script>
+
+<%- include ./private/delegate-ignore-modal %>
+<%- include ./private/delegate-modal %>
+<%- include ./public/components/rights %>
+<%- include ./public/footer %>
