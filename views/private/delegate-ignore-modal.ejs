@@ -11,7 +11,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary js-delegate">确认</button>
+          <button type="button" class="btn btn-primary js-ignore-confirm">确认</button>
         </div>
       </div>
     </div>
@@ -30,6 +30,15 @@
 
     $('#js-ignore-modal').on('show.bs.modal',function(){
       bind.bindingInfo(schema)
+    })
+
+    $('.js-ignore-confirm').on('click',function(){//确认忽略案件
+      var _id=$('.js-m-id').html().trim()
+      $.post(online+'ignoreList',{_id},(data)=>{
+        var index=bind.listIndex
+        $('#js-ignore-modal').modal('hide')
+        vm.lists.splice(index,1)
+      })
     })
   })
 </script>

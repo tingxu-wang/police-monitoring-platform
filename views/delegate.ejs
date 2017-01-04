@@ -1,7 +1,7 @@
 <%- include ./public/header %>
 
 <div class="container main-container" id="app">
-  <div class="list-container js-list-container" v-for="list in lists">
+  <div class="list-container js-list-container js-list-row" v-for="list in lists">
     <div class="row">
       <div class="col-sm-9 col-xs-8">
         <div class="list-info-row">
@@ -42,30 +42,34 @@
         </div>
       </div>
     </div>
+
+    <div class="hidden-info-container">
+      <div class="js-openid">{{ list.openid }}</div>
+    </div>
   </div>
 </div>
 
 <script type="text/javascript">
-  $(function(){
-    var vm=new Vue({
-      el:'#app',
-      data:{
-        //lists:[{ "_id" : 0, "listStatus" : 1, "caseInfo" : "这是描述", "userName" : "群众甲", " openid" : "od04Tv4xiR6kozeIHCkZMbI9bcYg", "phoneNum" : "46645848", "idCard" : "476848948", "caseType" : 4, "startTime" : 1483414592508}]
-        lists:[]
-      }
+  function getWantedList(){
+    $.post(online+'getWantedList',(data)=>{
+      vm.lists=data.lists
     })
+  }
 
-    function request(){
-      $.post(online+'getWantedList',(data)=>{
-        vm.lists=data.lists
-      })
+
+  var vm=new Vue({
+    el:'#app',
+    data:{
+      //lists:[{ "_id" : 0, "listStatus" : 1, "caseInfo" : "这是描述", "userName" : "群众甲", " openid" : "od04Tv4xiR6kozeIHCkZMbI9bcYg", "phoneNum" : "46645848", "idCard" : "476848948", "caseType" : 4, "startTime" : 1483414592508}]
+      lists:[]
     }
-
-    request()
-    setInterval(function(){
-      request()
-    },15000)
   })
+
+  getWantedList()
+  setInterval(function(){
+    getWantedList()
+  },5000)
+
 </script>
 
 <%- include ./private/delegate-ignore-modal %>

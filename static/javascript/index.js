@@ -1,6 +1,10 @@
 /* views中用的脚本文件 */
 var online='http://115.28.243.24:3000/'
 
+function global_getUserPosition(openid,fn){//利用openid查询用户来获取location
+  $.post(online+'findOne',{openid},fn)
+}
+
 function BindingModal(schema,isInsertStar){
   this.listIndex=0
 }
@@ -8,7 +12,7 @@ function BindingModal(schema,isInsertStar){
 BindingModal.prototype={
   bindingInfo (schema){
     for(var i=0;i<schema.length;i++){
-      var listValue=$('.js-'+schema[i]).eq(this.listIndex).html()
+      var listValue=$('.js-'+schema[i]).eq(this.listIndex).html().trim()
       $('.js-m-'+schema[i]).html(listValue)
     }
   },
@@ -16,6 +20,11 @@ BindingModal.prototype={
     var $listContainer=$this.parents('.js-list-container')
 
     this.listIndex=$listContainer.index()
+  },
+  removeListRow (){//在忽略案件之后立即调用此方法在dom中清除忽略的订单
+    /* 会导致vue渲染dom出现问题，不要混合vue的dom操作和自己的操作 */
+    var _this=this
+    $('.js-list-row').eq(_this.listIndex).remove()
   }
 }
 
@@ -33,7 +42,7 @@ StarCompile.prototype={
   mapRow (){
     var _this=this
     $('.js-case-star-row').each(function(index){//遍历一个评价单行
-      var markNumber=$(this).find('.js-hidden-info-container').html(),//隐藏域中的评价数字
+      var markNumber=$(this).find('.js-hidden-info-container').html().trim(),//隐藏域中的评价数字
           $starMainContainer=$(this).find('.js-star-main-container')//添加star的dom节点
 
       _this.insertStar($starMainContainer,markNumber)
