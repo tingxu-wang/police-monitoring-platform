@@ -100,7 +100,7 @@ var tools={
   sendPost (infoObj){
     var requestify=require('requestify')
 
-    requestify.post('http://115.159.202.104:8989/feedback', infoObj)
+    requestify.post('http://wxpytest.applinzi.com/feedback', infoObj)
     .then(function(response) {
         response.getBody();
     });
