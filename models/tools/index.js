@@ -70,7 +70,7 @@ var tools={
           if(result.nModified){
 
             if(isTransmit){
-              console.log('run!!')
+              console.log(filter)
               tools.transmit(filter)//转发数据
             }
 
@@ -113,6 +113,7 @@ var tools={
       }
 
       if(list){
+        console.log(list)
         tools.sendPost({
           openid:list.openid,
           listStatus:list.listStatus,
