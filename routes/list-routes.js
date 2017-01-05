@@ -92,14 +92,13 @@ module.exports=function(app){
     var success='案件忽略成功',
         error='案件失败'
 
-    tools.ignoreTransmit(_id)//向微信服务转发状态
-
     update(searchObj,updateObj,(err,result)=>{
       if(err){
         console.error(err)
       }
 
       if(result.nModified){
+        tools.ignoreTransmit(_id)//向微信服务转发状态
         res.json({
           success:1,
           msg:success
