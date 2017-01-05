@@ -56,6 +56,10 @@ var tools={
       updateObj.listStatus=2
     }
 
+    if(isTransmit){
+      tools.transmit(filter)//转发数据
+    }
+
     listUpdate(filter,updateObj,(err,result)=>{
       if(err){
         console.error(err)
@@ -69,10 +73,10 @@ var tools={
 
           if(result.nModified){
 
-            if(isTransmit){
+/*            if(isTransmit){
               console.log(filter)
               tools.transmit(filter)//转发数据
-            }
+            }*/
 
             res.json({
               success:1,
@@ -113,7 +117,6 @@ var tools={
       }
 
       if(list){
-        console.log(list)
         tools.sendPost({
           openid:list.openid,
           listStatus:list.listStatus,
