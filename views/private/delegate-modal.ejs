@@ -99,6 +99,7 @@
           policeName=$('.js-policeName').val()
 
       $.post(online+'delegate',{_id,policeName})
+      $('.js-policeName').remove()
       $('#js-list-modal').modal('hide')
     })
   })
