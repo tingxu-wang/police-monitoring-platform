@@ -26,7 +26,7 @@ function Person(person){
   this.name=person.name || 'admin'
   this.type=person.type || 0
   this.status=person.status || 0
-  this.openid=person.openid || ''
+  this.openid=person.openid
 }
 
 module.exports=Person

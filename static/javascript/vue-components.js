@@ -23,29 +23,31 @@ Vue.component('case-type',{
 
 Vue.component('list-status',{
   template:`
-    <span v-if="type===0">
+  <div>
+    <span v-if="status===0">
       未分派
     </span>
-    <span v-if="type===1">
+    <span v-if="status===1">
       已分派
     </span>
-    <span v-if="type===2" class="list-status-finished">
+    <span v-if="status===2" class="list-status-finished">
       已完成
     </span>
-    <span v-if="type===3">
+    <span v-if="status===3">
       已评价
     </span>
-    <span v-if="type===4" class="list-status-ignore">
+    <span v-if="status===4" class="list-status-ignore">
       已忽略
     </span>
-    <span v-if="type===5" class="list-status-onway">
+    <span v-if="status===5" class="list-status-onway">
       在路上
     </span>
-    <span v-if="type===6" class="list-status-arrive">
+    <span v-if="status===6" class="list-status-arrive">
       已到达
     </span>
+  </div>
   `,
-  props:['list-status']
+  props:['status']
 })
 
 

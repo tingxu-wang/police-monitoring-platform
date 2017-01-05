@@ -218,9 +218,19 @@ module.exports=function(app){
           paperTwo:paper,
           endTime:Date.now()
         }
-    var listId=paper.id//从反馈表单对象中取出的list对象id
+    var listId=paper.sojumpparm//从反馈表单对象中取出的list对象id
 
-    update({_id:listId,listStatus:2},{listStatus:3},(err,result)=>{
+    var searchObj={_id:listId,listStatus:2},
+        //userComment=(paper.q4 || ''),
+        updateObj={
+          listStatus:3,
+          caseResult:paper.q3,
+          policeAttitude:paper.q2,
+          userComment:[paper.q4 || ''],
+          policeSpeed:paper.q1
+        }
+
+    update(searchObj,updateObj,(err,result)=>{
       if(err){
         console.error(err)
       }

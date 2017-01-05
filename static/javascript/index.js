@@ -51,7 +51,7 @@ StarCompile.prototype={
     $('.js-case-star-row').each(function(index){//遍历一个评价单行
       var markNumber=$(this).find('.js-hidden-info-container').html(),//隐藏域中的评价数字
           $starMainContainer=$(this).find('.js-star-main-container')//添加star的dom节点
-        console.log(markNumber)
+
       _this.insertStar($starMainContainer,markNumber)
     })
   },

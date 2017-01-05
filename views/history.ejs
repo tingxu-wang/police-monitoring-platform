@@ -32,34 +32,45 @@
       <div class="col-sm-3 col-xs-4 list-police-info-container">
         <div class="clearfix">
           <div class="list-status">
-            <list-status :list-status="list.listStatus"></list-status>
+            <list-status :status="list.listStatus"></list-status>
           </div>
         </div>
-        <div class="clearfix">
-          <div class="list-police-info-first">
-            <span class="list-info-item">出警民警：</span>
-            <span class="list-info-value js-policeName">{{ list.policeName }}</span>
+
+        <template v-if="list.listStatus!==4">
+          <div class="clearfix">
+            <div class="list-police-info-first">
+              <span class="list-info-item">出警民警：</span>
+              <span class="list-info-value js-policeName">{{ list.policeName }}</span>
+            </div>
           </div>
-        </div>
-        <div class="clearfix">
-          <div class="list-police-info">
-            <span class="list-info-item">编号：</span>
-            <span class="list-info-value js-policeId"></span>
+          <div class="clearfix">
+            <div class="list-police-info">
+              <span class="list-info-item">编号：</span>
+              <span class="list-info-value js-policeId"></span>
+            </div>
           </div>
-        </div>
-        <div class="clearfix">
-          <div class="list-police-info">
-            <span class="list-info-item">总用时：</span>
-            <span class="list-info-value js-useTime">
-              <use-time :solvedTime="list.solvedTime" :confirmTime="list.confirmTime"></use-time>
-            </span>
+          <div class="clearfix">
+            <div class="list-police-info">
+              <span class="list-info-item">总用时：</span>
+              <span class="list-info-value js-useTime">
+                <use-time :solvedTime="list.solvedTime" :confirmTime="list.confirmTime"></use-time>
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="clearfix">
-          <div class="list-btn-short list-btn-short-default js-total-count js-show-modal">
-            4.5分
+          <div class="clearfix">
+            <template v-if="list.listStatus===3">
+              <div class="list-btn-short list-btn-short-default js-total-count js-show-modal">
+                4.5分
+              </div>
+            </template>
+            <template v-else>
+              <div class="list-btn-short list-btn-short-muted">
+                未评价
+              </div>
+            </template>
           </div>
-        </div>
+        </template>
+
       </div>
       <div class="hidden-info-container">
         <div class="js-police-speed">{{ list.policeSpeed }}</div>
