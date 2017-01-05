@@ -45,11 +45,6 @@
                 </div>
                 <div class="col-xs-6">
                   <select class="form-control js-policeName">
-                    <option value="minjing1">minjing1</option>
-                    <option value="minjing2">minjing2</option>
-                    <option value="minjing3">minjing3</option>
-                    <option value="minjing4">minjing4</option>
-                    <option value="minjing5">minjing5</option>
                   </select>
                 </div>
               </div>
@@ -73,13 +68,18 @@
     var schema=['userName','phoneNumber','idCard','caseType','caseInfo','id','openid']//list绑定到modal时用的字段，定位两者的class名
     var bind=new BindingModal()
 
+    function insertPolice(){//添加空闲民警到弹窗
+      $.post('/getfreePolice',(data)=>{
+        var policeArr=data.persons
+        for(var i=0;i<policeArr.length;i++){
+          $('.js-policeName').append($(`<option value="minjing${i+1}">minjing${i+1}</option>`))
+        }
+      })
+    }
+
     $('.main-container').on('click','.js-show-modal',function(){
       bind.getPosition($(this))
-
-      $.post('/getfreePolice',(data)=>{
-        
-      })
-
+      insertPolice()
       $('#js-list-modal').modal('show')
     })
 
