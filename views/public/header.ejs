@@ -35,9 +35,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="/views/delegate">未审核案件</a></li>
-          <li><a href="/views/watch">出警监控</a></li>
-          <li><a href="/views/history">历史案件</a></li>
+          <li <% if(position==='delegate') { %>class="active"<% } %>><a href="/views/delegate">未审核案件</a></li>
+          <li <% if(position==='watch') { %>class="active"<% } %>><a href="/views/watch">出警监控</a></li>
+          <li <% if(position==='history') { %>class="active"<% } %>><a href="/views/history">历史案件</a></li>
 
           <li><a class="quit">退出</a></li>
         </ul>

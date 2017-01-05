@@ -69,7 +69,7 @@
     var bind=new BindingModal()
 
     function insertPolice(){//添加空闲民警到弹窗
-      $.post('/getfreePolice',(data)=>{
+      $.post(online+'getfreePolice',(data)=>{
         var policeArr=data.persons
         for(var i=0;i<policeArr.length;i++){
           $('.js-policeName').append($(`<option value="minjing${i+1}">minjing${i+1}</option>`))
@@ -83,7 +83,8 @@
       $('#js-list-modal').modal('show')
     })
 
-    $('#js-list-modal').on('show.bs.modal',function(){
+    $('#js-list-modal')
+    .on('show.bs.modal',function(){
       var openid=''
 
       bind.bindingInfo(schema)//绑定信息到弹窗
@@ -93,13 +94,16 @@
         console.log(data.person.location)
       })
     })
+    .on('hide.bs.modal',function(){
+      $('.js-policeName').find('option').remove()
+    })
+
 
     $('.js-delegate-confirm').on('click',function(){
       var _id=$('.js-m-id').html().trim(),
           policeName=$('.js-policeName').val()
 
       $.post(online+'delegate',{_id,policeName})
-      $('.js-policeName').remove()
       $('#js-list-modal').modal('hide')
     })
   })

@@ -6,7 +6,7 @@ module.exports=function(app){
     res.render(`${req.params.filename}`,{title:'views'})
   });*/
   app.get('/',(req,res,next)=>{
-    res.render('index',{title:'登录'})
+    res.render('index',{title:'登录',position:'login'})
   })
 
   app.get('/views/delegate',(req,res,next)=>{

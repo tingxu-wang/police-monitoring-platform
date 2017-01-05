@@ -5,7 +5,7 @@ var Person=require('../models/person'),
 
 module.exports=function (app){
   app.get('/demo/:filename',(req,res,next)=>{
-    res.render(`demo/${req.params.filename}`,{title:'demo'})
+    res.render(`demo/${req.params.filename}`,{title:'demo',position:''})
   })
 
   app.post('/postTest',(req,res,next)=>{

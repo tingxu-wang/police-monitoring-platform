@@ -56,9 +56,9 @@ var tools={
       updateObj.listStatus=2
     }
 
-    if(isTransmit){
+/*    if(isTransmit){
       tools.transmit(filter)//转发数据
-    }
+    }*/
 
     listUpdate(filter,updateObj,(err,result)=>{
       if(err){
@@ -73,10 +73,10 @@ var tools={
 
           if(result.nModified){
 
-/*            if(isTransmit){
+            if(isTransmit){
               console.log(filter)
               tools.transmit(filter)//转发数据
-            }*/
+            }
 
             res.json({
               success:1,
@@ -112,6 +112,24 @@ var tools={
         policeName=filter.policeName
 
     findOne({listStatus,policeName},(err,list)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(list){
+        tools.sendPost({
+          openid:list.openid,
+          listStatus:list.listStatus,
+          id:list._id,
+          caseInfo:list.caseInfo
+        })
+      }
+    })
+  },
+  ignoreTransmit(_id){//忽略订单的时候使用的转发方法
+    var findOne=List.prototype.findOne
+
+    findOne({_id},(err,list)=>{
       if(err){
         console.error(err)
       }

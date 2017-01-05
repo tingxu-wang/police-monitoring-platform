@@ -80,9 +80,10 @@ module.exports=function(app){
 
   //web端忽略未处理的订单
   app.post('/ignoreList',(req,res,next)=>{
-    var update=List.prototype.update
+    var update=List.prototype.update,
+        _id=req.body._id
     var searchObj={
-          _id:req.body._id
+          _id
         },
         updateObj={
           listStatus:4,
@@ -90,6 +91,8 @@ module.exports=function(app){
         }
     var success='案件忽略成功',
         error='案件失败'
+
+    tools.ignoreTransmit(_id)//向微信服务转发状态
 
     update(searchObj,updateObj,(err,result)=>{
       if(err){
@@ -116,7 +119,10 @@ module.exports=function(app){
     var listUpdate=List.prototype.update,
         personUpdate=Person.prototype.update
 
-    listUpdate({_id:filter._id},{listStatus:1,sendTime:Date.now(),policeName:filter.policeName},(err,result)=>{
+    var searchObj={_id:filter._id},
+        updateObj={listStatus:1,sendTime:Date.now(),policeName:filter.policeName}
+
+    listUpdate(searchObj,updateObj,(err,result)=>{
       if(err){
         console.error(err)
       }
@@ -128,6 +134,8 @@ module.exports=function(app){
           }
 
           if(result.nModified){
+            tools.transmit(updateObj)//向微信服务转发状态
+
             res.json({
               success:1,
               msg:'民警状态及案件状态修改成功'
@@ -201,14 +209,15 @@ module.exports=function(app){
   })
 
   app.post('/confirmMission',(req,res,next)=>{
-    tools.changePoliceStatus(res,req.body.policeName,2,'confirmTime',true)
+    tools.changePoliceStatus(res,req.body.policeName,2,'confirmTime')
   })
 
   app.post('/policeArrive',(req,res,next)=>{
-    tools.changePoliceStatus(res,req.body.policeName,3,'arriveTime',true)
+    tools.changePoliceStatus(res,req.body.policeName,3,'arriveTime')
   })
 
   app.post('/policeSolved',(req,res,next)=>{
+    //向微信服务转发状态
     tools.changePoliceStatus(res,req.body.policeName,0,'solvedTime',true)
   })
 
