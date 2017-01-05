@@ -148,7 +148,7 @@ module.exports=function(app){
     })
   })
 
-  app.get('/getHistoryLists',(req,res,next)=>{
+  app.post('/getHistoryLists',(req,res,next)=>{
     var find=List.prototype.find
 
     find({listStatus:{$gte:2,$lte:4}},(err,lists)=>{
