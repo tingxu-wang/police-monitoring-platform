@@ -1,0 +1,96 @@
+<%- include ./public/header %>
+
+<div class="container main-container" id="#app">
+  <div class="list-container js-list-container" v-for="list in lists">
+    <div class="row">
+      <div class="col-sm-9 col-xs-8">
+        <div class="list-info-row">
+          <div class="list-title js-caseType">
+            <case-type v-bind:type="list.caseType"></case-type>
+          </div>
+          <div class="list-number js-id">
+            {{ list._id }}
+          </div>
+        </div>
+        <div class="list-info-row row">
+          <div class="list-first-info col-xs-12 col-sm-6">
+            <span class="list-info-item">报警人：</span><span class="list-info-value js-userName">{{ list.userName }}</span>
+          </div>
+          <div class="list-second-info col-xs-12 col-sm-6">
+            <span class="list-info-item">身份证：</span><span class="list-info-value js-idCard">{{ list.idCard }}</span>
+          </div>
+        </div>
+        <div class="list-info-row">
+          <div class="list-first-info">
+            <span class="list-info-item">联系电话：</span><span class="list-info-value js-phoneNumber">{{ list.phoneNum }}</span>
+          </div>
+        </div>
+        <div class="list-case-info js-caseInfo">
+          {{ list.caseInfo }}
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-4 list-police-info-container">
+        <div class="clearfix">
+          <div class="list-status">
+            <list-status :list-status="list.listStatus"></list-status>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="list-police-info-first">
+            <span class="list-info-item">出警民警：</span>
+            <span class="list-info-value js-policeName">{{ list.policeName }}</span>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="list-police-info">
+            <span class="list-info-item">编号：</span>
+            <span class="list-info-value js-policeId"></span>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="list-police-info">
+            <span class="list-info-item">总用时：</span>
+            <span class="list-info-value js-useTime">
+              <use-time :solvedTime="list.solvedTime" :confirmTime="list.confirmTime"></use-time>
+            </span>
+          </div>
+        </div>
+        <div class="clearfix">
+          <div class="list-btn-short list-btn-short-default js-total-count js-show-modal">
+            4.5分
+          </div>
+        </div>
+      </div>
+      <div class="hidden-info-container">
+        <div class="js-police-speed">{{ list.policeSpeed }}</div>
+        <div class="js-police-attitude">{{ list.policeAttitude }}</div>
+        <div class="js-case-result">{{ list.caseResult }}</div>
+        <div class="js-user-comment">{{ list.userComment }}</div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<script type="text/javascript">
+  function getHistoryLists(){
+    $.post(online+'getHistoryLists',(data)=>{
+      vm.lists=data.lists
+    })
+  }
+
+  var vm=new Vue({
+    el:'#app',
+    data:{
+      lists:[]
+    }
+  })
+
+  global_polling(getHistoryLists)
+</script>
+
+<%- include ./private/history-modal %>
+<%- include ./public/components/rights %>
+<%- include ./public/footer %>

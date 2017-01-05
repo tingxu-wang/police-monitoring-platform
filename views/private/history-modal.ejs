@@ -86,7 +86,7 @@
     var schema=['policeName','policeId','useTime','total-count','police-attitude','case-result','police-speed','id','user-comment']
 
     var bind=new BindingModal()
-    $('.js-show-modal').on('click',function(){
+    $('.main-container').on('click','.js-show-modal',function(){
       bind.getPosition($(this))
 
       $('#js-list-modal').modal('show')

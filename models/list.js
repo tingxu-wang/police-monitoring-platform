@@ -13,8 +13,7 @@ var Common=require('./common')
 var schema={
   policeName:String,//民警姓名
   listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略
-  //id:Number,//订单id（案件编号）
-  //id:{type:Number,index:{dafault:00001}},
+  //5为在路上（接单但未到达） 6为已到达（但未解决）
 
   /* 从问卷中抽出的转存信息 */
   caseInfo:String,//案件描述
@@ -24,6 +23,11 @@ var schema={
   idCard:String,//市民身份证号
   caseType:Number,//报案类型
 
+  /* 从反馈问卷(paperTwo)中转存的用户评价 */
+  caseResult:Number,//处置结果
+  policeAttitude:Number,//民警态度
+  policeSpeed:Number,//民进出警速度
+  userComment:String,//用户评价
 
   /* 时间单位为毫秒，记录操作的当前时间 */
   startTime:Number,//订单发起时间（用户提交paperOne的时间）

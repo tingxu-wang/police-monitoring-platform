@@ -148,6 +148,24 @@ module.exports=function(app){
     })
   })
 
+  app.get('/getHistoryLists',(req,res,next)=>{
+    var find=List.prototype.find
+
+    find({listStatus:{$gte:2,$lte:4}},(err,lists)=>{
+      if(lists){
+        res.json({
+          success:1,
+          lists
+        })
+      }else{
+        res.json({
+          success:0,
+          info:'目前没有已完成的订单'
+        })
+      }
+    })
+  })
+
   /*
    * 更改民警状态
   */

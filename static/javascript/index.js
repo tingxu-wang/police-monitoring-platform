@@ -5,6 +5,13 @@ function global_getUserPosition(openid,fn){//利用openid查询用户来获取lo
   $.post(online+'findOne',{openid},fn)
 }
 
+function global_polling(ajaxFunction){
+  ajaxFunction()
+  setInterval(function(){
+    ajaxFunction()
+  },5000)
+}
+
 function BindingModal(schema,isInsertStar){
   this.listIndex=0
 }
@@ -12,7 +19,7 @@ function BindingModal(schema,isInsertStar){
 BindingModal.prototype={
   bindingInfo (schema){
     for(var i=0;i<schema.length;i++){
-      var listValue=$('.js-'+schema[i]).eq(this.listIndex).html().trim()
+      var listValue=$('.js-'+schema[i]).eq(this.listIndex).html()
       $('.js-m-'+schema[i]).html(listValue)
     }
   },
@@ -42,9 +49,9 @@ StarCompile.prototype={
   mapRow (){
     var _this=this
     $('.js-case-star-row').each(function(index){//遍历一个评价单行
-      var markNumber=$(this).find('.js-hidden-info-container').html().trim(),//隐藏域中的评价数字
+      var markNumber=$(this).find('.js-hidden-info-container').html(),//隐藏域中的评价数字
           $starMainContainer=$(this).find('.js-star-main-container')//添加star的dom节点
-
+        console.log(markNumber)
       _this.insertStar($starMainContainer,markNumber)
     })
   },

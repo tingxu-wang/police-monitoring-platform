@@ -41,6 +41,14 @@ var tools={
 
     var updateObj={[listTimeType]:Date.now()}
 
+    if(listTimeType==='confirmTime'){//已接单接口调用时将listStatus设置为5
+      updateObj.listStatus=5
+    }
+
+    if(listTimeType==='arriveTime'){//已到达接口调用时将listStatus设置为6
+      updateObj.listStatus=6
+    }
+
     if(listTimeType==='solvedTime'){//已解决接口调用时将listStatus设置为2
       updateObj.listStatus=2
     }

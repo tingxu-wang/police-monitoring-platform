@@ -42,7 +42,7 @@ list字段示例：
 
 var schema={
   policeName:String,//民警姓名
-  listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略
+  listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略 5为在路上（接单但未到达） 6为已到达（但未解决）
 
   /* 从问卷中抽出的转存信息 */
   caseInfo:String,//案件描述
@@ -52,6 +52,11 @@ var schema={
   idCard:String,//市民身份证号
   caseType:Number,//报案类型
 
+  /* 从反馈问卷(paperTwo)中转存的用户评价 */
+  caseResult:Number,//处置结果
+  policeAttitude:Number,//民警态度
+  policeSpeed:Number,//民进出警速度
+  userComment:String,//用户评价
 
   /* 时间单位为毫秒，记录操作的当前时间 */
   startTime:Number,//订单发起时间（用户提交paperOne的时间）
@@ -88,6 +93,7 @@ var schema={
 | /getfreePolice | 无 | `status=0`的person对象数组 | 抓取未出警的民警 |
 | /ignoreList | {_id:订单编号} | {success,msg} | 忽略未处理的订单,提交成功后后台会自动更新`endTime`字段并将该`_id`的订单`listStatus`设置为4 |
 | /delegate | {_id,policeName} | {success,msg} | web端委派未处理的订单，提交成功后后台会自动更新`sendTime`字段并将该`policeName`的民警`status`设置为1 |
+| /getHistoryLists | 无 | {success,msg,lists} | 获取已完成的订单(liststatus为2,3,4的) |
 | /getMission | {policeName} | {success,msg,list} | 获取分配给自己（该民警）的任务 |
 | /confirmMission | {policeName} | {success,msg} | 提交成功后后台会自动更新`confirmTime`字段并将该`policeName`的民警`status`设置为2 |
 | /policeArrive | {policeName} | {success,msg} | 提交成功后后台会自动更新`arriveTime`字段并将该`policeName`的民警`status`设置为3 |
@@ -115,21 +121,21 @@ var schema={
 更改民警状态：
 - 获取分配给自己（该民警）的任务`/getMission`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`req.query.policeName`将匹配的list对象去除`paperOne`以及`paperTwo`两个字段后发送给请求方
 
-- 民警确认出警`/confirmMission`：安卓端将`policeName`发送给后端，后端联合`listStatus=1`以及`policeName`将匹配的list对象`confirmTime`设置为当前时间
+- 民警确认出警`/confirmMission`：安卓端将`policeName`发送给后端，后端联合`listStatus=1`以及`policeName`将匹配的list对象`confirmTime`设置为当前时间，`listStatus`设置为5
 
   (设置`person`集合中该`policeName`的民警`status`为2)
 
-- 民警到达市民地点`/policeArrive`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`policeName`将匹配的list对象`arriveTime`设置为当前时间
+- 民警到达市民地点`/policeArrive`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`policeName`将匹配的list对象`arriveTime`设置为当前时间，`listStatus`设置为6
 
   (设置`person`集合中该`policeName`的民警`status`为3)
 
-- 民警解决案件`/policeSolved`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`policeName`将匹配的list对象`listStatus`设置为2，`solveTime`设置为当前时间
+- 民警解决案件`/policeSolved`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`policeName`将匹配的list对象`listStatus`设置为2，`solveTime`设置为当前时间，`listStatus`设置为2
 
   **将该list对象中的  `openid` `id` `caseInfo` `listStatus`字段以json格式发送到晓晨服务器上，对象示例：**
   ```javascript
   {
     openid:String,//市民微信openid
-    listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略
+    listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略 5为在路上（接单但未到达） 6为已到达（但未解决）
     id:Number,//订单id（案件编号）
     caseInfo:String//案件描述
   }

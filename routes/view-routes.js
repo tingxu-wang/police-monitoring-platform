@@ -12,4 +12,8 @@ module.exports=function(app){
   app.get('/views/delegate',(req,res,next)=>{
     res.render('delegate',{title:'未审核案件'})
   })
+
+  app.get('/views/history',(req,res,next)=>{
+    res.render('history',{title:'历史案件'})
+  })
 }
