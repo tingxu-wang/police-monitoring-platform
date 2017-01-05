@@ -59,7 +59,7 @@ module.exports=function(app){
   app.post('/getfreePolice',(req,res,next)=>{
     var find=Person.prototype.find
 
-    find({status:0},(err,persons)=>{
+    find({status:0,type:1},(err,persons)=>{
       if(err){
         console.error(err)
       }

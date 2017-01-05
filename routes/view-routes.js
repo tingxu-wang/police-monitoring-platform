@@ -10,10 +10,14 @@ module.exports=function(app){
   })
 
   app.get('/views/delegate',(req,res,next)=>{
-    res.render('delegate',{title:'未审核案件'})
+    res.render('delegate',{title:'未审核案件',position:'delegate'})
   })
 
   app.get('/views/history',(req,res,next)=>{
-    res.render('history',{title:'历史案件'})
+    res.render('history',{title:'历史案件',position:'history'})
+  })
+
+  app.get('/views/watch',(req,res,next)=>{
+    res.render('watch',{title:'实时监控',position:'watch'})
   })
 }

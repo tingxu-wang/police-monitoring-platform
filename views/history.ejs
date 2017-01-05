@@ -60,7 +60,7 @@
           <div class="clearfix">
             <template v-if="list.listStatus===3">
               <div class="list-btn-short list-btn-short-default js-total-count js-show-modal">
-                4.5分
+                {{ (list.policeSpeed + list.policeAttitude + list.caseResult)/3 }}
               </div>
             </template>
             <template v-else>

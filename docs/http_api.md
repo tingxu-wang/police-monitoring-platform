@@ -109,7 +109,7 @@ var schema={
 
 控制台展现订单以及民警信息：
 - 抓取未处理的订单`/getWantedList`：web端设置心跳抓取`listStatus=0`的list对象数组
-- 抓取未出警的民警`/getfreePolice`：web端设置心跳抓取`status=0`的person对象数组
+- 抓取未出警的民警`/getfreePolice`：web端设置心跳抓取`status=0`并且`type=1`的person对象数组
 
 分配订单：
 - 忽略未处理的订单`/ignoreList`：web端将该list的`id`字段发送到后台，后台设置该`id`的list对象`listStatus`为4，将当前时间保存到`endTime`字段内

@@ -45,8 +45,11 @@
                 </div>
                 <div class="col-xs-6">
                   <select class="form-control js-policeName">
-                    <option>minjing1</option>
-                    <option>minjing2</option>
+                    <option value="minjing1">minjing1</option>
+                    <option value="minjing2">minjing2</option>
+                    <option value="minjing3">minjing3</option>
+                    <option value="minjing4">minjing4</option>
+                    <option value="minjing5">minjing5</option>
                   </select>
                 </div>
               </div>
@@ -73,6 +76,10 @@
     $('.main-container').on('click','.js-show-modal',function(){
       bind.getPosition($(this))
 
+      $.post('/getfreePolice',(data)=>{
+        
+      })
+
       $('#js-list-modal').modal('show')
     })
 
@@ -88,10 +95,10 @@
     })
 
     $('.js-delegate-confirm').on('click',function(){
-      var _id=$('.js-m-id').html().trim()
-          //policeName=$('.')
+      var _id=$('.js-m-id').html().trim(),
+          policeName=$('.js-policeName').val()
 
-      //$.post(online+'delegate',{_id,policeName})
+      $.post(online+'delegate',{_id,policeName})
       $('#js-list-modal').modal('hide')
     })
   })
