@@ -201,11 +201,11 @@ module.exports=function(app){
   })
 
   app.post('/confirmMission',(req,res,next)=>{
-    tools.changePoliceStatus(res,req.body.policeName,2,'confirmTime')
+    tools.changePoliceStatus(res,req.body.policeName,2,'confirmTime',true)
   })
 
   app.post('/policeArrive',(req,res,next)=>{
-    tools.changePoliceStatus(res,req.body.policeName,3,'arriveTime')
+    tools.changePoliceStatus(res,req.body.policeName,3,'arriveTime',true)
   })
 
   app.post('/policeSolved',(req,res,next)=>{

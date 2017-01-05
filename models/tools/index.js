@@ -71,7 +71,7 @@ var tools={
 
           if(result.nModified){
             if(isTransmit){
-              tools.transmit(filter)
+              tools.transmit(filter)//转发数据
             }
             res.json({
               success:1,
