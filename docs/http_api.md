@@ -119,17 +119,17 @@ var schema={
   (设置`person`集合中该`policeName`的民警`status`为1)
 
 更改民警状态：
-- 获取分配给自己（该民警）的任务`/getMission`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`req.query.policeName`将匹配的list对象去除`paperOne`以及`paperTwo`两个字段后发送给请求方
+- 获取分配给自己（该民警）的任务`/getMission`：安卓端将`policeName`发送到后台，后台联合`listStatus=1 || 5 || 6`以及`req.query.policeName`将匹配的list对象去除`paperOne`以及`paperTwo`两个字段后发送给请求方
 
 - 民警确认出警`/confirmMission`：安卓端将`policeName`发送给后端，后端联合`listStatus=1`以及`policeName`将匹配的list对象`confirmTime`设置为当前时间，`listStatus`设置为5
 
   (设置`person`集合中该`policeName`的民警`status`为2)
 
-- 民警到达市民地点`/policeArrive`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`policeName`将匹配的list对象`arriveTime`设置为当前时间，`listStatus`设置为6
+- 民警到达市民地点`/policeArrive`：安卓端将`policeName`发送到后台，后台联合`listStatus=5`以及`policeName`将匹配的list对象`arriveTime`设置为当前时间，`listStatus`设置为6
 
   (设置`person`集合中该`policeName`的民警`status`为3)
 
-- 民警解决案件`/policeSolved`：安卓端将`policeName`发送到后台，后台联合`listStatus=1`以及`policeName`将匹配的list对象`listStatus`设置为2，`solveTime`设置为当前时间，`listStatus`设置为2
+- 民警解决案件`/policeSolved`：安卓端将`policeName`发送到后台，后台联合`listStatus=6`以及`policeName`将匹配的list对象`listStatus`设置为2，`solveTime`设置为当前时间，`listStatus`设置为2
 
   **将该list对象中的  `openid` `id` `caseInfo` `listStatus`字段以json格式发送到晓晨服务器上，对象示例：**
   ```javascript

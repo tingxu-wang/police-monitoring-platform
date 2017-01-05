@@ -37,19 +37,24 @@ var tools={
     var listUpdate=List.prototype.update,
         personUpdate=Person.prototype.update
 
-    var filter={listStatus:1,policeName}
+    var filter
 
     var updateObj={[listTimeType]:Date.now()}
 
     if(listTimeType==='confirmTime'){//已接单接口调用时将listStatus设置为5
+      filter={listStatus:1,policeName}
       updateObj.listStatus=5
     }
 
     if(listTimeType==='arriveTime'){//已到达接口调用时将listStatus设置为6
+      //filter={$or:[{listStatus:1},{listStatus:5},{listStatus:6}],policeName}
+      filter={listStatus:5,policeName}
       updateObj.listStatus=6
     }
 
     if(listTimeType==='solvedTime'){//已解决接口调用时将listStatus设置为2
+      //filter={$or:[{listStatus:1},{listStatus:5},{listStatus:6}],policeName}
+      filter={listStatus:6,policeName}
       updateObj.listStatus=2
     }
 

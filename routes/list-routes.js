@@ -175,7 +175,8 @@ module.exports=function(app){
     var findOne=List.prototype.findOne
     var searchObj={
       policeName:req.body.policeName,
-      listStatus:1
+      //listStatus:1
+      $or:[{listStatus:1},{listStatus:5},{listStatus:6}]
     }
 
     findOne(searchObj,(err,list)=>{
