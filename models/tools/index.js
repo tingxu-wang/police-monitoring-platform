@@ -56,9 +56,9 @@ var tools={
       updateObj.listStatus=2
     }
 
-/*    if(isTransmit){
+    if(isTransmit){
       tools.transmit(filter)//转发数据
-    }*/
+    }
 
     listUpdate(filter,updateObj,(err,result)=>{
       if(err){
