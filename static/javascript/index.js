@@ -19,13 +19,13 @@ function BindingModal(schema,isInsertStar){
 BindingModal.prototype={
   bindingInfo (schema){
     for(var i=0;i<schema.length;i++){
-      var listValue=$('.js-'+schema[i]).eq(this.listIndex).html()
+      //var listValue=$('.js-'+schema[i]).eq(this.listIndex).html()
+      var listValue=$('.js-list-container').eq(this.listIndex).find('.js-'+schema[i]).html()
       $('.js-m-'+schema[i]).html(listValue)
     }
   },
   getPosition ($this){//得到当前的list位置信息并赋值给全局变量listIndex
     var $listContainer=$this.parents('.js-list-container')
-
     this.listIndex=$listContainer.index()
   },
   removeListRow (){//在忽略案件之后立即调用此方法在dom中清除忽略的订单

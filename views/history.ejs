@@ -46,21 +46,21 @@
           <div class="clearfix">
             <div class="list-police-info">
               <span class="list-info-item">编号：</span>
-              <span class="list-info-value js-policeId"></span>
+              <span class="list-info-value js-policeId"><police-id :policename="list.policeName"></police-id></span>
             </div>
           </div>
           <div class="clearfix">
             <div class="list-police-info">
               <span class="list-info-item">总用时：</span>
               <span class="list-info-value js-useTime">
-                <use-time :solvedTime="list.solvedTime" :confirmTime="list.confirmTime"></use-time>
+                <use-time :solvedtime="list.solvedTime" :confirmtime="list.confirmTime"></use-time>
               </span>
             </div>
           </div>
           <div class="clearfix">
             <template v-if="list.listStatus===3">
               <div class="list-btn-short list-btn-short-default js-total-count js-show-modal">
-                {{ (list.policeSpeed + list.policeAttitude + list.caseResult)/3 }}
+                {{ Math.floor((list.policeSpeed + list.policeAttitude + list.caseResult)/3) }}分
               </div>
             </template>
             <template v-else>

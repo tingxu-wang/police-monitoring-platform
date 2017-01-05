@@ -56,15 +56,46 @@ Vue.component('use-time',{
     <span>{{ time }}</span>
   `,
   computed:{
-    time (confirmTime,solvedTime){
-      var useTime=solvedTime-confirmTime,
+    time (){
+      var useTime=this.solvedtime-this.confirmtime,
           date=new Date(useTime),
           second=date.getSeconds(),
           minutes=date.getMinutes(),
           hours=date.getHours()
 
-      return `${hours}:${minutes}:${second}`
+      return `${hours-8}:${minutes}:${second}`
     }
   },
-  props:['solvedTime','confirmTime']
+  props:['solvedtime','confirmtime']
+})
+
+Vue.component('live-use-time',{//即时运算当前执法花费的时间
+  template:`
+    <span>{{ time }}</span>
+  `,
+  computed:{
+    time (){
+      var useTime=new Date()-this.confirmtime,
+          watch=this.incrasenumber,//动态更新时间的钩子
+          date=new Date(useTime),
+          second=date.getSeconds(),
+          minutes=date.getMinutes(),
+          hours=date.getHours()
+
+      return `${hours-8}:${minutes}:${second}`
+    }
+  },
+  props:['confirmtime','incrasenumber']
+})
+
+Vue.component('police-id',{
+  template:`
+    <span>{{ policeId }}</span>
+  `,
+  computed:{
+    policeId (){
+      return this.policename.replace('minjing','')
+    }
+  },
+  props:['policename']
 })

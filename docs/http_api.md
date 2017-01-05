@@ -94,6 +94,7 @@ var schema={
 | /ignoreList | {_id:订单编号} | {success,msg} | 忽略未处理的订单,提交成功后后台会自动更新`endTime`字段并将该`_id`的订单`listStatus`设置为4 |
 | /delegate | {_id,policeName} | {success,msg} | web端委派未处理的订单，提交成功后后台会自动更新`sendTime`字段并将该`policeName`的民警`status`设置为1 |
 | /getHistoryLists | 无 | {success,msg,lists} | 获取已完成的订单(liststatus为2,3,4的) |
+| /getUnfinishLists | 无 | {success,msg,lists} | web端获取正在进行的案件（`listStatus`为5 6的订单） |
 | /getMission | {policeName} | {success,msg,list} | 获取分配给自己（该民警）的任务 |
 | /confirmMission | {policeName} | {success,msg} | 提交成功后后台会自动更新`confirmTime`字段并将该`policeName`的民警`status`设置为2 |
 | /policeArrive | {policeName} | {success,msg} | 提交成功后后台会自动更新`arriveTime`字段并将该`policeName`的民警`status`设置为3 |

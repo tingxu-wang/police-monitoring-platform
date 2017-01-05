@@ -21,84 +21,19 @@
   <script src="//cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
   <script src="/static/javascript/tool.js"></script>
   <script>
-    var update={
-      name:'minjing100',
-      location:'1,10',
-      type:1
-    }
+  // 1483630408711 1483630406750
 
-    var get={
-      name:'minjing100'
-      //type:0
-    }
+  function time (confirmTime,solvedTime){
+    var useTime=new Date()-confirmTime,
+        date=new Date(useTime),
+        second=date.getSeconds(),
+        minutes=date.getMinutes(),
+        hours=date.getHours()
 
-    var changeStatus={
-      name:'minjing7',
-      status:2
-    }
+    return `${hours-8}:${minutes}:${second}`
+  }
 
-    var callout={
-      name:'minjing1'
-    }
-
-/*    toLocal('update',{
-      name:'minjing22',
-      type:1
-    })
-
-    toLocal('find',{
-      name:'minjing22'
-    })*/
-
-    //toLocal('update',update)
-
-/*    toLocal('paperOne',{
-      activity: '11600216',
-      name: '贵安新区公安局报警系统',
-      sojumpparm: 'od04Tv4xiR6kozeIHCkZMbI9bcYg',
-      q1: '王庭旭',
-      q2: '123456789',
-      q3: '987654321',
-      q4: '2',
-      q5: '这里是描述',
-      q6: '河南',
-      index: '8',
-      timetaken: '39',
-      submittime: '2016-12-31 22:42:01'
-    })
-*/
-
-/*    toLocal('save',{
-      name:'minjing76',
-      location:'0,0',
-      type:1,
-      status:0
-    })
-*/
-/*  toLocal('confirmMission',{
-    policeName:'minjing2'
-  })*/
-/*  toLocal('policeSolved',{
-    policeName:'minjing2'
-  })
-  toLocal('find',{
-    name:'minjing2'
-  })*/
-/*  toOnline('save',{
-    name:'民警1',
-    type:1,
-    location:'1,3'
-  })*/
-/*  toLocal('save',{
-    name:'民警1',
-    type:1
-  })*/
-
-  toOnline('findOne',{
-    name:'minjing1',
-    type:0
-  })
-  //toOnline('getWantedList')
+  console.log(time(1483630408711))
   </script>
 </body>
 </html>

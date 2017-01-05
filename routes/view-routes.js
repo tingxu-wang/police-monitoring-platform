@@ -20,4 +20,8 @@ module.exports=function(app){
   app.get('/views/watch',(req,res,next)=>{
     res.render('watch',{title:'实时监控',position:'watch'})
   })
+
+  app.get('/views/detail',(req,res,next)=>{
+    res.render('detail',{title:'案件详情',position:'detail'})
+  })
 }

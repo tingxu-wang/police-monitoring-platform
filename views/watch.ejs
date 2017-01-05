@@ -1,7 +1,7 @@
-<%- include ../public/header %>
+<%- include ./public/header %>
 
-<div class="container main-container">
-  <div class="list-container">
+<div class="container main-container" id="app">
+  <div class="list-container" v-for="list in lists">
     <div class="row">
       <div class="col-sm-9 col-xs-8">
         <div class="list-info-row">
@@ -43,23 +43,23 @@
         <div class="clearfix">
           <div class="list-police-info-first">
             <span class="list-info-item">出警民警：</span>
-            <span class="list-info-value">王小二</span>
+            <span class="list-info-value">{{ list.policeName }}</span>
           </div>
         </div>
         <div class="clearfix">
           <div class="list-police-info">
             <span class="list-info-item">编号：</span>
-            <span class="list-info-value">12138</span>
+            <span class="list-info-value"><police-id :policename="list.policeName"></police-id></span>
           </div>
         </div>
         <div class="clearfix">
           <div class="list-police-info">
             <span class="list-info-item">总用时：</span>
-            <span class="list-info-value">00:13:46</span>
+            <span class="list-info-value"><live-use-time :confirmtime="list.confirmTime" :incrasenumber="incraseNumber"></live-use-time></span>
           </div>
         </div>
         <div class="clearfix">
-          <div class="list-btn-short list-btn-short-default js-href" data-link="/demo/history">
+          <div class="list-btn-short list-btn-short-default js-href" data-link="/views/detail">
             查看详情
           </div>
         </div>
@@ -68,5 +68,25 @@
   </div>
 </div>
 
-<%- include ../public/components/rights %>
-<%- include ../public/footer %>
+<script type="text/javascript">
+  function getUnfinishLists (){
+    $.post(online+'getUnfinishLists',(data)=>{
+      vm.lists=data.lists
+    })
+  }
+
+  var vm=new Vue({
+    el:'#app',
+    data:{
+      lists:[{confirmTime:1483630408711,policeName:'minjing2'},{confirmTime:1483630200711,policeName:'minjing2'}],
+      incraseNumber:0//触发computed内方法的钩子
+    }
+  })
+
+  setInterval(function(){
+    vm.incraseNumber++
+  },1000)
+</script>
+
+<%- include ./public/components/rights %>
+<%- include ./public/footer %>

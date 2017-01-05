@@ -173,6 +173,30 @@ module.exports=function(app){
     })
   })
 
+  /* web端获取正在进行的案件（listStatus为5 6的订单） */
+  app.post('/getUnfinishLists',(req,res,next)=>{
+    var find=List.prototype.find,
+        searchObj={$or:[{listStatus:5},{listStatus:6}]}
+
+    find(searchObj,(err,lists)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(lists){
+        res.json({
+          success:1,
+          lists
+        })
+      }else{
+        res.json({
+          success:0,
+          msg:'未找到正在进行的订单'
+        })
+      }
+    })
+  })
+
   /*
    * 更改民警状态
   */
