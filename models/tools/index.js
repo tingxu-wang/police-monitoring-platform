@@ -56,9 +56,9 @@ var tools={
       updateObj.listStatus=2
     }
 
-    if(isTransmit){
+/*    if(isTransmit){
       tools.transmit(filter)//转发数据
-    }
+    }*/
 
     listUpdate(filter,updateObj,(err,result)=>{
       if(err){
@@ -73,6 +73,11 @@ var tools={
 
           if(result.nModified){
 
+          /*  if(isTransmit){
+              console.log(filter)
+              tools.transmit(filter)//转发数据
+            }
+*/
             res.json({
               success:1,
               msg:`订单时间字段 ${listTimeType} 设置成功,民警当前status值为：${policeStatusNumber}`

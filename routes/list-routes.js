@@ -217,8 +217,9 @@ module.exports=function(app){
   })
 
   app.post('/policeSolved',(req,res,next)=>{
+    tools.changePoliceStatus(res,req.body.policeName,0,'solvedTime')
     //向微信服务转发状态
-    tools.changePoliceStatus(res,req.body.policeName,0,'solvedTime',true)
+    tools.transmit({policeName:req.body.policeName,listStatus:2})
   })
 
   app.post('/paperTwo',(req,res,next)=>{
