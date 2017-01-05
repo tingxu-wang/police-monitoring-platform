@@ -72,7 +72,8 @@
       $.post(online+'getfreePolice',(data)=>{
         var policeArr=data.persons
         for(var i=0;i<policeArr.length;i++){
-          $('.js-policeName').append($(`<option value="minjing${i+1}">minjing${i+1}</option>`))
+          var police=policeArr[i]
+          $('.js-policeName').append($(`<option value="${police.name}">${police.name}</option>`))
         }
       })
     }

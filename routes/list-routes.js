@@ -222,11 +222,11 @@ module.exports=function(app){
 
   app.post('/paperTwo',(req,res,next)=>{
     var update=List.prototype.update
-    var paper=req.body,
+    var paper=req.body/*,
         schema={
           paperTwo:paper,
           endTime:Date.now()
-        }
+        }*/
     var listId=paper.sojumpparm//从反馈表单对象中取出的list对象id
 
     var searchObj={_id:listId,listStatus:2},
@@ -236,7 +236,9 @@ module.exports=function(app){
           caseResult:paper.q3,
           policeAttitude:paper.q2,
           userComment:[paper.q4 || ''],
-          policeSpeed:paper.q1
+          policeSpeed:paper.q1,
+          paperTwo:paper,
+          endTime:Date.now()
         }
 
     update(searchObj,updateObj,(err,result)=>{
