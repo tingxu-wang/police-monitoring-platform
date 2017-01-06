@@ -73,12 +73,12 @@
 <script type="text/javascript">
   var map = new AMap.Map('map-container',{resizeEnable: true,zoom:15}),
       mapPoints=[]
-/*  var point={
+  var point={
     title:'市民位置',
     map,
     position:['1','1']
   }
-  mapPoints[0]=new AMap.Marker(point)*/
+  mapPoints[0]=new AMap.Marker(point)
 </script>
 <script type="text/javascript">
   $(function(){
@@ -122,16 +122,16 @@
 
       map.on('complete',function(){
         global_getUserPosition(openid,(data)=>{//获取用户位置坐标，用于地图展示
-          var point={
+          /*var point={
             title:'市民位置',
             map,
             position:data.person.location.split(',')
-          }
-          mapPoints[0]=new AMap.Marker(point)
-          map.setFitView(mapPoints[0]);
-          /*var positionArr=data.person.location.split(',')
+          }*/
+          /*mapPoints[0]=new AMap.Marker(point)
+          map.setFitView(mapPoints[0]);*/
+          var positionArr=data.person.location.split(',')
           mapPoints[0].setPosition(new AMap.LngLat(positionArr[0],positionArr[1]))
-          map.setFitView()*/
+          map.setFitView()
         })
       })
 

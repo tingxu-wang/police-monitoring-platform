@@ -31,6 +31,7 @@ module.exports=function(grunt){
       dev:{
         options:{
           script:'bin/www',
+          //script:'--max_old_space_size=800 bin/www',
           reload:true
         }
       }
