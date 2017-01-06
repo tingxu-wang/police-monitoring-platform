@@ -199,6 +199,9 @@ function live(){
   function watchListStatus(policeName){
     $.post(online+'getMission',{policeName},function(data){
       if(data.success===1){//订单还在进行中
+        if(data.list.listStatus===6){//已到达
+          vm.lists[0].listStatus=6
+        }
         //vm.lists=[data.list]
         //live()//初始化表单信息之后如果
       }else{//订单已完成
