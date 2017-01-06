@@ -40,7 +40,8 @@
           <div class="clearfix">
             <div class="list-police-info-first">
               <span class="list-info-item">出警民警：</span>
-              <span class="list-info-value js-policeName">{{ list.policeName }}</span>
+              <!-- <span class="list-info-value js-policeName">{{ list.policeName }}</span> -->
+              <span class="list-info-value js-policeName"><police-name :realnames="realNames" :policename="list.policeName"></police-name></span>
             </div>
           </div>
           <div class="clearfix">
@@ -95,7 +96,8 @@
   var vm=new Vue({
     el:'#app',
     data:{
-      lists:[]
+      lists:[],
+      realNames:global_realNames
     }
   })
 

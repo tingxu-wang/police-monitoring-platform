@@ -26,3 +26,11 @@
   background: #ccc;
   margin-top: 20px;
 }
+
+.live-tip-container{
+  width:595px;
+  height:390px;
+  position: absolute;
+  text-align: center;
+  font-size: 30px;
+}

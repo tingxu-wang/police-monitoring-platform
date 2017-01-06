@@ -33,14 +33,19 @@
               <div class="list-case-detail-info js-m-caseInfo">
 
               </div>
-              <div class="list-case-map">
+              <div class="list-case-map" id="map-container">
                 <!-- 地图 -->
               </div>
               <div class="list-case-police-choice row">
                 <div class="col-xs-6">
                   <select class="form-control js-officeName">
-                    <option>派出所1</option>
-                    <option>派出所2</option>
+                    <option value="">请选择派出所</option>
+                    <option value="minjing1">湖潮派出所</option>
+                    <option value="minjing2">党武派出所</option>
+                    <option value="minjing3">思雅派出所</option>
+                    <option value="minjing4">高峰派出所</option>
+                    <option value="minjing5">马场派出所</option>
+                    <option value="minjing6">黔中路警务大队</option>
                   </select>
                 </div>
                 <div class="col-xs-6">
@@ -63,24 +68,48 @@
   </div>
 </div>
 
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=6b5a8d3e24a8e0d618bffe49f353147e"></script>
+<!-- 地图初始化 -->
+<script type="text/javascript">
+  var map = new AMap.Map('map-container',{resizeEnable: true,zoom:15}),
+      mapPoints=[]
+/*  var point={
+    title:'市民位置',
+    map,
+    position:['1','1']
+  }
+  mapPoints[0]=new AMap.Marker(point)*/
+</script>
 <script type="text/javascript">
   $(function(){
     var schema=['userName','phoneNumber','idCard','caseType','caseInfo','id','openid']//list绑定到modal时用的字段，定位两者的class名
     var bind=new BindingModal()
 
-    function insertPolice(){//添加空闲民警到弹窗
+    function insertPolice(requirePolice){//添加指定的空闲民警到弹窗
       $.post(online+'getfreePolice',(data)=>{
         var policeArr=data.persons
+
         for(var i=0;i<policeArr.length;i++){
           var police=policeArr[i]
-          $('.js-policeName').append($(`<option value="${police.name}">${police.name}</option>`))
+          //$('.js-policeName').append($(`<option value="${police.name}">${global_realNames[police.name]}</option>`))
+          if(requirePolice===police.name){
+            $('.js-policeName').append($(`<option value="${police.name}">${global_realNames[police.name]}</option>`))
+          }
         }
       })
     }
 
+    $('.js-officeName').on('click',function(){//警察局选定完后抓取民警
+      var requirePolice=$(this).val()
+
+      $('.js-policeName').find('option').remove()
+
+      insertPolice(requirePolice)
+    })
+
     $('.main-container').on('click','.js-show-modal',function(){
       bind.getPosition($(this))
-      insertPolice()
+      //insertPolice()
       $('#js-list-modal').modal('show')
     })
 
@@ -91,9 +120,21 @@
       bind.bindingInfo(schema)//绑定信息到弹窗
       openid=$('.js-m-openid').html().trim()
 
-      global_getUserPosition(openid,(data)=>{//获取用户位置坐标，用于地图展示
-        console.log(data.person.location)
+      map.on('complete',function(){
+        global_getUserPosition(openid,(data)=>{//获取用户位置坐标，用于地图展示
+          var point={
+            title:'市民位置',
+            map,
+            position:data.person.location.split(',')
+          }
+          mapPoints[0]=new AMap.Marker(point)
+          map.setFitView(mapPoints[0]);
+          /*var positionArr=data.person.location.split(',')
+          mapPoints[0].setPosition(new AMap.LngLat(positionArr[0],positionArr[1]))
+          map.setFitView()*/
+        })
       })
+
     })
     .on('hide.bs.modal',function(){
       $('.js-policeName').find('option').remove()
@@ -104,8 +145,11 @@
       var _id=$('.js-m-id').html().trim(),
           policeName=$('.js-policeName').val()
 
-      $.post(online+'delegate',{_id,policeName})
-      $('#js-list-modal').modal('hide')
+      $.post(online+'delegate',{_id,policeName},(data)=>{
+        var index=bind.listIndex
+        $('#js-list-modal').modal('hide')
+        vm.lists.splice(index,1)
+      })
     })
   })
 </script>

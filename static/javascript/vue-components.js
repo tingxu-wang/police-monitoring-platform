@@ -24,25 +24,25 @@ Vue.component('case-type',{
 Vue.component('list-status',{
   template:`
   <div>
-    <span v-if="status===0">
+    <span v-if="status===0" class="js-list-status-text">
       未分派
     </span>
-    <span v-if="status===1">
+    <span v-if="status===1" class="js-list-status-text">
       已分派
     </span>
     <span v-if="status===2" class="list-status-finished">
       已完成
     </span>
-    <span v-if="status===3">
+    <span v-if="status===3" class="js-list-status-text">
       已评价
     </span>
-    <span v-if="status===4" class="list-status-ignore">
+    <span v-if="status===4" class="list-status-ignore js-list-status-text">
       已忽略
     </span>
-    <span v-if="status===5" class="list-status-onway">
+    <span v-if="status===5" class="list-status-onway js-list-status-text">
       在路上
     </span>
-    <span v-if="status===6" class="list-status-arrive">
+    <span v-if="status===6" class="list-status-arrive js-list-status-text">
       已到达
     </span>
   </div>
@@ -76,16 +76,21 @@ Vue.component('live-use-time',{//即时运算当前执法花费的时间
   computed:{
     time (){
       var useTime=new Date()-this.confirmtime,
-          watch=this.incrasenumber,//动态更新时间的钩子
+          watch=this.increasenumber,//动态更新时间的钩子
+          //watch,
           date=new Date(useTime),
           second=date.getSeconds(),
           minutes=date.getMinutes(),
           hours=date.getHours()
 
+    /*  if(this.liststatus===5){//只有订单状态为在路上才更新时间
+        watch=this.increasenumber
+      }*/
+
       return `${hours-8}:${minutes}:${second}`
     }
   },
-  props:['confirmtime','incrasenumber']
+  props:['confirmtime','increasenumber']
 })
 
 Vue.component('police-id',{
@@ -98,4 +103,16 @@ Vue.component('police-id',{
     }
   },
   props:['policename']
+})
+
+Vue.component('police-name',{
+  template:`
+    <span>{{ realName }}</span>
+  `,
+  computed:{
+    realName (){
+      return this.realnames[this.policename]
+    }
+  },
+  props:['realnames','policename']//名字替换依据数组，list中的policeName
 })

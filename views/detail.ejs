@@ -1,66 +1,240 @@
 <%- include ./public/header %>
 
-<div class="container main-container">
-  <div class="row">
+<div class="container main-container" id="app">
+  <div class="row" v-for="list in lists">
     <div class="col-sm-4">
       <div class="list-info-row">
         <div class="list-title">
-          盗窃案
+          <case-type v-bind:type="list.caseType"></case-type>
         </div>
         <div class="list-number">
-          0001
+          {{ list._id }}
         </div>
       </div>
       <div class="list-info-row">
         <div class="list-first-info">
-          <span class="list-info-item">报警人：</span><span class="list-info-value">张二狗</span>
+          <span class="list-info-item">报警人：</span><span class="list-info-value">{{ list.userName }}</span>
         </div>
       </div>
       <div class="list-info-row">
         <div class="list-second-info">
-          <span class="list-info-item">身份证：</span><span class="list-info-value">110107199412120014</span>
+          <span class="list-info-item">身份证：</span><span class="list-info-value">{{ list.idCard }}</span>
         </div>
       </div>
       <div class="list-info-row">
         <div class="list-first-info">
-          <span class="list-info-item">联系电话：</span><span class="list-info-value">15801183454</span>
+          <span class="list-info-item">联系电话：</span><span class="list-info-value">{{ list.phoneNum }}</span>
         </div>
       </div>
       <div class="case-detail-info">
-        点击出警按钮弹出该弹窗，点击确认指派，状态变更；点击取消关闭弹窗 案件描述及整
-        个弹窗高度给的都是最大高度，这里最好不要写成固定的高度，不然文字少的时候可能太
-        丑 地图居中显示报案人位置 派出所选择默认文案：“请选择出警派出所”  ，颜色#999999
-        ，点击上拉菜单选择派出所， ，选择后显示派出所名称，颜色变为#1a1a1a 未选择派出所时，
-        民警选择不可选择，文案“请选择民警”，颜色#CCCCCC，派出所选择后，“请选择民警”颜色变为#999999
-        ，点击上拉菜单选择民警
+        {{ list.caseInfo }}
       </div>
       <div class="detail-police-info-container row">
         <div class="col-sm-6 list-status-onway">
-          在路上
+          <list-status :status="list.listStatus"></list-status>
         </div>
         <div class="col-sm-6 detail-info-right">
-          <span class="list-info-item">出警民警：</span><span class="list-info-value">王小二</span>
+          <span class="list-info-item">出警民警：</span>
+          <span class="list-info-value"><police-name :realnames="realNames" :policename="list.policeName"></span>
         </div>
       </div>
       <div class="detail-police-info-container row">
         <div class="col-sm-6">
-          00:13:56
+          <live-use-time :confirmtime="list.confirmTime" :increasenumber="incraseNumber" :liststatus="list.listStatus"></live-use-time>
         </div>
         <div class="col-sm-6 detail-info-right">
-          <span class="list-info-item">编号：</span><span class="list-info-value">12354</span>
+          <span class="list-info-item">编号：</span><span class="list-info-value"><police-id :policename="list.policeName"></police-id></span>
         </div>
       </div>
     </div>
-    <div class="col-sm-8 live-container">
+    <div class="col-sm-8 live-container" @click.once="openLive" id="player-wrapper">
+        <div class="live-tip-container">
+          点击获取现场情况
+        </div>
+        <div id="player"></div>
+
     </div>
   </div>
   <div class="row">
-    <div class="detail-map-container">
+    <div class="detail-map-container" id="container">
 
     </div>
   </div>
 
 </div>
+<!-- 高德地图 -->
+<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=6b5a8d3e24a8e0d618bffe49f353147e"></script>
+<!-- 网页端直播脚本 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/clappr/latest/clappr.min.js"></script>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/clappr.rtmp/latest/rtmp.min.js"></script>
+<!-- 直播配置脚本 -->
+<script type="text/javascript">
+function live(){
+  var play=new Clappr.Player({
+    source: "rtmp://115.28.243.24/live/<%= policeName %>",
+    parentId: "#player-wrapper",
+    plugins: {'playback': [RTMP]},
+    width:'595px',
+    height:'390px',
+    autoPlay:true,
+    rtmpConfig: {
+      swfPath: '//cdn.jsdelivr.net/clappr.rtmp/latest/assets/RTMP.swf',
+      scaling:'stretch',
+      playbackType: 'live',
+      bufferTime: 1,
+      startLevel: 0,
+      switchRules: {
+          "SufficientBandwidthRule": {
+              "bandwidthSafetyMultiple": 1.15,
+              "minDroppedFps": 2
+          },
+          "InsufficientBufferRule": {
+              "minBufferLength": 2
+          },
+          "DroppedFramesRule": {
+              "downSwitchByOne": 10,
+              "downSwitchByTwo": 20,
+              "downSwitchToZero": 24
+          },
+          "InsufficientBandwidthRule": {
+              "bitrateMultiplier": 1.15
+          }
+      }
+    }
+  });
+  return play
+}
+</script>
+<!-- 地图信息更新，订单信息抓取 -->
+<script type="text/javascript">
+  function countTime(){//时间累加器
+    setInterval(function(){
+      vm.incraseNumber++
+    },1000)
+  }
+
+  function init(){//只获取一次订单信息
+    var map = new AMap.Map('container',{resizeEnable: true,zoom:4}),//渲染地图
+        mapPoints=[]
+    var policeName='<%= policeName %>',
+        userOpenid=''
+
+    function initPosition(policeName,userOpenid){//更新人物位置
+      function initPolicePosition(policeName){//初始化民警位置
+        $.post(online+'findOne',{name:policeName},(data)=>{
+          var point={
+            title:'民警位置',
+            map,
+            position:data.person.location.split(',').reverse()
+          },
+          marker=new AMap.Marker(point)
+
+          mapPoints[0]=marker
+        })
+      }
+      function initUserPosition(userOpenid){
+        $.post(online+'findOne',{openid:userOpenid},(data)=>{
+          var point={
+            title:'市民位置',
+            map,
+            position:data.person.location.split(',')
+          },
+          marker=new AMap.Marker(point)
+
+          map.setFitView();//矫正地图镜头位置
+          mapPoints[1]=marker
+        })
+      }
+      function mapPlugin(){
+        /* 高德地图控件 */
+        AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.OverView'],function(){
+          map.addControl(new AMap.ToolBar());
+          map.addControl(new AMap.Scale());
+          map.addControl(new AMap.OverView({isOpen:true}));
+        })
+      }
+
+      mapPlugin()
+      initPolicePosition(policeName)
+      initUserPosition(userOpenid)
+    }
+
+    function setPosition(policeName,userOpenid){
+      function setPolicePosition(policeName){
+        $.post(online+'findOne',{name:policeName},(data)=>{
+          var positionArr=data.person.location.split(',').reverse()
+
+          mapPoints[0].setPosition(new AMap.LngLat(positionArr[0],positionArr[1]))
+        })
+      }
+      function setUserPosition(userOpenid){
+        $.post(online+'findOne',{openid:userOpenid},(data)=>{
+          var positionArr=data.person.location.split(',')
+
+          mapPoints[1].setPosition(new AMap.LngLat(positionArr[0],positionArr[1]))
+        })
+      }
+
+      setPolicePosition(policeName)
+      setUserPosition(userOpenid)
+    }
+
+    function positionCtrl(policeName,userOpenid){//初始化及更新人员位置
+      $.post(online+'getMission',{policeName},function(data){
+        vm.lists=[data.list]
+        userOpenid=data.list.openid//取出list的openid
+
+        initPosition(policeName,userOpenid)//获取完订单信息之后初始化位置
+        /* 轮询更新民警以及用户的位置 */
+
+        setInterval(function(){
+          setPosition(policeName,userOpenid)
+        },5000)
+      })
+    }
+
+    positionCtrl(policeName,userOpenid)
+  }
+
+  function watchListStatus(policeName){
+    $.post(online+'getMission',{policeName},function(data){
+      if(data.success===1){//订单还在进行中
+        //vm.lists=[data.list]
+        //live()//初始化表单信息之后如果
+      }else{//订单已完成
+        vm.lists[0].listStatus=2
+        clearInterval(timeCount)
+      }
+    })
+  }
+
+  var vm=new Vue({
+    el:'#app',
+    data:{
+      lists:[],
+      realNames:global_realNames,
+      incraseNumber:0//触发computed内方法的钩子
+    },
+    methods:{
+      openLive (){
+        live().play()
+        /*$('#player').next().css({
+          height:'390px',
+          right:'15px'
+        })*/
+      }
+    }
+  })
+
+  //countTime()
+  var timeCount=setInterval(function(){
+    vm.incraseNumber++
+  },1000)
+  init()
+  setInterval(function(){
+    watchListStatus('<%= policeName %>')
+  },5000)
+</script>
 
 <%- include ./public/components/rights %>
 <%- include ./public/footer %>

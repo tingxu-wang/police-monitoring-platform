@@ -4,36 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <script type="text/javascript" src="/static/javascript/player/srs.page.js"></script>
+  <script type="text/javascript" src="/static/javascript/player/srs.player.js"></script>
+  <script type="text/javascript" src="/static/javascript/player/srs.utility.js"></script> -->
   <title>tool</title>
 </head>
 <body>
-<!--  <div>
-    <label>本地<input type="radio" value="http://localhost:3000" name="send"></label>
-    <label>远程<input type="radio" value="http://115.28.243.24:3000" name="send"></label>
+  <div id="player-wrapper" style="width:400px;height:500px;">
+    <div id="player"></div>
   </div>
-  <div class="js-ajax">
-    <h3>提交民警信息</h3>
-    <div class="js-save">
-      <label>name: <input type="text" class="name"></label> <br>
-      <label>name: <input type="text" class="name"></label> <br>
-    </div>
-  </div>-->
   <script src="//cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
   <script src="/static/javascript/tool.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/clappr/latest/clappr.min.js"></script>
+  <script type="text/javascript" src="http://cdn.jsdelivr.net/clappr.rtmp/latest/rtmp.min.js"></script>
   <script>
-  // 1483630408711 1483630406750
+  //var player = new Clappr.Player({source: "http://your.video/here.mp4", parentId: "#player"});
+/*  var player = new Clappr.Player({
+      source: "rtmp://115.28.243.24/live/minjing2",
+      parentId: "#player-wrapper",
+      plugins: {'playback': [RTMP]},
+      autoPlay:true,
+      hideMediaControl:true,
+      width:'100px',
+      rtmpConfig: {
 
-  function time (confirmTime,solvedTime){
-    var useTime=new Date()-confirmTime,
-        date=new Date(useTime),
-        second=date.getSeconds(),
-        minutes=date.getMinutes(),
-        hours=date.getHours()
-
-    return `${hours-8}:${minutes}:${second}`
-  }
-
-  console.log(time(1483630408711))
+          swfPath: '//cdn.jsdelivr.net/clappr.rtmp/latest/assets/RTMP.swf',
+          scaling:'stretch',
+          playbackType: 'live',
+          bufferTime: 1,
+          startLevel: 0,
+          autoSwitch:true,
+          switchRules: {
+              "SufficientBandwidthRule": {
+                  "bandwidthSafetyMultiple": 1.15,
+                  "minDroppedFps": 2
+              },
+              "InsufficientBufferRule": {
+                  "minBufferLength": 2
+              },
+              "DroppedFramesRule": {
+                  "downSwitchByOne": 10,
+                  "downSwitchByTwo": 20,
+                  "downSwitchToZero": 24
+              },
+              "InsufficientBandwidthRule": {
+                  "bitrateMultiplier": 1.15
+              }
+          }
+      }
+  });
+  //player.load("rtmp://115.28.243.24/live/minjing2")
+  player.play()*/
+  toOnline('save',{
+    name:'minjing6',
+    type:1
+  })
   </script>
 </body>
 </html>

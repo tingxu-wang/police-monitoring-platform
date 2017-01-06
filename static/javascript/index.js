@@ -1,5 +1,13 @@
 /* views中用的脚本文件 */
 var online='http://115.28.243.24:3000/'
+var global_realNames={
+  minjing1:'刘学祥',
+  minjing2:'张虎',
+  minjing3:'余松',
+  minjing4:'韩信',
+  minjing5:'赵琦',
+  minjing6:'曹政江'
+}
 
 function global_getUserPosition(openid,fn){//利用openid查询用户来获取location
   $.post(online+'findOne',{openid},fn)
