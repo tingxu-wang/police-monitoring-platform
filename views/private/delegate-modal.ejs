@@ -120,20 +120,21 @@
       bind.bindingInfo(schema)//绑定信息到弹窗
       openid=$('.js-m-openid').html().trim()
 
-      map.on('complete',function(){
+      //map.on('complete',function(){
         global_getUserPosition(openid,(data)=>{//获取用户位置坐标，用于地图展示
-          /*var point={
+          console.log(data.person)
+/*          var point={
             title:'市民位置',
             map,
             position:data.person.location.split(',')
-          }*/
-          /*mapPoints[0]=new AMap.Marker(point)
+          }
+          mapPoints[0]=new AMap.Marker(point)
           map.setFitView(mapPoints[0]);*/
           var positionArr=data.person.location.split(',')
           mapPoints[0].setPosition(new AMap.LngLat(positionArr[0],positionArr[1]))
           map.setFitView()
         })
-      })
+      //})
 
     })
     .on('hide.bs.modal',function(){
