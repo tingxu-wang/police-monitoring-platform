@@ -9,7 +9,8 @@ module.exports=function(app){
     var person={
       type:req.body.type,
       location:req.body.location,
-      name:req.body.name
+      name:req.body.name,
+      openid:req.body.openid
     }
 
     var newPerson=new Person(person)
