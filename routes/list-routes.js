@@ -13,11 +13,26 @@ module.exports=function(app){
         }
 
     var newList=new List(schema)
-    var newPerson=new Person({name:paper.q1,openid:paper.sojumpparm})
 
-    newPerson.findOne({openid:paper.sojumpparm},(err,person)=>{
+    //var newPerson=new Person({name:paper.q1,openid:paper.sojumpparm})
+
+/*    newPerson.findOne({openid:paper.sojumpparm},(err,person)=>{
       if(!person){
         newPerson.save(()=>{})//新建用户对象
+      }
+    })*/
+    /* 找到微信端创建的该用户并更新其name值 */
+    var personUpdate=Person.prototype.update,
+        searchObj={
+          openid:paper.sojumpparm
+        },
+        updateObj={
+          name:paper.q1
+        }
+
+    personUpdate(searchObj,updateObj,(err,result)=>{
+      if(err){
+        console.error(err)
       }
     })
 
