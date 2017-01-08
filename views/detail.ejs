@@ -40,7 +40,13 @@
       </div>
       <div class="detail-police-info-container row">
         <div class="col-sm-6">
-          <live-use-time :sendtime="list.sendTime" :increasenumber="increaseNumber"></live-use-time>
+          <!-- <live-use-time :sendtime="list.sendTime" :increasenumber="increaseNumber"></live-use-time> -->
+          <template v-if="list.listStatus===5">
+            <live-use-time :sendtime="list.sendTime" :increasenumber="increaseNumber"></live-use-time>
+          </template>
+          <template v-else>
+            <police-use-time :arrivetime="list.arriveTime" :sendtime="list.sendTime"></police-use-time>
+          </template>
         </div>
         <div class="col-sm-6 detail-info-right">
           <span class="list-info-item">编号：</span><span class="list-info-value"><police-id :policename="list.policeName"></police-id></span>
@@ -109,7 +115,7 @@ function live(){
 <script type="text/javascript">
   function countTime(){//时间累加器
     setInterval(function(){
-      vm.incraseNumber++
+      vm.increaseNumber++
     },1000)
   }
 
@@ -125,7 +131,8 @@ function live(){
           var point={
             title:'民警位置',
             map,
-            position:data.person.location.split(',').reverse()
+            position:data.person.location.split(',').reverse(),
+            icon:'/static/images/police.png'
           },
           marker=new AMap.Marker(point)
 
@@ -137,7 +144,8 @@ function live(){
           var point={
             title:'市民位置',
             map,
-            position:data.person.location.split(',')
+            position:data.person.location.split(','),
+            icon:'/static/images/user.png'
           },
           marker=new AMap.Marker(point)
 
@@ -217,7 +225,7 @@ function live(){
     data:{
       lists:[],
       realNames:global_realNames,
-      incraseNumber:0//触发computed内方法的钩子
+      increaseNumber:0//触发computed内方法的钩子
     },
     methods:{
       openLive (){
@@ -232,7 +240,7 @@ function live(){
 
   //countTime()
   var timeCount=setInterval(function(){
-    vm.incraseNumber++
+    vm.increaseNumber++
   },1000)
   init()
   setInterval(function(){

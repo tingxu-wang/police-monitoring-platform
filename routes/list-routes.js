@@ -285,4 +285,29 @@ module.exports=function(app){
     })
   })
 
+  //根据民警用户名返回所有的已完成订单(listStatus=2)
+  app.post('/getPoliceHistory',(req,res,next)=>{
+    var find=List.prototype.find
+    var filter=req.body,
+        searchObj={policeName:filter.policeName,listStatus:2}
+
+    find(searchObj,(err,lists)=>{
+      if(err){
+        console.error(err)
+      }
+
+      if(lists.length){
+        res.json({
+          success:1,
+          lists
+        })
+      }else{
+        res.json({
+          success:0,
+          msg:'暂时没有历史订单'
+        })
+      }
+    })
+  })
+
 }
