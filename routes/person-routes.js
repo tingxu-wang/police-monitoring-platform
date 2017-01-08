@@ -15,7 +15,7 @@ module.exports=function(app){
 
     var newPerson=new Person(person)
 
-    if(person.type===1){//民警信息创建
+    if(person.type==1){//民警信息创建
       newPerson.findOne({name:person.name},(err,person)=>{
         if(person){
           res.json({
