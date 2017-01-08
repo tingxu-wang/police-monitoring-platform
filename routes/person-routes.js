@@ -15,24 +15,45 @@ module.exports=function(app){
 
     var newPerson=new Person(person)
 
-    newPerson.findOne({name:person.name},(err,person)=>{
-      if(person){
-        res.json({
-          success:0,
-          msg:'用户已存在'
-        })
-      }else{
-        newPerson.save((err,person)=>{
-          if(err){
-            console.error(err)
-          }
+    if(person.type===1){//民警信息创建
+      newPerson.findOne({name:person.name},(err,person)=>{
+        if(person){
           res.json({
-            success:1,
-            msg:'用户信息保存成功'
+            success:0,
+            msg:'该民警已存在'
           })
-        })
-      }
-    })
+        }else{
+          newPerson.save((err,person)=>{
+            if(err){
+              console.error(err)
+            }
+            res.json({
+              success:1,
+              msg:'民警信息保存成功'
+            })
+          })
+        }
+      })
+    }else{//用户信息创建
+      newPerson.findOne({openid:person.openid},(err,person)=>{
+        if(person){
+          res.json({
+            success:0,
+            msg:'该用户已存在'
+          })
+        }else{
+          newPerson.save((err,person)=>{
+            if(err){
+              console.error(err)
+            }
+            res.json({
+              success:1,
+              msg:'用户信息保存成功'
+            })
+          })
+        }
+      })
+    }
   })
 
   app.post('/findOne',(req,res,next)=>{
