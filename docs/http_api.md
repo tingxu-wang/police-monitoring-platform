@@ -101,7 +101,7 @@ var schema={
 | /policeArrive | {policeName} | {success,msg} | 提交成功后后台会自动更新`arriveTime`字段并将该`policeName`的民警`status`设置为3 |
 | /policeSolved | {policeName,policeComment} | {success,msg} | 提交成功后后台会自动更新`solveTime`字段并将该`policeName`的民警`status`设置为0,将传来的`policeComment`保存到该list对象 |
 | /paperTwo | 问卷二数据对象 | {success,msg} | 提交表单json对象后后端自动检索json中的`id`字段的list对象，将问卷信息并入匹配文档中并更新该list对象的`listStatus`为3 |
-| /getPoliceHistory | {policeName} | {success,lists} | 根据民警用户名返回所有的已完成订单(`listStatus`=2) |
+| /getPoliceHistory | {policeName} | {success,lists} | 根据民警用户名返回所有的已完成订单(`listStatus`=2 || 3) |
 
 ---
 

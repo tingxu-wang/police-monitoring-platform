@@ -285,11 +285,13 @@ module.exports=function(app){
     })
   })
 
-  //根据民警用户名返回所有的已完成订单(listStatus=2)
+  //根据民警用户名返回所有的已完成订单(listStatus=2 || 3)
   app.post('/getPoliceHistory',(req,res,next)=>{
     var find=List.prototype.find
     var filter=req.body,
-        searchObj={policeName:filter.policeName,listStatus:2}
+        searchObj={policeName:filter.policeName,
+                    $or:[{listStatus:2},{listStatus:3}]
+                  }
 
     find(searchObj,(err,lists)=>{
       if(err){
