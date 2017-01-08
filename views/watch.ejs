@@ -50,7 +50,14 @@
         <div class="clearfix">
           <div class="list-police-info">
             <span class="list-info-item">总用时：</span>
-            <span class="list-info-value"><live-use-time :confirmtime="list.confirmTime" :increasenumber="increaseNumber"></live-use-time></span>
+            <span class="list-info-value">
+              <template v-if="list.listStatus===5">
+                <live-use-time :sendtime="list.sendTime" :increasenumber="increaseNumber"></live-use-time>
+              </template>
+              <template v-else>
+                <police-use-time :arrivetime="list.arriveTime" :sendtime="list.sendTime"></police-use-time>
+              </template>
+            </span>
           </div>
         </div>
         <div class="clearfix">
@@ -83,7 +90,7 @@
     }
   })
 
-  setInterval(function(){
+  var timeCount=setInterval(function(){
     vm.increaseNumber++
   },1000)
   global_polling(getUnfinishLists)

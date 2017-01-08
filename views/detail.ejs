@@ -40,7 +40,7 @@
       </div>
       <div class="detail-police-info-container row">
         <div class="col-sm-6">
-          <live-use-time :confirmtime="list.confirmTime" :increasenumber="incraseNumber" :liststatus="list.listStatus"></live-use-time>
+          <live-use-time :sendtime="list.sendTime" :increasenumber="increaseNumber"></live-use-time>
         </div>
         <div class="col-sm-6 detail-info-right">
           <span class="list-info-item">编号：</span><span class="list-info-value"><police-id :policename="list.policeName"></police-id></span>
@@ -201,12 +201,13 @@ function live(){
       if(data.success===1){//订单还在进行中
         if(data.list.listStatus===6){//已到达
           vm.lists[0].listStatus=6
+          clearInterval(timeCount)//已到达之后停止计时
         }
         //vm.lists=[data.list]
         //live()//初始化表单信息之后如果
       }else{//订单已完成
         vm.lists[0].listStatus=2
-        clearInterval(timeCount)
+        //clearInterval(timeCount)
       }
     })
   }

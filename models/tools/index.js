@@ -29,7 +29,8 @@ var tools={
       }
     })
   },
-  changePoliceStatus (res,policeName,policeStatusNumber,listTimeType,isTransmit){
+  changePoliceStatus (res,policeName,policeStatusNumber,listTimeType,isTransmit,policeComment){
+    /* 最后一个参数为policeSolved专用，保存民警评价 */
     if(!arguments[4]){
       var isTransmit=false
     }
@@ -54,6 +55,7 @@ var tools={
     if(listTimeType==='solvedTime'){//已解决接口调用时将listStatus设置为2
       filter={listStatus:6,policeName}
       updateObj.listStatus=2
+      updateObj.policeComment=policeComment
     }
 
     if(isTransmit){

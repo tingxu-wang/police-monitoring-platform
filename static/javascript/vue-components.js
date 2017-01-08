@@ -51,13 +51,13 @@ Vue.component('list-status',{
 })
 
 
-Vue.component('use-time',{
+Vue.component('use-time',{//订单的总用时
   template:`
     <span>{{ time }}</span>
   `,
   computed:{
     time (){
-      var useTime=this.solvedtime-this.confirmtime,
+      var useTime=this.solvedtime-this.sendtime,
           date=new Date(useTime),
           second=date.getSeconds(),
           minutes=date.getMinutes(),
@@ -66,7 +66,25 @@ Vue.component('use-time',{
       return `${hours-8}:${minutes}:${second}`
     }
   },
-  props:['solvedtime','confirmtime']
+  props:['solvedtime','sendtime']
+})
+
+Vue.component('police-use-time',{//民警到达现场的总用时
+  template:`
+    <span>{{ time }}</span>
+  `,
+  computed:{
+    time (){
+      var useTime=this.arrivetime-this.sendtime,
+          date=new Date(useTime),
+          second=date.getSeconds(),
+          minutes=date.getMinutes(),
+          hours=date.getHours()
+
+      return `${hours-8}:${minutes}:${second}`
+    }
+  },
+  props:['arrivetime','sendtime']
 })
 
 Vue.component('live-use-time',{//即时运算当前执法花费的时间
@@ -75,7 +93,7 @@ Vue.component('live-use-time',{//即时运算当前执法花费的时间
   `,
   computed:{
     time (){
-      var useTime=new Date()-this.confirmtime,
+      var useTime=new Date()-this.sendtime,
           watch=this.increasenumber,//动态更新时间的钩子
           //watch,
           date=new Date(useTime),
@@ -90,7 +108,7 @@ Vue.component('live-use-time',{//即时运算当前执法花费的时间
       return `${hours-8}:${minutes}:${second}`
     }
   },
-  props:['confirmtime','increasenumber']
+  props:['sendtime','increasenumber']
 })
 
 Vue.component('police-id',{

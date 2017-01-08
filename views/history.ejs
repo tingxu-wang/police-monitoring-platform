@@ -54,7 +54,7 @@
             <div class="list-police-info">
               <span class="list-info-item">总用时：</span>
               <span class="list-info-value js-useTime">
-                <use-time :solvedtime="list.solvedTime" :confirmtime="list.confirmTime"></use-time>
+                <use-time :solvedtime="list.solvedTime" :sendtime="list.sendTime"></use-time>
               </span>
             </div>
           </div>
@@ -78,6 +78,7 @@
         <div class="js-police-attitude">{{ list.policeAttitude }}</div>
         <div class="js-case-result">{{ list.caseResult }}</div>
         <div class="js-user-comment">{{ list.userComment }}</div>
+        <div class="js-police-comment">{{ list.policeComment }}</div>
       </div>
     </div>
 

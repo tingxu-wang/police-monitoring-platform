@@ -28,6 +28,7 @@ var schema={
   policeAttitude:Number,//民警态度
   policeSpeed:Number,//民进出警速度
   userComment:String,//用户评价
+  policeComment:String,//民警评价
 
   /* 时间单位为毫秒，记录操作的当前时间 */
   startTime:Number,//订单发起时间（用户提交paperOne的时间）

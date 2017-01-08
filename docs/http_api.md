@@ -57,6 +57,7 @@ var schema={
   policeAttitude:Number,//民警态度
   policeSpeed:Number,//民进出警速度
   userComment:String,//用户评价
+  policeComment:String,//民警评价
 
   /* 时间单位为毫秒，记录操作的当前时间 */
   startTime:Number,//订单发起时间（用户提交paperOne的时间）
@@ -98,7 +99,7 @@ var schema={
 | /getMission | {policeName} | {success,msg,list} | 获取分配给自己（该民警）的任务 |
 | /confirmMission | {policeName} | {success,msg} | 提交成功后后台会自动更新`confirmTime`字段并将该`policeName`的民警`status`设置为2 |
 | /policeArrive | {policeName} | {success,msg} | 提交成功后后台会自动更新`arriveTime`字段并将该`policeName`的民警`status`设置为3 |
-| /policeSolved | {policeName} | {success,msg} | 提交成功后后台会自动更新`solveTime`字段并将该`policeName`的民警`status`设置为0 |
+| /policeSolved | {policeName,policeComment} | {success,msg} | 提交成功后后台会自动更新`solveTime`字段并将该`policeName`的民警`status`设置为0,将传来的`policeComment`保存到该list对象 |
 | /paperTwo | 问卷二数据对象 | {success,msg} | 提交表单json对象后后端自动检索json中的`id`字段的list对象，将问卷信息并入匹配文档中并更新该list对象的`listStatus`为3 |
 
 ---
