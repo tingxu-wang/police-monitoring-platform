@@ -80,8 +80,8 @@ function live(){
     source: "rtmp://115.28.243.24/live/<%= policeName %>",
     parentId: "#player-wrapper",
     plugins: {'playback': [RTMP]},
-    width:'595px',
-    height:'390px',
+    width:'100%',
+    height:'100%',
     autoPlay:true,
     rtmpConfig: {
       swfPath: '//cdn.jsdelivr.net/clappr.rtmp/latest/assets/RTMP.swf',
@@ -209,6 +209,7 @@ function live(){
       if(data.success===1){//订单还在进行中
         if(data.list.listStatus===6){//已到达
           vm.lists[0].listStatus=6
+          vm.lists[0].arriveTime=data.list.arriveTime
           clearInterval(timeCount)//已到达之后停止计时
         }
         //vm.lists=[data.list]

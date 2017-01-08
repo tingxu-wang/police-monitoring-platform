@@ -305,7 +305,7 @@ module.exports=function(app){
         })
       }else{
         res.json({
-          success:0,
+          success:1,
           msg:'暂时没有历史订单'
         })
       }
