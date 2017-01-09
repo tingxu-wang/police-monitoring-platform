@@ -58,7 +58,8 @@
 
   function getWantedList(){
     $.post(online+'getWantedList',(data)=>{
-      if(vm.lists.length!==data.lists.length){
+      console.log(data.success)
+      if(data.success!==0 && (vm.lists.length!==data.lists.length)){
         playSound()
       }
       vm.lists=data.lists
