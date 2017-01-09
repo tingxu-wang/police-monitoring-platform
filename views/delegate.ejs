@@ -49,9 +49,18 @@
   </div>
 </div>
 
+<!-- jquery声音插件 -->
+<script src="/static/javascript/lib/jquery-play-sound.js"></script>
 <script type="text/javascript">
+  function playSound(){//播放声音函数
+    $.playSound('/static/sound/alert')
+  }
+
   function getWantedList(){
     $.post(online+'getWantedList',(data)=>{
+      if(vm.lists.length!==data.lists.length){
+        playSound()
+      }
       vm.lists=data.lists
     })
   }

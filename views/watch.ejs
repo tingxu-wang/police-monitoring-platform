@@ -74,10 +74,15 @@
 </div>
 
 <!-- jquery声音插件 -->
-<script src="/static/javascript/lib/jquery-play-sound.js"></script>
+<!-- <script src="/static/javascript/lib/jquery-play-sound.js"></script> -->
 <script type="text/javascript">
   function getUnfinishLists (){
+/*    function playSound(){
+      $.playSound('')
+    }*/
     $.post(online+'getUnfinishLists',(data)=>{
+
+
       vm.lists=data.lists
     })
   }
