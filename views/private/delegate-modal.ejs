@@ -134,6 +134,9 @@
           var positionArr=data.person.location.split(',')
           mapPoints[0].setPosition(new AMap.LngLat(positionArr[0],positionArr[1]))
           map.setFitView()
+          for(var i=0;i<15;i++){//地图缩放
+            map.zoomIn()
+          }
         })
       //})
 
