@@ -1,5 +1,6 @@
 /* views中用的脚本文件 */
-var online='http://115.28.243.24:3000/'
+//var online='http://115.28.243.24:3000/'
+var online='http://115.159.202.104:3000/'
 var global_realNames={
   minjing1:'刘学祥',
   minjing2:'张虎',
