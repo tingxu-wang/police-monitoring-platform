@@ -40,7 +40,8 @@ Person.prototype={
       location:this.location,
       type:this.type,
       status:this.status,
-      openid:this.openid
+      openid:this.openid,
+      userStatus:this.userStatus
     }
     var personModel=new PersonModel(person)
 
