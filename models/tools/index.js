@@ -117,7 +117,8 @@ var tools={
           openid:list.openid,
           listStatus:list.listStatus,
           id:list._id,
-          caseInfo:list.caseInfo
+          caseInfo:list.caseInfo,
+          listType:list.listType
         })
       }
     })
@@ -135,7 +136,8 @@ var tools={
           openid:list.openid,
           listStatus:list.listStatus,
           id:list._id,
-          caseInfo:list.caseInfo
+          caseInfo:list.caseInfo,
+          listType:list.listType
         })
       }
     })
