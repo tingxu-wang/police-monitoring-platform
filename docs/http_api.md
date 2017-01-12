@@ -1,4 +1,6 @@
 # ajax api
+version 2
+
 ---
 
 问卷推送数据说明文档：
@@ -33,7 +35,8 @@ var schema={
   location:String,//经纬度字符串 格式为:"12,11" x和y值中间用英文逗号隔开
   type:Number,//人员类别 0为市民 1为民警
   status:Number,//民警的当前状态  0 未出警 1 已委派 2 已出警(确认) 3 已到达
-  openid:String//用户的微信openid，用于微信更新用户位置
+  openid:String,//用户的微信openid，用于微信更新用户位置
+  userStatus:Number//用户状态 0为未发起订单 1为已经发起订单
 }
 
 ```
@@ -44,6 +47,7 @@ list字段示例：
 var schema={
   policeName:String,//民警姓名
   listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略 5为在路上（接单但未到达） 6为已到达（但未解决）
+  listType:Number,//订单类型 0为紧急订单 1为普通订单
 
   /* 从问卷中抽出的转存信息 */
   caseInfo:String,//案件描述
@@ -52,6 +56,7 @@ var schema={
   phoneNum:String,//市民电话号码
   idCard:String,//市民身份证号
   caseType:Number,//报案类型
+  wxName:String,//用户微信昵称
 
   /* 从反馈问卷(paperTwo)中转存的用户评价 */
   caseResult:Number,//处置结果
@@ -90,7 +95,9 @@ var schema={
 ## 订单数据交互api
 | url | 发送值 | 返回值 | 说明 |
 | :------------- | :------------- | :------------- | :------------- |
-| /paperOne | 问卷一数据对象 | {success,msg} | 利用所给到的对象数据创建list对象，并对问卷中的关键信息进行转存 |
+| /createNormalList | {wxName,openid} | {success,msg} | 根据用户微信昵称以及openid值创建普通订单 |
+| /createEmergencyList | {wxName,openid} | {success,msg} | 根据用户微信昵称以及openid值创建紧急订单 |
+| /paperOne | 问卷一数据对象 | {success,msg} | 检索请求体中的`id`字段对该`id`值的订单对象的paperOne字段进行保存并对问卷中的关键信息进行转存 |
 | /getWantedList | 无 | `listStatus=0`的list对象数组 | 抓取未处理的订单 |
 | /getfreePolice | 无 | `status=0`的person对象数组 | 抓取未出警的民警 |
 | /ignoreList | {_id:订单编号} | {success,msg} | 忽略未处理的订单,提交成功后后台会自动更新`endTime`字段并将该`_id`的订单`listStatus`设置为4 |
@@ -100,16 +107,24 @@ var schema={
 | /getMission | {policeName} | {success,msg,list} | 获取分配给自己（该民警）的任务 |
 | /confirmMission | {policeName} | {success,msg} | 提交成功后后台会自动更新`confirmTime`字段并将该`policeName`的民警`status`设置为2 |
 | /policeArrive | {policeName} | {success,msg} | 提交成功后后台会自动更新`arriveTime`字段并将该`policeName`的民警`status`设置为3 |
-| /policeSolved | {policeName,policeComment} | {success,msg} | 提交成功后后台会自动更新`solveTime`字段并将该`policeName`的民警`status`设置为0,将传来的`policeComment`保存到该list对象 |
+| /policeSolved | {policeName,policeComment} | {success,msg} | 提交成功后后台会自动更新`solveTime`字段并将该`policeName`的民警`status`设置为0,将传来的`policeComment`保存到该list对象,将该`openid`值的person对象`userStatus`设置为0 |
 | /paperTwo | 问卷二数据对象 | {success,msg} | 提交表单json对象后后端自动检索json中的`id`字段的list对象，将问卷信息并入匹配文档中并更新该list对象的`listStatus`为3 |
-| /getPoliceHistory | {policeName} | {success,lists} | 根据民警用户名返回所有的已完成订单(`listStatus`=2 || 3) |
+| /getPoliceHistory | {policeName} | {success,lists} | 根据民警用户名返回所有的已完成订单(`listStatus`=2 或 3) |
 
 ---
 
 ## 订单交互逻辑梳理及api设计(括号中的操作为person集合的操作而非对list)
 
 发起订单：
-- 创建list对象(post)`/paperOne`：用户发出paperOne问卷对象，后台新创建一个list对象保存此表单信息到paperOne字段，并将`listStatus`字段值设置为0，设置`id`字段值自增1，并将当前时间保存到`startTime`字段内,**将问卷内的关键信息转存一份到该list相应字段内**
+- 创建普通订单list对象`/createNormalList`：调用此接口直接创建订单对象用请求体中的`wxName`和`openid`保存到创建的表单对象中，将`listType`设置为1，设置`id`字段值自增1，并将当前时间保存到`startTime`字段内，并将`listStatus`字段值设置为0
+
+  (将该订单中`openid`的person对象`userStatus`设置为1)
+
+- 创建紧急订单list对象`/createEmergencyList`：调用此接口直接创建订单对象用请求体中的`wxName`和`openid`保存到创建的表单对象中，将`listType`设置为0，设置`id`字段值自增1，并将当前时间保存到`startTime`字段内，并将`listStatus`字段值设置为0
+
+  (将该订单中`openid`的person对象`userStatus`设置为1)
+
+- 更新list对象信息`/paperOne`：调用此接口发出paperOne问卷对象，后台根据请求体总的订单`id`保存该`id`值的list对象的paperOne字段，**将问卷内的关键信息转存一份到该list相应字段内**
 
 控制台展现订单以及民警信息：
 - 抓取未处理的订单`/getWantedList`：web端设置心跳抓取`listStatus=0`的list对象数组
@@ -134,6 +149,8 @@ var schema={
   (设置`person`集合中该`policeName`的民警`status`为3)
 
 - 民警解决案件`/policeSolved`：安卓端将`policeName`发送到后台，后台联合`listStatus=6`以及`policeName`将匹配的list对象`listStatus`设置为2，`solveTime`设置为当前时间，`listStatus`设置为2
+
+  (将该订单中`openid`的person对象`userStatus`设置为0)
 
   **将该list对象中的  `openid` `id` `caseInfo` `listStatus`字段以json格式发送到晓晨服务器上，对象示例：**
   ```javascript
