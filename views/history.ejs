@@ -90,7 +90,9 @@
 <script type="text/javascript">
   function getHistoryLists(){
     $.post(online+'getHistoryLists',(data)=>{
-      vm.lists=data.lists.reverse()
+      if(data.success===1){        
+        vm.lists=data.lists.reverse()
+      }
     })
   }
 
