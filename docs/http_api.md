@@ -124,7 +124,7 @@ var schema={
 
   (将该订单中`openid`的person对象`userStatus`设置为1)
 
-- 更新list对象信息`/paperOne`：调用此接口发出paperOne问卷对象，后台根据请求体总的订单`id`保存该`id`值的list对象的paperOne字段，**将问卷内的关键信息转存一份到该list相应字段内**
+- 更新list对象信息`/paperOne`：调用此接口发出paperOne问卷对象，后台根据请求体总的订单`id`更新(update)该`id`值的list对象的paperOne字段，**将问卷内的关键信息转存一份到该list相应字段内**
 
 控制台展现订单以及民警信息：
 - 抓取未处理的订单`/getWantedList`：web端设置心跳抓取`listStatus=0`的list对象数组
