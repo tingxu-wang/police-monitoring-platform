@@ -14,6 +14,7 @@ var schema={
   policeName:String,//民警姓名
   listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略
   //5为在路上（接单但未到达） 6为已到达（但未解决）
+  listType:Number,//订单类型 0为紧急订单 1为普通订单
 
   /* 从问卷中抽出的转存信息 */
   caseInfo:String,//案件描述
@@ -22,6 +23,7 @@ var schema={
   phoneNum:String,//市民电话号码
   idCard:String,//市民身份证号
   caseType:Number,//报案类型
+  wxName:String,//用户微信昵称
 
   /* 从反馈问卷(paperTwo)中转存的用户评价 */
   caseResult:Number,//处置结果
@@ -54,13 +56,17 @@ var common=new Common(ListModel)
 
 function List(list){
   this.list={
-    /*创建文档的时候并不是所有字段都给出，注释掉的是之后update的*/
-    //policeName:list.policeName,
+    listStatus:list.listStatus || 0,
+    listType:list.listType,
 
-    //listStatus:list.listStatus,
-    listStatus:0,
+    wxName:list.wxName,
+    openid:list.openid,
 
-    caseInfo:list.paperOne.q5,
+    startTime:list.startTime
+
+
+//转存转移到之后的表单提交的update中
+/*    caseInfo:list.paperOne.q5,
     userName:list.paperOne.q1,
     openid:list.paperOne.sojumpparm,
     phoneNum:list.paperOne.q3,
@@ -68,14 +74,8 @@ function List(list){
     caseType:list.paperOne.q4,
 
     startTime:list.startTime,
-    // endTime:list.endTime,
-    // sendTime:list.sendTime,
-    // confirmTime:list.confirmTime,
-    // arriveTime:list.arriveTime,
-    // solvedTime:list.solvedTime,
 
-    paperOne:list.paperOne
-    //paperTwo:list.paperTwo
+    paperOne:list.paperOne*/
   }
 }
 

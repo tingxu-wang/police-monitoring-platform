@@ -74,12 +74,6 @@ var tools={
           }
 
           if(result.nModified){
-
-          /*  if(isTransmit){
-              console.log(filter)
-              tools.transmit(filter)//转发数据
-            }
-*/
             res.json({
               success:1,
               msg:`订单时间字段 ${listTimeType} 设置成功,民警当前status值为：${policeStatusNumber}`
@@ -104,7 +98,7 @@ var tools={
 
     requestify.post('http://wxpytest.applinzi.com/feedback', infoObj)
     .then(function(response) {
-        response.getBody();
+      response.getBody();
     });
   },
   /*调用该方法后根据参数对象在list集合中搜索list对象，抽出所需字段推到微信服务器*/

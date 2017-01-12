@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- <script type="text/javascript" src="/static/javascript/player/srs.page.js"></script>
-  <script type="text/javascript" src="/static/javascript/player/srs.player.js"></script>
-  <script type="text/javascript" src="/static/javascript/player/srs.utility.js"></script> -->
   <title>tool</title>
 </head>
 <body>
@@ -18,53 +15,35 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/clappr/latest/clappr.min.js"></script>
   <script type="text/javascript" src="http://cdn.jsdelivr.net/clappr.rtmp/latest/rtmp.min.js"></script>
   <script>
-  //var player = new Clappr.Player({source: "http://your.video/here.mp4", parentId: "#player"});
-/*  var player = new Clappr.Player({
-      source: "rtmp://115.28.243.24/live/minjing2",
-      parentId: "#player-wrapper",
-      plugins: {'playback': [RTMP]},
-      autoPlay:true,
-      hideMediaControl:true,
-      width:'100px',
-      rtmpConfig: {
-
-          swfPath: '//cdn.jsdelivr.net/clappr.rtmp/latest/assets/RTMP.swf',
-          scaling:'stretch',
-          playbackType: 'live',
-          bufferTime: 1,
-          startLevel: 0,
-          autoSwitch:true,
-          switchRules: {
-              "SufficientBandwidthRule": {
-                  "bandwidthSafetyMultiple": 1.15,
-                  "minDroppedFps": 2
-              },
-              "InsufficientBufferRule": {
-                  "minBufferLength": 2
-              },
-              "DroppedFramesRule": {
-                  "downSwitchByOne": 10,
-                  "downSwitchByTwo": 20,
-                  "downSwitchToZero": 24
-              },
-              "InsufficientBandwidthRule": {
-                  "bitrateMultiplier": 1.15
-              }
-          }
-      }
-  });
-  //player.load("rtmp://115.28.243.24/live/minjing2")
-  player.play()*/
-  for(var i=1;i<=6;i++){
-    toOnline2('save',{
+/*  for(var i=1;i<=6;i++){
+    toLocal('save',{
       name:`minjing${i}`,
       type:1
     })
-  }
-/*  toOnline('updateUserLocation',{
-    'openid':"od04Tv32oLQ1BiabP5jj719XSvfQ",
-    'location':'12,124'
+  }*/
+
+/*  toLocal('createNormalList',{
+    wxName:'庭旭',
+    openid:'od04Tv0cqVPPLDnDYP6Wx3vhH0Mc'
   })*/
+  toLocal('paperOne',{
+  activity: '11600216',
+  name: '贵安新区公安局报警系统',
+  sojumpparm: '57',
+  q1: '段晓晨',
+  q2: '123456789',
+  q3: '987654321',
+  q4: '1',
+  q5: '站前路发生打架斗殴',
+  index: '8',
+  timetaken: '39',
+  submittime: '2016-12-31 22:42:01'
+})
+
+/*  toLocal('save',{
+    openid:'od04Tv0cqVPPLDnDYP6Wx3vhH0Mc'
+  })*/
+
   </script>
 </body>
 </html>

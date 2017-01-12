@@ -116,15 +116,17 @@ var schema={
 ## 订单交互逻辑梳理及api设计(括号中的操作为person集合的操作而非对list)
 
 发起订单：
-- 创建普通订单list对象`/createNormalList`：调用此接口直接创建订单对象用请求体中的`wxName`和`openid`保存到创建的表单对象中，将`listType`设置为1，设置`id`字段值自增1，并将当前时间保存到`startTime`字段内，并将`listStatus`字段值设置为0
+- 创建普通订单list对象`/createNormalList`：调用此接口直接创建订单对象用请求体中的`wxName`和`openid`保存到创建的表单对象中，将`listType`设置为1，设置`id`字段值自增1，并将当前时间保存到`startTime`字段内，并将`listStatus`字段值设置为0，转发list对象到晓晨服务器
 
   (将该订单中`openid`的person对象`userStatus`设置为1)
 
-- 创建紧急订单list对象`/createEmergencyList`：调用此接口直接创建订单对象用请求体中的`wxName`和`openid`保存到创建的表单对象中，将`listType`设置为0，设置`id`字段值自增1，并将当前时间保存到`startTime`字段内，并将`listStatus`字段值设置为0
+- 创建紧急订单list对象`/createEmergencyList`：调用此接口直接创建订单对象用请求体中的`wxName`和`openid`保存到创建的表单对象中，将`listType`设置为0，设置`id`字段值自增1，并将当前时间保存到`startTime`字段内，并将`listStatus`字段值设置为0，转发list对象到晓晨服务器
 
   (将该订单中`openid`的person对象`userStatus`设置为1)
 
 - 更新list对象信息`/paperOne`：调用此接口发出paperOne问卷对象，后台根据请求体总的订单`id`更新(update)该`id`值的list对象的paperOne字段，**将问卷内的关键信息转存一份到该list相应字段内**
+
+  (将该订单中`openid`的person对象`name`设置为表单中的name)
 
 控制台展现订单以及民警信息：
 - 抓取未处理的订单`/getWantedList`：web端设置心跳抓取`listStatus=0`的list对象数组

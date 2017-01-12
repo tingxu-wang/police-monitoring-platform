@@ -6,12 +6,13 @@ var tools=require('../tools'),
 
 module.exports=function(app){
   app.post('/save',(req,res,next)=>{
-    var person={
+    /*var person={
       type:req.body.type,
       location:req.body.location,
       name:req.body.name,
       openid:req.body.openid
-    }
+    }*/
+    person=renderInfo(req.body)
 
     var newPerson=new Person(person)
 
@@ -23,9 +24,9 @@ module.exports=function(app){
             msg:'该民警已存在'
           })
         }else{
-          newPerson.save((err,person)=>{
-            if(err){
-              console.error(err)
+          newPerson.save((person)=>{
+            if(person){
+              console.log(person)
             }
             res.json({
               success:1,
@@ -42,9 +43,9 @@ module.exports=function(app){
             msg:'该用户已存在'
           })
         }else{
-          newPerson.save((err,person)=>{
-            if(err){
-              console.error(err)
+          newPerson.save((person)=>{
+            if(person){
+              console.log(person)
             }
             res.json({
               success:1,
