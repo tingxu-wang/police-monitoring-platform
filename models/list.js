@@ -62,14 +62,14 @@ function List(list){
     wxName:list.wxName,
     openid:list.openid,
 
-    startTime:list.startTime
+    startTime:list.startTime,
 
-/*    caseInfo:'尚未填写',
+    caseInfo:'尚未填写',
     userName:'尚未填写',
     phoneNum:'尚未填写',
     idCard:'尚未填写',
     //caseType:6,//尚未填写的案件类型值
-    caseType:0,//开发版默认值，之后调回6*/
+    caseType:0,//开发版默认值，之后调回6
 
     //userComment:'尚未填写',//用户评价
     //policeComment:'尚未填写',//民警评价
