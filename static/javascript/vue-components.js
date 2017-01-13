@@ -72,6 +72,29 @@ Vue.component('use-time',{//订单的总用时
   props:['solvedtime','sendtime']
 })
 
+Vue.component('chat-time',{
+  template:`
+    <div class="chat-message-time-container">
+      {{ time }}
+    </div>
+  `,
+  computed:{
+    time (){
+      var mill=Number(this.chattime)*1000
+          date=new Date(mill),
+          year=date.getFullYear(),
+          month=date.getMonth(),
+          day=date.getDate(),
+          second=date.getSeconds(),
+          minutes=date.getMinutes(),
+          hours=date.getHours()
+          console.log(Number(this.chattime))
+      return `${year}年${month}月${day}日${hours}:${minutes}:${second}`
+    }
+  },
+  props:['chattime']
+})
+
 Vue.component('police-use-time',{//民警到达现场的总用时
   template:`
     <span>{{ time }}</span>

@@ -9,9 +9,10 @@
   <div class="container main-container">
     <div class="list-container js-list-container chat-container" v-for="message in list.messages">
       <div class="row">
-        <div class="chat-message-time-container">
+        <!--<div class="chat-message-time-container">
           2017年1月13日21:21
-        </div>
+        </div>-->
+        <chat-time :chattime="message.time"></chat-time>
         <template v-if="message.type==0">
           <div class="chat-text-container">
             {{ message.message }}
@@ -58,8 +59,8 @@
       if(data.success===1){
         if(vm.list.messages.length!==data.list.messages.length){
           playSound()
+          vm.list=data.list
         }
-        vm.list=data.list
       }else{
         console.error(data.msg)
       }
@@ -72,7 +73,8 @@
       list:{messages:[]}
     }
   })
-  getList()
+
+  global_polling(getList)
 </script>
 
 <%- include ./private/chat-image-modal %>

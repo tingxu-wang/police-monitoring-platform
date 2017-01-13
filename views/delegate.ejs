@@ -69,8 +69,8 @@
       if(data.success===1){
         if(vm.lists.length!==data.lists.length){
           playSound()
+          vm.lists=data.lists
         }
-        vm.lists=data.lists
       }
     })
   }
