@@ -3,18 +3,42 @@
 <div id="app">
   <div class="container">
     <div class="chat-userName-container">
-      tingxu的私信
+      {{ list.wxName }}的私信
     </div>
   </div>
   <div class="container main-container">
-    <div class="list-container js-list-container chat-container">
+    <div class="list-container js-list-container chat-container" v-for="message in list.messages">
       <div class="row">
         <div class="chat-message-time-container">
           2017年1月13日21:21
         </div>
-        <div class="chat-text-container">
+        <template v-if="message.type==0">
+          <div class="chat-text-container">
+            {{ message.message }}
+          </div>
+        </template>
+        <template v-if="message.type==1">
+          <div class="chat-image-container js-show-image-modal">
+            <img src="http://115.159.202.104:3000/static/images/chat/{{ message.fileName }}" class="chat-image">
+          </div>
+          <div class="hidden-info-container">
+            <div class="js-image-file-name">{{ message.fileName }}</div>
+          </div>
+        </template>
+        <template v-if="message.type==2">
+          <div>
+            <audio controls src="http://115.159.202.104:3000/static/sound/chat/{{ message.fileName }}">
 
-        </div>
+            </audio>
+          </div>
+        </template>
+        <template v-if="message.type==3">
+          <div class="chat-video-container">
+            <video controls src="http://115.159.202.104:3000/static/video/chat/{{ message.fileName }}" class="chat-video">
+
+            </video>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -32,7 +56,7 @@
   function getList(){
     $.post(online+'getListById',{_id:listId},(data)=>{
       if(data.success===1){
-        if(vm.list.messages.length!==data.lists.length){
+        if(vm.list.messages.length!==data.list.messages.length){
           playSound()
         }
         vm.list=data.list
@@ -45,7 +69,7 @@
   var vm=new Vue({
     el:'#app',
     data:{
-      list:{}
+      list:{messages:[]}
     }
   })
   getList()
