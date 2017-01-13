@@ -25,9 +25,12 @@
                   <span class="list-info-item">身份证：</span><span class="list-info-value js-m-idCard"></span>
                 </div>
               </div>
-              <div class="list-info-row">
-                <div class="list-first-info">
-                  <span class="list-info-item">联系电话：</span><span class="list-info-value js-m-phoneNumber"></span>
+              <div class="list-info-row row">
+                <div class="list-first-info col-xs-12 col-sm-6">
+                  <span class="list-info-item">电话：</span><span class="list-info-value js-m-phoneNumber"></span>
+                </div>
+                <div class="list-second-info col-xs-12 col-sm-6">
+                  <span class="list-info-item">微信昵称：</span><span class="list-info-value js-m-wxName"></span>
                 </div>
               </div>
               <div class="list-case-detail-info js-m-caseInfo">
@@ -77,13 +80,13 @@
     title:'市民位置',
     map,
     position:['1','1'],
-    icon : '/static/images/user.png'
+    icon : '/static/images/user.gif'
   }
   mapPoints[0]=new AMap.Marker(point)
 </script>
 <script type="text/javascript">
   $(function(){
-    var schema=['userName','phoneNumber','idCard','caseType','caseInfo','id','openid']//list绑定到modal时用的字段，定位两者的class名
+    var schema=['userName','phoneNumber','idCard','caseType','caseInfo','id','openid','wxName']//list绑定到modal时用的字段，定位两者的class名
     var bind=new BindingModal()
 
     function insertPolice(requirePolice){//添加指定的空闲民警到弹窗

@@ -118,7 +118,7 @@ list聊天记录实例
 | /paperOne | 问卷一数据对象 | {success,msg} | 检索请求体中的`id`字段对该`id`值的订单对象的paperOne字段进行保存并对问卷中的关键信息进行转存 |
 | /getWantedList | 无 | `listStatus=0`的list对象数组 | 抓取未处理的订单 |
 | /getfreePolice | 无 | `status=0`的person对象数组 | 抓取未出警的民警 |
-| /ignoreList | {_id:订单编号} | {success,msg} | 忽略未处理的订单,提交成功后后台会自动更新`endTime`字段并将该`_id`的订单`listStatus`设置为4 |
+| /ignoreList | {_id:订单编号} | {success,msg} | 忽略未处理的订单,提交成功后后台会自动更新`endTime`字段并将该`_id`的订单`listStatus`设置为4,将该`openid`值的person对象`userStatus`设置为0 |
 | /delegate | {_id,policeName} | {success,msg} | web端委派未处理的订单，提交成功后后台会自动更新`sendTime`字段并将该`policeName`的民警`status`设置为1 |
 | /getHistoryLists | 无 | {success,msg,lists} | 获取已完成的订单(liststatus为2,3,4的) |
 | /getUnfinishLists | 无 | {success,msg,lists} | web端获取正在进行的案件（`listStatus`为5 6的订单） |
@@ -152,6 +152,8 @@ list聊天记录实例
 
 分配订单：
 - 忽略未处理的订单`/ignoreList`：web端将该list的`id`字段发送到后台，后台设置该`id`的list对象`listStatus`为4，将当前时间保存到`endTime`字段内
+
+  (将该订单中`openid`的person对象`userStatus`设置为0)
 
 - 委派未处理的订单`/delegate`：web端将该list的`id`以及`policeName`字段发送到后台，后台设置该`id`的list对象`listStatus`为1，`policeName`设置为获取的民警姓名，`sendTime`字段保存当前时间
 

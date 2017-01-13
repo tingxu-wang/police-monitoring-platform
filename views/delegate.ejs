@@ -13,16 +13,19 @@
           </div>
         </div>
         <div class="list-info-row row">
-          <div class="list-first-info col-xs-12 col-sm-6">
+          <div class="list-first-info col-xs-12 col-sm-7">
             <span class="list-info-item">报警人：</span><span class="list-info-value js-userName">{{ list.userName }}</span>
           </div>
-          <div class="list-second-info col-xs-12 col-sm-6">
+          <div class="list-second-info col-xs-12 col-sm-5">
             <span class="list-info-item">身份证：</span><span class="list-info-value js-idCard">{{ list.idCard }}</span>
           </div>
         </div>
-        <div class="list-info-row">
-          <div class="list-first-info">
-            <span class="list-info-item">联系电话：</span><span class="list-info-value js-phoneNumber">{{ list.phoneNum }}</span>
+        <div class="list-info-row row">
+          <div class="list-first-info col-xs-12 col-sm-7">
+            <span class="list-info-item">电话：</span><span class="list-info-value js-phoneNumber">{{ list.phoneNum }}</span>
+          </div>
+          <div class="list-second-info col-xs-12 col-sm-5">
+            <span class="list-info-item">微信昵称：</span><span class="list-info-value js-wxName">{{ list.wxName }}</span>
           </div>
         </div>
         <div class="list-case-info js-caseInfo">
@@ -39,6 +42,11 @@
           <div class="list-btn list-btn-danger js-show-ignore-modal">
             忽略
           </div>
+        </div>
+        <div class="clearfix" v-if="list.listType===0">
+          <a class="list-btn list-btn-chat" href="/views/chat?id={{list._id}}">
+            查看留言
+          </a>
         </div>
       </div>
     </div>
@@ -59,7 +67,7 @@
   function getWantedList(){
     $.post(online+'getWantedList',(data)=>{
       //console.log(data.success)
-      console.log(vm.lists)
+      //console.log(vm.lists)
       /*if(data.success!==0 && (vm.lists.length!==data.lists.length)){
         playSound()
       }*/

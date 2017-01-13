@@ -10,13 +10,14 @@
     display: inline-block;
     text-align: center;
     line-height: 30px;
-    margin: 15px 0px 0px 200px;
+    /*margin: 15px 0px 0px 200px;*/
+    margin: 15px 0px 0px 0px;
     cursor: pointer;
   }
 
   @media(max-width:1200px){
     .quit{
-      margin-left: 120px;
+      /*margin-left: 120px;*/
     }
   }
 }

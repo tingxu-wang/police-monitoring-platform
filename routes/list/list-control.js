@@ -54,9 +54,7 @@ module.exports=function(app){
   app.post('/ignoreList',(req,res,next)=>{
     var update=List.prototype.update,
         _id=req.body._id
-    var searchObj={
-          _id
-        },
+    var searchObj={_id},
         updateObj={
           listStatus:4,
           endTime:Date.now()
@@ -64,6 +62,33 @@ module.exports=function(app){
     var success='案件忽略成功',
         error='案件失败'
 
+    /* 更改对应订单的服务用户userStatus为0 */
+    var listFindOne=List.prototype.findOne,
+        listSearchObj={_id}
+
+    listFindOne(listSearchObj,(err,list)=>{
+      if(err){
+        console.error(err)
+      }
+      if(list){
+        var personUpdate=Person.prototype.update
+        var openid=list.openid,
+            personSearchObj={openid},
+            personUpdateObj={userStatus:0}
+        personUpdate(personSearchObj,personUpdateObj,(err,result)=>{
+          if(err){
+            console.error(err)
+          }
+          if(!result.nModified){
+            console.log('忽略订单时更改userStatus成功')
+          }else{
+            console.error('忽略订单时更改userStatus失败')
+          }
+        })
+      }
+    })
+
+    /* 忽略订单 */
     update(searchObj,updateObj,(err,result)=>{
       if(err){
         console.error(err)

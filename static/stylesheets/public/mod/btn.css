@@ -17,6 +17,16 @@
   margin-top: 20px;
 }
 
+.list-btn-chat{
+  background: #352a9e;
+  margin-top: 20px;
+}
+
+.list-btn-chat:hover{
+  text-decoration: none;
+  color:#fff;
+}
+
 .list-btn-short{
   width:100px;
   height: 30px;

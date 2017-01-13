@@ -24,4 +24,9 @@ module.exports=function(app){
   app.get('/views/detail',(req,res,next)=>{
     res.render('detail',{title:'案件详情',position:'detail',policeName:req.query.policeName})
   })
+
+  /* 私信页面 */
+  app.get('/views/chat',(req,res,next)=>{
+    res.render('chat',{title:'留言查看',position:'chat',id:req.query.id})
+  })
 }

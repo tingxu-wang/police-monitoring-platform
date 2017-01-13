@@ -16,6 +16,9 @@ Vue.component('case-type',{
     <template v-if="type===5">
       其他求助
     </template>
+    <template v-if="type===6">
+      尚未选择
+    </template>
   </div>
   `,
   props:['type']
