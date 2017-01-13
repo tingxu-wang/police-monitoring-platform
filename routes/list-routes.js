@@ -15,4 +15,7 @@ module.exports=function(app){
 
   /* web端订单相关操作接口 */
   require('./list/list-control')(app)
+
+  /* web端私信功能相关接口 */
+  require('./list/chat')(app)
 }

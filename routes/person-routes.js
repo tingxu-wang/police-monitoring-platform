@@ -12,7 +12,7 @@ module.exports=function(app){
       name:req.body.name,
       openid:req.body.openid
     }*/
-    person=renderInfo(req.body)
+    var person=renderInfo(req.body)
 
     var newPerson=new Person(person)
 

@@ -29,6 +29,9 @@ Common.prototype={
   update (searchObj,updateObj,callback){
     this.model.update(searchObj,{$set:updateObj},{upsert:false},callback)
   },
+  updatePush (searchObj,updateObj,callback){
+    this.model.update(searchObj,{$push:updateObj},{upsert:false},callback)
+  },
   findOneAndUpdate (searchObj,updateObj,callback){
     this.model.findOneAndUpdate(searchObj,{$set:updateObj},{upsert:false},function(err,doc){
       if(err){

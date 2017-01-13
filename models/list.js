@@ -41,7 +41,10 @@ var schema={
   endTime:Number,//订单结束时间（用户评价后或者指挥端忽略后更新此字段）
 
   paperOne:Object,//问卷1
-  paperTwo:Object//问卷2
+  paperTwo:Object,//问卷2
+
+  /* 聊天信息 */
+  messages:Array
 }
 
 var listSchema=new mongoose.Schema(schema,{
@@ -71,7 +74,9 @@ function List(list){
     caseType:6,//尚未填写的案件类型值
 
     userComment:'尚未填写',//用户评价
-    policeComment:'尚未填写'//民警评价
+    policeComment:'尚未填写',//民警评价
+
+    messages:[]//评论数组集合
 
 //转存转移到之后的表单提交的update中
 /*    caseInfo:list.paperOne.q5,
@@ -106,5 +111,6 @@ List.prototype={
   find:common.find.bind(common),
   upsertUpdate:common.upsertUpdate.bind(common),
   update:common.update.bind(common),
-  findOneAndUpdate:common.findOneAndUpdate.bind(common)
+  findOneAndUpdate:common.findOneAndUpdate.bind(common),
+  updatePush:common.updatePush.bind(common)
 }
