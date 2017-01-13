@@ -68,11 +68,10 @@ function List(list){
     userName:'尚未填写',
     phoneNum:'尚未填写',
     idCard:'尚未填写',
-    //caseType:6,//尚未填写的案件类型值
-    caseType:0,//开发版默认值，之后调回6
+    caseType:6//尚未填写的案件类型值
 
-    //userComment:'尚未填写',//用户评价
-    //policeComment:'尚未填写',//民警评价
+    userComment:'尚未填写',//用户评价
+    policeComment:'尚未填写',//民警评价
 
 //转存转移到之后的表单提交的update中
 /*    caseInfo:list.paperOne.q5,
