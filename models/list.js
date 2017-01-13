@@ -62,7 +62,7 @@ function List(list){
     wxName:list.wxName,
     openid:list.openid,
 
-    startTime:list.startTime,
+    startTime:list.startTime
 
 /*    caseInfo:'尚未填写',
     userName:'尚未填写',
