@@ -115,6 +115,7 @@ list聊天记录实例
 | /createNormalList | {wxName,openid} | {success,msg} | 根据用户微信昵称以及openid值创建普通订单 |
 | /createEmergencyList | {wxName,openid} | {success,msg} | 根据用户微信昵称以及openid值创建紧急订单 |
 | /saveMessage | {message} | {success,msg} | 根据`openid`后台联合`listStatus`=0或1或5或6保存(push)到匹配的list集合`messages`字段中 |
+| /getListById | {_id} | {success,msg} | 根据订单的id值获取订单对象 |
 | /paperOne | 问卷一数据对象 | {success,msg} | 检索请求体中的`id`字段对该`id`值的订单对象的paperOne字段进行保存并对问卷中的关键信息进行转存 |
 | /getWantedList | 无 | `listStatus=0`的list对象数组 | 抓取未处理的订单 |
 | /getfreePolice | 无 | `status=0`的person对象数组 | 抓取未出警的民警 |

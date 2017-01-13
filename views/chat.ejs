@@ -1,0 +1,56 @@
+<%- include ./public/header %>
+
+<div id="app">
+  <div class="container">
+    <div class="chat-userName-container">
+      tingxu的私信
+    </div>
+  </div>
+  <div class="container main-container">
+    <div class="list-container js-list-container chat-container">
+      <div class="row">
+        <div class="chat-message-time-container">
+          2017年1月13日21:21
+        </div>
+        <div class="chat-text-container">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- jquery声音插件 -->
+<script src="/static/javascript/lib/jquery-play-sound.js"></script>
+<script type="text/javascript">
+  var listId=<%=id %>
+
+  function playSound(){//播放声音函数
+    $.playSound('/static/sound/message')
+  }
+
+  function getList(){
+    $.post(online+'getListById',{_id:listId},(data)=>{
+      if(data.success===1){
+        if(vm.list.messages.length!==data.lists.length){
+          playSound()
+        }
+        vm.list=data.list
+      }else{
+        console.error(data.msg)
+      }
+    })
+  }
+
+  var vm=new Vue({
+    el:'#app',
+    data:{
+      list:{}
+    }
+  })
+  getList()
+</script>
+
+<%- include ./private/chat-image-modal %>
+<%- include ./public/components/rights %>
+<%- include ./public/footer %>

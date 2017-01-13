@@ -42,4 +42,28 @@ module.exports=function(app){
       }
     })
   })
+
+  //通过订单id获取订单对象
+  app.post('/getListById',(req,res,next)=>{
+    var _id=req.body._id
+    var listFindOne=List.prototype.findOne,
+        listSearchObj={_id}
+
+    listFindOne(listSearchObj,(err,list)=>{
+      if(err){
+        console.error(err)
+      }
+      if(list){
+        res.json({
+          success:1,
+          list
+        })
+      }else{
+        res.json({
+          success:0,
+          msg:'没有满足此id值的订单'
+        })
+      }
+    })
+  })
 }
