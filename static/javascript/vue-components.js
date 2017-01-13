@@ -62,9 +62,9 @@ Vue.component('use-time',{//订单的总用时
     time (){
       var useTime=this.solvedtime-this.sendtime,
           date=new Date(useTime),
-          second=date.getSeconds()+1,
-          minutes=date.getMinutes()+1,
-          hours=date.getHours()+1
+          second=date.getSeconds(),
+          minutes=date.getMinutes(),
+          hours=date.getHours()
 
       return `${hours-8}:${minutes}:${second}`
     }
@@ -85,9 +85,9 @@ Vue.component('chat-time',{
           year=date.getFullYear(),
           month=date.getMonth()+1,
           day=date.getDate(),
-          second=date.getSeconds()+1,
-          minutes=date.getMinutes()+1,
-          hours=date.getHours()+1
+          second=date.getSeconds(),
+          minutes=date.getMinutes(),
+          hours=date.getHours()
 
       return `${year}年${month}月${day}日${hours}:${minutes}:${second}`
     }
@@ -103,9 +103,9 @@ Vue.component('police-use-time',{//民警到达现场的总用时
     time (){
       var useTime=this.arrivetime-this.sendtime,
           date=new Date(useTime),
-          second=date.getSeconds()+1,
-          minutes=date.getMinutes()+1,
-          hours=date.getHours()+1
+          second=date.getSeconds(),
+          minutes=date.getMinutes(),
+          hours=date.getHours()
 
       return `${hours-8}:${minutes}:${second}`
     }
@@ -123,9 +123,9 @@ Vue.component('live-use-time',{//即时运算当前执法花费的时间
           watch=this.increasenumber,//动态更新时间的钩子
           //watch,
           date=new Date(useTime),
-          second=date.getSeconds()+1,
-          minutes=date.getMinutes()+1,
-          hours=date.getHours()+1
+          second=date.getSeconds(),
+          minutes=date.getMinutes(),
+          hours=date.getHours()
 
     /*  if(this.liststatus===5){//只有订单状态为在路上才更新时间
         watch=this.increasenumber
