@@ -74,7 +74,24 @@ var schema={
   endTime:Number,//订单结束时间（用户评价后或者指挥端忽略后更新此字段）
 
   paperOne:Object,//问卷1
-  paperTwo:Object//问卷2
+  paperTwo:Object,//问卷2
+
+  /* 聊天信息 */
+  messages:Array
+}
+
+```
+
+list聊天记录实例
+```javascript
+
+{
+  type:0,//信息类型 0为文本 1为图片 2为语音 3为视频
+  openid:'od04Tv0cqVPPLDnDYP6Wx3vhH0Mc',//用户openid
+  fileName:'voice.mp3',//非文本类型时的文件名
+  message:'有人打我',//文本类型时的文本内容
+  time:1484288636144,//发消息时的UTC时间
+  msgid:6374973069743538395//本条信息的微信messageid
 }
 
 ```
@@ -97,6 +114,7 @@ var schema={
 | :------------- | :------------- | :------------- | :------------- |
 | /createNormalList | {wxName,openid} | {success,msg} | 根据用户微信昵称以及openid值创建普通订单 |
 | /createEmergencyList | {wxName,openid} | {success,msg} | 根据用户微信昵称以及openid值创建紧急订单 |
+| /saveMessage | {openid,message} | {success,msg} | 根据`openid`后台联合`listStatus`=0或1或5或6保存(push)到匹配的list集合`messages`字段中 |
 | /paperOne | 问卷一数据对象 | {success,msg} | 检索请求体中的`id`字段对该`id`值的订单对象的paperOne字段进行保存并对问卷中的关键信息进行转存 |
 | /getWantedList | 无 | `listStatus=0`的list对象数组 | 抓取未处理的订单 |
 | /getfreePolice | 无 | `status=0`的person对象数组 | 抓取未出警的民警 |
