@@ -20,6 +20,8 @@
 
 /* 案件详情页样式 */
 @import url("../private/mod/detail.css");
+/* 私聊页样式 */
+@import url("../private/mod/chat.css");
 
 body{
   /*background-color: #efefef;*/

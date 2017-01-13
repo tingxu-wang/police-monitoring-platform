@@ -36,6 +36,8 @@ BindingModal.prototype={
   getPosition ($this){//得到当前的list位置信息并赋值给全局变量listIndex
     var $listContainer=$this.parents('.js-list-container')
     this.listIndex=$listContainer.index()
+    
+    console.log($listContainer.index())
   },
   removeListRow (){//在忽略案件之后立即调用此方法在dom中清除忽略的订单
     /* 会导致vue渲染dom出现问题，不要混合vue的dom操作和自己的操作 */

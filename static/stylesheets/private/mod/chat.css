@@ -1,0 +1,34 @@
+.chat-container{
+  min-height:100px;
+}
+
+.chat-userName-container{
+  text-align: center;
+  font-weight: bold;
+}
+
+.chat-message-type-container{
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.chat-message-type-container:after{
+  content: ":"
+}
+
+.chat-text-container{
+  max-height: 150px;
+  overflow: auto;
+}
+
+.chat-image,.chat-video{
+  max-height: 240px;
+}
+
+.chat-image-container{
+  cursor: pointer;
+}
+
+.chat-modal-image{
+  max-width: 100%;
+}

@@ -1,0 +1,44 @@
+<div class="js-modal-container modal-container">
+  <div class="modal fade" id="js-image-modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">图片详情</h4>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+        </div>
+        <div class="hidden-info-container">
+          <div class="js-m-image-file-name"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    var schema=['image-file-name']
+    var bind=new BindingModal()
+    var imagePath='http://115.159.202.104:3000/static/images/chat/'
+    $('.main-container').on('click','.js-show-image-modal',function(){
+      bind.getPosition($(this))
+
+      $('#js-image-modal').modal('show')
+    })
+
+    $('#js-image-modal').on('show.bs.modal',function(){
+      bind.bindingInfo(schema)
+      var imageFileName=$('.js-m-image-file-name').html().trim()//得到图片文件名
+      $('.modal-body').append($('<img>').addClass('chat-modal-image').prop('src',imagePath+imageFileName))
+    })
+
+    $('#js-image-modal').on('hidden.bs.modal',function(){
+      $(this).find('img').remove()
+    })
+  })
+</script>
