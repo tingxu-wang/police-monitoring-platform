@@ -118,7 +118,8 @@ var tools={
           listStatus:list.listStatus,
           id:list._id,
           caseInfo:list.caseInfo,
-          listType:list.listType
+          listType:list.listType,
+          policeName:list.policeName
         })
       }
     })
@@ -137,7 +138,8 @@ var tools={
           listStatus:list.listStatus,
           id:list._id,
           caseInfo:list.caseInfo,
-          listType:list.listType
+          listType:list.listType,
+          policeName:list.policeName
         })
       }
     })
