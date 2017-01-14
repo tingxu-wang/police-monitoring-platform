@@ -70,8 +70,10 @@
         if(vm.lists.length!==data.lists.length){
           playSound()
         }
+        vm.lists=data.lists
+      }else{
+        vm.lists=[]
       }
-      vm.lists=data.lists
     })
   }
 
