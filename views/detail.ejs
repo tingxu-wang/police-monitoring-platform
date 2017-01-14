@@ -233,11 +233,11 @@ function live(){
           clearInterval(timeCount)//已到达之后停止计时
         }
 
-        /* 如果订单是紧急订单，更新订单信息 */
-        if(data.list.listType===0){
+        /* 更新订单信息 */
+        //if(data.list.listType===0){
 
           updateListInfo(data.list)
-        }
+        //}
       }else{//订单已完成
         vm.lists[0].listStatus=2
       }
