@@ -80,8 +80,8 @@ Vue.component('chat-time',{
   `,
   computed:{
     time (){
-      var mill=Number(this.chattime)*1000
-          date=new Date(mill),
+      var milliSeconds=Number(this.chattime),
+          date=new Date(milliSeconds),
           year=date.getFullYear(),
           month=date.getMonth()+1,
           day=date.getDate(),

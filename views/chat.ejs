@@ -20,7 +20,8 @@
         </template>
         <template v-if="message.type==1">
           <div class="chat-image-container js-show-image-modal">
-            <img src="http://115.159.202.104:3000/static/images/chat/{{ message.fileName }}" class="chat-image">
+            <!-- <img src="http://115.159.202.104:3000/static/images/chat/{{ message.fileName }}" class="chat-image"> -->
+            <img :src="imagePath+message.fileName" class="chat-image">
           </div>
           <div class="hidden-info-container">
             <div class="js-image-file-name">{{ message.fileName }}</div>
@@ -28,14 +29,14 @@
         </template>
         <template v-if="message.type==2">
           <div>
-            <audio controls src="http://115.159.202.104:3000/static/sound/chat/{{ message.fileName }}">
+            <audio controls :src="audioPath+message.fileName">
 
             </audio>
           </div>
         </template>
         <template v-if="message.type==3">
           <div class="chat-video-container">
-            <video controls src="http://115.159.202.104:3000/static/video/chat/{{ message.fileName }}" class="chat-video">
+            <video controls :src="videoPath+message.fileName" class="chat-video">
 
             </video>
           </div>
@@ -57,6 +58,7 @@
   function getList(){
     $.post(online+'getListById',{_id:listId},(data)=>{
       if(data.success===1){
+        vm.list.wxName=data.list.wxName
         if(vm.list.messages.length!==data.list.messages.length){
           playSound()
           vm.list=data.list
@@ -70,7 +72,10 @@
   var vm=new Vue({
     el:'#app',
     data:{
-      list:{messages:[]}
+      list:{messages:[],wxName:''},
+      imagePath:'http://115.159.202.104:3000/static/images/chat/',
+      audioPath:'http://115.159.202.104:3000/static/sound/chat/',
+      videoPath:'http://115.159.202.104:3000/static/video/chat/'
     }
   })
 
