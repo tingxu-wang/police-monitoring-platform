@@ -9,6 +9,11 @@
 @import url("../public/mod/pc.css");
 
 /*
+ *全站通用样式
+*/
+@import url("../public/mod/global.css");
+
+/*
  *通用自定义样式
 */
 /* 按钮样式 */
@@ -35,9 +40,14 @@ body{
   padding:0px 30px 20px;
 }
 
-.copy-right{
-  color:#fff;
-  margin-top: 20px;
-  height:60px;
+.g-header-container{
   text-align: center;
+  font-weight: bold;
+  padding:20px 20px;
+  background: rgba(255,255,255,0.8);
+  margin-top:20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  margin-left: 15px;
+  margin-right: 15px;
 }

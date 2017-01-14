@@ -1,8 +1,60 @@
-<%- include ./public/header %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/static/stylesheets/private/login.css">
+  <script src="//cdn.bootcss.com/vue/1.0.28/vue.js"></script>
+  <title><%= title %></title>
+</head>
+<body>
 
-<div class="container main-container">
-  <a href="/views/delegate">登录</a>
+<div class="main-container" id="app">
+  <!-- <a href="/views/delegate">登录</a> -->
+  <div class="login-header-container">
+    <div class="login-header"></div>
+  </div>
+  <div class="login-body-container">
+    <div class="login-window">
+      <input type="text" class="login-userName" v-model="userName">
+      <input type="password" class="login-password" v-model="password">
+      <div class="login-btn" @click="toDelegate"></div>
+      <div class="login-warning-text">{{ warningText }}</div>
+    </div>
+    <div class="login-slogan"></div>
+  </div>
 </div>
+
+<script type="text/javascript">
+  var vm=new Vue({
+    el:'#app',
+    data:{
+      warningText:'',
+      userName:'',
+      password:''
+    },
+    methods:{
+      toDelegate (){
+        if(this.isValidate()){
+          window.location.href='/views/delegate'
+        }
+      },
+      isValidate (){
+        if(this.userName===''){
+          this.warningText='请填写用户名'
+          return false
+        }
+        if(this.password===''){
+          this.warningText='请填写密码'
+          return false
+        }
+        return true
+      }
+    }
+  })
+</script>
 
 <%- include ./public/components/rights %>
 <%- include ./public/footer %>

@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="clearfix" v-if="list.listType===0">
-          <a class="list-btn list-btn-chat" :href="chatPath+list._id">
+          <a class="list-btn list-btn-chat" :href="chatPath+list._id" target="_blank">
             查看留言
           </a>
         </div>
@@ -69,8 +69,8 @@
       if(data.success===1){
         if(vm.lists.length!==data.lists.length){
           playSound()
-          vm.lists=data.lists
         }
+        vm.lists=data.lists
       }
     })
   }

@@ -1,0 +1,83 @@
+/*
+ *全站通用样式
+*/
+@import url("../public/mod/global.css");
+
+body{
+  background:url('/static/images/login_bg.jpg') fixed;
+  background-size: cover;
+  margin:0px;
+}
+
+.main-container{
+  min-height: 680px;
+}
+
+.login-header-container{
+  margin-top: 50px;
+}
+
+.login-header{
+  width:488px;
+  height: 150px;
+  margin-left: 70px;
+  background: url('/static/images/login_logo.png');
+}
+
+.login-body-container{
+  margin-top: 60px;
+}
+
+.login-window{
+  width:566px;
+  height:340px;
+  background: url('/static/images/login_win.png');
+  float: left;
+  position: relative;
+}
+
+.login-window input{
+  position: absolute;
+  width:166px;
+  height: 18px;
+  left:166px;
+  font-size: 14px;
+  background: rgba(255,255,255,0);
+  border:0px;
+  outline: 0px;
+  color:#fff;
+}
+
+.login-userName{
+  top:139px;
+}
+
+.login-password{
+  top:176px;
+}
+
+.login-slogan{
+  width:327px;
+  height:196px;
+  background: url('/static/images/login_slogan.png');
+  float: left;
+  margin-top: 80px;
+  margin-left: 50px;
+}
+
+.login-btn{
+  position: absolute;
+  width:64px;
+  height:67px;
+  cursor:pointer;
+  top:134px;
+  left:338px;
+}
+
+.login-warning-text{
+  color:red;
+  width:200px;
+  position: absolute;
+  top:208px;
+  left:160px;
+}
