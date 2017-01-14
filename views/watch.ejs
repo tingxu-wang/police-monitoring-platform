@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="clearfix">
-          <div class="list-btn-short list-btn-short-default js-href" data-link="/views/detail?policeName=">
+          <div class="list-btn-short list-btn-short-default js-href" data-link="/views/detail?policeName={{ list.policeName }}&id={{ list._id }}">
             查看详情
           </div>
           <div class="hidden-info-container">
@@ -107,7 +107,8 @@
         policeName=$('.js-link-police-name').eq(index).html(),
         link=$(this).data('link')
 
-    window.location.href=link+policeName
+    //window.location.href=link+policeName
+    window.location.href=link
   })
 </script>
 

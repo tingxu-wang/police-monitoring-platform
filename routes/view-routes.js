@@ -22,7 +22,7 @@ module.exports=function(app){
   })
 
   app.get('/views/detail',(req,res,next)=>{
-    res.render('detail',{title:'案件详情',position:'detail',policeName:req.query.policeName})
+    res.render('detail',{title:'案件详情',position:'detail',policeName:req.query.policeName,id:req.query.id})
   })
 
   /* 私信页面 */

@@ -44,15 +44,19 @@
       </div>
     </div>
   </div>
+
+  <a class="chat-form-link-container" :href="formPath" target="_blank">
+    完善<br>信息
+  </a>
+
+  <audio src="/static/sound/message.mp3" id="sound"></audio>
 </div>
 
-<!-- jquery声音插件 -->
-<script src="/static/javascript/lib/jquery-play-sound.js"></script>
 <script type="text/javascript">
   var listId=<%=id %>
 
   function playSound(){//播放声音函数
-    $.playSound('/static/sound/message')
+    $('#sound').get(0).play()
   }
 
   function getList(){
@@ -75,7 +79,8 @@
       list:{messages:[],wxName:''},
       imagePath:'http://115.159.202.104:3000/static/images/chat/',
       audioPath:'http://115.159.202.104:3000/static/sound/chat/',
-      videoPath:'http://115.159.202.104:3000/static/video/chat/'
+      videoPath:'http://115.159.202.104:3000/static/video/chat/',
+      formPath:'http://www.sojump.hk/jq/11665442.aspx?sojumpparm='+listId
     }
   })
 

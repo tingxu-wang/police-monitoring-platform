@@ -55,13 +55,13 @@
       <div class="js-openid">{{ list.openid }}</div>
     </div>
   </div>
+
+  <audio src="/static/sound/alert.mp3" id="sound"></audio>
 </div>
 
-<!-- jquery声音插件 -->
-<script src="/static/javascript/lib/jquery-play-sound.js"></script>
 <script type="text/javascript">
   function playSound(){//播放声音函数
-    $.playSound('/static/sound/alert')
+    $('#sound').get(0).play()
   }
 
   function getWantedList(){

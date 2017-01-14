@@ -35,3 +35,25 @@
 .chat-modal-image{
   max-width: 100%;
 }
+
+.chat-form-link-container{
+  width:100px;
+  height:100px;
+  border-radius: 5px;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  text-align: center;
+  font-size: 16px;
+  color:#fff;
+  padding-top: 25px;
+  background: linear-gradient(0deg,#224c84,#265491);
+}
+
+.chat-form-link-container:hover,
+.chat-form-link-container:visited,
+.chat-form-link-container:active,
+.chat-form-link-container:link{
+  color:#fff;
+  text-decoration: none;
+}

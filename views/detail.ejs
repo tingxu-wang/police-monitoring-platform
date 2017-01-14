@@ -60,6 +60,10 @@
         <div id="player"></div>
 
     </div>
+
+    <a class="chat-form-link-container" :href="formPath" target="_blank" v-if="list.listType==0">
+      完善<br>信息
+    </a>
   </div>
   <div class="row">
     <div class="detail-map-container" id="container">
@@ -204,6 +208,22 @@ function live(){
     positionCtrl(policeName,userOpenid)
   }
 
+  /* 更新订单信息 */
+  function updateListInfo(info){
+    var list=vm.lists[0],
+        infoKeys=Object.getOwnPropertyNames(info)
+
+    for(var i=0;i<infoKeys.length;i++){
+      var property=infoKeys[i]
+      list[property]=info[property]
+    }
+    /*list.caseInfo=info.caseInfo
+    list.userName=info.userName
+    list.phoneNum=info.phoneNum
+    list.idCard=info.idCard
+    list.*/
+  }
+
   function watchListStatus(policeName){
     $.post(online+'getMission',{policeName},function(data){
       if(data.success===1){//订单还在进行中
@@ -212,13 +232,21 @@ function live(){
           vm.lists[0].arriveTime=data.list.arriveTime
           clearInterval(timeCount)//已到达之后停止计时
         }
-        //vm.lists=[data.list]
-        //live()//初始化表单信息之后如果
+
+        /* 如果订单是紧急订单，更新订单信息 */
+        if(data.list.listType===0){
+
+          updateListInfo(data.list)
+        }
       }else{//订单已完成
         vm.lists[0].listStatus=2
-        //clearInterval(timeCount)
       }
     })
+  }
+
+  /* 更新填写表单超链接路径 */
+  function updateFormPath(listId){
+    vm.formPath+=listId
   }
 
   var vm=new Vue({
@@ -226,18 +254,17 @@ function live(){
     data:{
       lists:[],
       realNames:global_realNames,
-      increaseNumber:0//触发computed内方法的钩子
+      increaseNumber:0,//触发computed内方法的钩子
+      formPath:'http://www.sojump.hk/jq/11665442.aspx?sojumpparm='
     },
     methods:{
       openLive (){
         live().play()
-        /*$('#player').next().css({
-          height:'390px',
-          right:'15px'
-        })*/
       }
     }
   })
+
+  updateFormPath(<%= id %>)
 
   //countTime()
   var timeCount=setInterval(function(){
@@ -247,6 +274,7 @@ function live(){
   setInterval(function(){
     watchListStatus('<%= policeName %>')
   },5000)
+
 </script>
 
 <%- include ./public/components/rights %>
