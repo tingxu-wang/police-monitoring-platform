@@ -10,10 +10,18 @@
         <div class="list-number">
           {{ list._id }}
         </div>
+        <div class="list-chat-container" v-if="list.listType==0">
+          <chat-btn :listid="list._id"></chat-btn>
+        </div>
       </div>
       <div class="list-info-row">
         <div class="list-first-info">
           <span class="list-info-item">报警人：</span><span class="list-info-value">{{ list.userName }}</span>
+        </div>
+      </div>
+      <div class="list-info-row">
+        <div class="list-first-info">
+          <span class="list-info-item">报警人微信昵称：</span><span class="list-info-value">{{ list.wxName }}</span>
         </div>
       </div>
       <div class="list-info-row">
@@ -217,11 +225,6 @@ function live(){
       var property=infoKeys[i]
       list[property]=info[property]
     }
-    /*list.caseInfo=info.caseInfo
-    list.userName=info.userName
-    list.phoneNum=info.phoneNum
-    list.idCard=info.idCard
-    list.*/
   }
 
   function watchListStatus(policeName){

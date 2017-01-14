@@ -160,3 +160,17 @@ Vue.component('police-name',{
   },
   props:['realnames','policename']//名字替换依据数组，list中的policeName
 })
+
+Vue.component('chat-btn',{
+  template:`
+    <a :href="chatPath+listid" target="_blank">
+      <div class="chat-btn"></div>
+    </a>
+  `,
+  data (){
+    return {
+      chatPath:'/views/chat?id='
+    }
+  },
+  props:['listid']
+})

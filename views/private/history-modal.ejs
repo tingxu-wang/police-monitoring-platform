@@ -71,10 +71,10 @@
                 <label>群众评论</label>
                 <textarea placeholder="无反馈意见" class="form-control js-m-user-comment" disabled=""></textarea>
               </div>
-              <div class="case-info-container">
+              <!--<div class="case-info-container">
                 <label>民警处理结果及意见</label>
                 <textarea placeholder="无反馈意见" class="form-control js-m-police-comment" disabled=""></textarea>
-              </div>
+              </div>-->
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@
 
 <script type="text/javascript">
   $(function(){
-    var schema=['policeName','policeId','useTime','total-count','police-attitude','case-result','police-speed','id','user-comment','police-comment']
+    var schema=['policeName','policeId','useTime','total-count','police-attitude','case-result','police-speed','id','user-comment'/*,'police-comment'*/]
 
     var bind=new BindingModal()
     $('.main-container').on('click','.js-show-modal',function(){

@@ -11,6 +11,9 @@
           <div class="list-number js-id">
             {{ list._id }}
           </div>
+          <div class="list-chat-container" v-if="list.listType==0">
+            <chat-btn :listid="list._id"></chat-btn>
+          </div>
         </div>
         <div class="list-info-row row">
           <div class="list-first-info col-xs-12 col-sm-6">
@@ -25,8 +28,17 @@
             <span class="list-info-item">联系电话：</span><span class="list-info-value js-phoneNumber">{{ list.phoneNum }}</span>
           </div>
         </div>
-        <div class="list-case-info js-caseInfo">
-          {{ list.caseInfo }}
+        <div class="form-group list-info-container">
+          <label>案件描述：</label>
+          <div class="list-case-info">
+              {{ list.caseInfo }}
+          </div>
+        </div>
+        <div class="form-group list-info-container">
+          <label>民警处理结果及意见：</label>
+          <div class="list-case-info">
+            {{ list.policeComment }}
+          </div>
         </div>
       </div>
       <div class="col-sm-3 col-xs-4 list-police-info-container">
@@ -78,7 +90,6 @@
         <div class="js-police-attitude">{{ list.policeAttitude }}</div>
         <div class="js-case-result">{{ list.caseResult }}</div>
         <div class="js-user-comment">{{ list.userComment }}</div>
-        <div class="js-police-comment">{{ list.policeComment }}</div>
       </div>
     </div>
 
@@ -90,8 +101,10 @@
 <script type="text/javascript">
   function getHistoryLists(){
     $.post(online+'getHistoryLists',(data)=>{
-      if(data.success===1){        
-        vm.lists=data.lists.reverse()
+      if(data.success===1){
+        //if(vm.lists.length!==data.lists.length){
+          vm.lists=data.lists.reverse()
+        //}
       }
     })
   }

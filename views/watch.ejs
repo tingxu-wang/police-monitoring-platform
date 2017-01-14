@@ -11,6 +11,9 @@
           <div class="list-number">
             {{ list._id }}
           </div>
+          <div class="list-chat-container" v-if="list.listType==0">
+            <chat-btn :listid="list._id"></chat-btn>
+          </div>
         </div>
         <div class="list-info-row row">
           <div class="list-first-info col-xs-12 col-sm-6">

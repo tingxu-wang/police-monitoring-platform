@@ -29,7 +29,14 @@ BindingModal.prototype={
   bindingInfo (schema){
     for(var i=0;i<schema.length;i++){
       //var listValue=$('.js-'+schema[i]).eq(this.listIndex).html()
-      var listValue=$('.js-list-container').eq(this.listIndex).find('.js-'+schema[i]).html()
+      var text=$('.js-list-container').eq(this.listIndex).find('.js-'+schema[i]).html()
+      var listValue=''
+      if(text){
+        listValue=text.trim()
+      }else{
+        listValue=text
+      }
+
       $('.js-m-'+schema[i]).html(listValue)
     }
   },

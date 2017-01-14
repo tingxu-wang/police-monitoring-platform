@@ -47,7 +47,7 @@
 }
 
 .list-case-info{
-  height:40px;
+  max-height:60px;
   margin-top: 10px;
   overflow: auto;
 }
@@ -148,4 +148,14 @@
   .star-main-container{
     float: left;
   }
+}
+
+.list-chat-container{
+  float:left;
+  margin-left: 25px;
+  margin-top: -2.5px;
+}
+
+.list-info-container{
+  margin-top: 15px;
 }

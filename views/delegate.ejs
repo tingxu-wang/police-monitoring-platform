@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="clearfix" v-if="list.listType===0">
-          <a class="list-btn list-btn-chat" href="/views/chat?id={{list._id}}">
+          <a class="list-btn list-btn-chat" :href="chatPath+list._id">
             查看留言
           </a>
         </div>
@@ -80,7 +80,8 @@
     el:'#app',
     data:{
       //lists:[{ "_id" : 0, "listStatus" : 1, "caseInfo" : "这是描述", "userName" : "群众甲", " openid" : "od04Tv4xiR6kozeIHCkZMbI9bcYg", "phoneNum" : "46645848", "idCard" : "476848948", "caseType" : 4, "startTime" : 1483414592508}]
-      lists:[]
+      lists:[],
+      chatPath:'/views/chat?id='
     }
   })
 
