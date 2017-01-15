@@ -46,3 +46,15 @@
   border-radius: 5px;
   padding-bottom: 10px;
 }
+
+.detail-map-main-container{
+  position: relative;
+}
+
+.detail-map-example{
+  width:200px;
+  height:120px;
+  background: url('/static/images/map_example.png');
+  position: absolute;
+  top:287px;
+}
