@@ -112,7 +112,7 @@ list聊天记录实例
 ## 订单数据交互api
 | url | 发送值 | 返回值 | 说明 |
 | :------------- | :------------- | :------------- | :------------- |
-| /createNormalList | {wxName,openid} | {success,msg} | 根据用户微信昵称以及openid值创建普通订单 |
+| /createNormalList | {wxName,listType,openid} | {success,msg} | 根据用户微信昵称，listType以及openid值创建普通订单 |
 | /createEmergencyList | {wxName,openid} | {success,msg} | 根据用户微信昵称以及openid值创建紧急订单 |
 | /saveMessage | {message} | {success,msg} | 根据`openid`后台联合`listStatus`=0或1或5或6保存(push)到匹配的list集合`messages`字段中 |
 | /getListById | {_id} | {success,msg} | 根据订单的id值获取订单对象 |

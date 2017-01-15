@@ -48,11 +48,13 @@ module.exports=function(app){
     var filter=req.body,
         wxName=filter.wxName,
         openid=filter.openid,
+        caseType=filter.caseType,
         startTime=Date.now()
     var schema={
           wxName,
           openid,
           startTime,
+          caseType,
           listStatus:0,
           listType:1//普通订单类型
         }
