@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="container main-container">
-    <div class="list-container js-list-container" v-for="list in lists">
+    <div class="list-container js-list-container" v-for="list in lists" :class="{'list-type-normal':list.listType==1,'list-type-emergency':list.listType==0}">
       <div class="row">
         <div class="col-sm-9 col-xs-8">
           <div class="list-info-row">
@@ -34,7 +34,7 @@
             <div class="list-number js-id">
               {{ list._id }}
             </div>
-            <div class="list-chat-container" v-if="list.listType==0">
+            <div class="list-chat-container">
               <chat-btn :listid="list._id"></chat-btn>
             </div>
           </div>

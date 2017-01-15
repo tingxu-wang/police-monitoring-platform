@@ -9,7 +9,7 @@
 
 .live-container{
   height:390px;
-  background: #ccc;
+  background: rgba(0,0,0,0.8);
   margin-top: 15px;
   padding-right: 0px;
   padding-left: 0px;
@@ -32,9 +32,17 @@
 .live-tip-container{
   /*width:595px;
   height:390px;*/
+  color:#fff;
   width:100%;
   height:100%;
   position: absolute;
   text-align: center;
   font-size: 30px;
+  margin-top: 156px;
+}
+
+.detail-info-container{
+  background: rgba(255,255,255,0.8);
+  border-radius: 5px;
+  padding-bottom: 10px;
 }

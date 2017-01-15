@@ -181,7 +181,8 @@ list聊天记录实例
     openid:String,//市民微信openid
     listStatus:Number,//订单状态 0为未接单 1为已分派民警 2为已完成 3已评价 4为已忽略 5为在路上（接单但未到达） 6为已到达（但未解决）
     id:Number,//订单id（案件编号）
-    caseInfo:String//案件描述
+    caseInfo:String,//案件描述
+    policeName:String//民警姓名
   }
   ```
 

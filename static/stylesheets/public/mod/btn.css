@@ -39,8 +39,9 @@
 }
 
 .chat-btn{
-  width:30px;
-  height:30px;
+  margin-top: -2.5px;
+  width:35px;
+  height:35px;
   background: url('/static/images/chat.png');
   background-size: cover;
 }

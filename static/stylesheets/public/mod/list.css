@@ -2,11 +2,19 @@
 
 .list-container{
   padding:20px 20px;
-  background: rgba(255,255,255,0.8);
+  /*background: rgba(255,255,255,0.8);*/
   margin-top:20px;
   margin-bottom: 20px;
   border-radius: 6px;
   /*border-bottom: 1px #ccc solid;*/
+}
+
+.list-type-normal{
+  background: rgba(255,255,255,0.8);
+}
+
+.list-type-emergency{
+  background: rgb(242,222,222);
 }
 
 .list-title{

@@ -1,7 +1,7 @@
 <%- include ./public/header %>
 
 <div class="container main-container" id="app">
-  <div class="row" v-for="list in lists">
+  <div class="row detail-info-container" v-for="list in lists">
     <div class="col-sm-4">
       <div class="list-info-row">
         <div class="list-title">
@@ -10,7 +10,7 @@
         <div class="list-number">
           {{ list._id }}
         </div>
-        <div class="list-chat-container" v-if="list.listType==0">
+        <div class="list-chat-container">
           <chat-btn :listid="list._id"></chat-btn>
         </div>
       </div>
@@ -61,11 +61,14 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-8 live-container" @click.once="openLive" id="player-wrapper">
-        <div class="live-tip-container">
-          点击获取现场情况
+    <div class="col-sm-8 ">
+        <div class="live-container" @click.once="openLive" id="player-wrapper">
+          <div class="live-tip-container">
+            点击获取现场情况
+          </div>
+          <div id="player"></div>
         </div>
-        <div id="player"></div>
+
 
     </div>
 
@@ -170,7 +173,7 @@ function live(){
         /* 高德地图控件 */
         AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.OverView'],function(){
           map.addControl(new AMap.ToolBar());
-          map.addControl(new AMap.Scale());
+          // map.addControl(new AMap.Scale());
           map.addControl(new AMap.OverView({isOpen:true}));
         })
       }

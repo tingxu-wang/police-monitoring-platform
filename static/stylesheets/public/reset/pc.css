@@ -9,6 +9,7 @@
 
   .navbar-nav > li{
     margin-left: 20px;
+    font-size: 16px;
   }
   .navbar-container,.navbar-nav a{
     height:60px;
