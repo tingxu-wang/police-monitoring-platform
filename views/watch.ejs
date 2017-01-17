@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="clearfix">
-          <div class="list-btn-short list-btn-short-default js-href" :data-link="detailPath+list.policeName+detailPath2+list._id">
+          <div class="list-btn-short list-btn-short-default js-href" :data-link="detailPath+'?policeName='+list.policeName+'&id='+list._id">
             查看详情
           </div>
           <div class="hidden-info-container">
@@ -97,8 +97,7 @@
       lists:[],
       realNames:global_realNames,
       increaseNumber:0,//触发computed内方法的钩子
-      detailPath:'/views/detail?policeName=',
-      detailPath2:'&id='
+      detailPath:'/views/detail'
     }
   })
 
