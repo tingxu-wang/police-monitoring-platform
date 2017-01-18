@@ -113,5 +113,6 @@ List.prototype={
   upsertUpdate:common.upsertUpdate.bind(common),
   update:common.update.bind(common),
   findOneAndUpdate:common.findOneAndUpdate.bind(common),
-  updatePush:common.updatePush.bind(common)
+  updatePush:common.updatePush.bind(common),
+  remove:common.remove.bind(common)
 }

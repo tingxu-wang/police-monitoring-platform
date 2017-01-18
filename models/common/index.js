@@ -39,5 +39,12 @@ Common.prototype={
       }
       callback(null,doc)
     })
+  },
+  remove (searchObj,callback){
+    this.model.remove(searchObj,function(err){
+      if(err){
+        return callback(err)
+      }
+    })
   }
 }

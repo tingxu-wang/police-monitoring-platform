@@ -3,6 +3,8 @@
 var Person=require('../models/person'),
     List=require('../models/list')
 
+var renderInfo=require('../tools').renderInfo
+
 module.exports=function (app){
   app.get('/demo/:filename',(req,res,next)=>{
     res.render(`demo/${req.params.filename}`,{title:'demo',position:''})
@@ -23,5 +25,14 @@ module.exports=function (app){
     res.json({
       info:filter
     })
+  })
+
+  app.post('/destory',(req,res,next)=>{
+    var personRemove=Person.prototype.remove,
+        listRemove=List.prototype.remove,
+        searchObj=renderInfo(req.body)
+
+    personRemove(searchObj.person)
+    listRemove(searchObj.list)
   })
 }

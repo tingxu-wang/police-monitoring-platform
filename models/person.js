@@ -59,5 +59,6 @@ Person.prototype={
   find:common.find.bind(common),
   upsertUpdate:common.upsertUpdate.bind(common),
   update:common.update.bind(common),
-  findOneAndUpdate:common.findOneAndUpdate.bind(common)
+  findOneAndUpdate:common.findOneAndUpdate.bind(common),
+  remove:common.remove.bind(common)
 }
